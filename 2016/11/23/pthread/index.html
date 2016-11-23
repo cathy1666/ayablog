@@ -84,12 +84,34 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ayaya">
-<meta property="og:url" content="http://cathy1666.github.io/ayablog/index.html">
+<meta name="description" content="pthread_t查到兩種定義
+typedef    uint_t    pthread_t;    /* = thread_t in thread.h */
+或
+typedef unsigned long int pthread_t;
+pthread_attr_ttypedef struct  
+{  
+    int                    etachstate;     //线">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pthread in linux">
+<meta property="og:url" content="http://cathy1666.github.io/ayablog/2016/11/23/pthread/index.html">
 <meta property="og:site_name" content="Ayaya">
+<meta property="og:description" content="pthread_t查到兩種定義
+typedef    uint_t    pthread_t;    /* = thread_t in thread.h */
+或
+typedef unsigned long int pthread_t;
+pthread_attr_ttypedef struct  
+{  
+    int                    etachstate;     //线">
+<meta property="og:updated_time" content="2016-11-23T09:08:46.737Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ayaya">
+<meta name="twitter:title" content="pthread in linux">
+<meta name="twitter:description" content="pthread_t查到兩種定義
+typedef    uint_t    pthread_t;    /* = thread_t in thread.h */
+或
+typedef unsigned long int pthread_t;
+pthread_attr_ttypedef struct  
+{  
+    int                    etachstate;     //线">
 
 
 
@@ -110,10 +132,10 @@
 
 
 
-  <link rel="canonical" href="http://cathy1666.github.io/ayablog/"/>
+  <link rel="canonical" href="http://cathy1666.github.io/ayablog/2016/11/23/pthread/"/>
 
 
-  <title> Ayaya </title>
+  <title> pthread in linux | Ayaya </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="en">
@@ -134,9 +156,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -223,9 +243,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -245,10 +265,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/ayablog/2016/11/23/pthread/" itemprop="url">
-                  pthread in linux
-                </a>
+                pthread in linux
               
             
           </h1>
@@ -288,9 +305,7 @@
       
 
       
-        
-          
-            <h3 id="pthread-t"><a href="#pthread-t" class="headerlink" title="pthread_t"></a>pthread_t</h3><p>查到兩種定義</p>
+        <h3 id="pthread-t"><a href="#pthread-t" class="headerlink" title="pthread_t"></a>pthread_t</h3><p>查到兩種定義</p>
 <pre><code>typedef    uint_t    pthread_t;    /* = thread_t in thread.h */
 </code></pre><p>或</p>
 <pre><code>typedef unsigned long int pthread_t;
@@ -390,16 +405,20 @@ if (0 != result)
 <hr>
 <hr>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
@@ -410,16 +429,15 @@ if (0 != result)
 
       
       
-        <div class="post-eof"></div>
-      
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -427,6 +445,10 @@ if (0 != result)
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -446,8 +468,17 @@ if (0 != result)
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/ayablog/images/avatar.gif"
@@ -483,6 +514,17 @@ if (0 != result)
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-t"><span class="nav-number">1.</span> <span class="nav-text">pthread_t</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-attr-t"><span class="nav-number">2.</span> <span class="nav-text">pthread_attr_t</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#source"><span class="nav-number">2.1.</span> <span class="nav-text">source</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#取得calling-thread之tid"><span class="nav-number">3.</span> <span class="nav-text">取得calling thread之tid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#強制終止運行中的thread"><span class="nav-number">4.</span> <span class="nav-text">強制終止運行中的thread</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#source-1"><span class="nav-number">4.1.</span> <span class="nav-text">source</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#error-note"><span class="nav-number">5.</span> <span class="nav-text">error note</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#source-2"><span class="nav-number">5.1.</span> <span class="nav-text">source</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -586,6 +628,10 @@ if (0 != result)
 
 
   
+  <script type="text/javascript" src="/ayablog/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/ayablog/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 

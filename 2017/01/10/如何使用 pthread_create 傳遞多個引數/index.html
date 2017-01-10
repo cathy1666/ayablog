@@ -98,7 +98,7 @@ int pthread_create( pthread_t *thread,
                     const pthread_attr_t *attr, 
                     void *(*start_routine) (void *),
                     void *a">
-<meta property="og:updated_time" content="2017-01-10T01:31:26.781Z">
+<meta property="og:updated_time" content="2017-01-10T01:46:12.330Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何使用 pthread_create 傳遞多個引數">
 <meta name="twitter:description" content="函數定義#include &amp;lt;pthread.h&amp;gt;
@@ -299,7 +299,7 @@ int pthread_create( pthread_t *thread,
       
 
       
-        <h4 id="函數定義"><a href="#函數定義" class="headerlink" title="函數定義"></a>函數定義</h4><pre><code>#include &lt;pthread.h&gt;
+        <h3 id="函數定義"><a href="#函數定義" class="headerlink" title="函數定義"></a>函數定義</h3><pre><code>#include &lt;pthread.h&gt;
 int pthread_create( pthread_t *thread, 
                     const pthread_attr_t *attr, 
                     void *(*start_routine) (void *),
@@ -317,7 +317,7 @@ int pthread_create( pthread_t *thread,
 pthread_t t1;
 int arg1 = 5;
 pthread_create( &amp;t1, NULL , print_data , (void *)&amp;arg1);
-</code></pre><h4 id="傳遞一個引數"><a href="#傳遞一個引數" class="headerlink" title="傳遞一個引數"></a>傳遞一個引數</h4><pre><code>void *print_data(void *data)
+</code></pre><h3 id="傳遞一個引數"><a href="#傳遞一個引數" class="headerlink" title="傳遞一個引數"></a>傳遞一個引數</h3><pre><code>void *print_data(void *data)
 {
     //printf(&quot;data = %d\n&quot;, *data);//compile不會過
 
@@ -346,7 +346,7 @@ int main()
 </code></pre><p>(void *)指標型態的參數傳進function後，需要先指定是甚麼型態的指標才能使用，直接使用指標指向的值，compiler無法判斷要讀多長的記憶體空間，所以連compile都不會過:</p>
 <pre><code>warning: dereferencing &apos;void *&apos; pointer [enabled by default]
 error: invalid use of void expression
-</code></pre><h4 id="傳遞多個引數"><a href="#傳遞多個引數" class="headerlink" title="傳遞多個引數"></a>傳遞多個引數</h4><p>pthread_create的函數定義裡，只有一個欄位可以放傳入handler function的引數，所以要傳遞多個引數時，可以把需要的引數包成一個structure，再將此structure的pointer作為引數傳入。</p>
+</code></pre><h3 id="傳遞多個引數"><a href="#傳遞多個引數" class="headerlink" title="傳遞多個引數"></a>傳遞多個引數</h3><p>pthread_create的函數定義裡，只有一個欄位可以放傳入handler function的引數，所以要傳遞多個引數時，可以把需要的引數包成一個structure，再將此structure的pointer作為引數傳入。</p>
 <pre><code>struct testdata
 {
     int num;
@@ -380,7 +380,7 @@ int main()
     sleep(5); //避免thread還沒執行完main就結束
     return 0;
 }
-</code></pre><h4 id="pass-by-reference引起的segmentation-fault"><a href="#pass-by-reference引起的segmentation-fault" class="headerlink" title="pass by reference引起的segmentation fault"></a>pass by reference引起的segmentation fault</h4><p>因為受限於pthread_create本身的定義，pthread_create所有的參數都是使用指標，也就是用pass by reference的方式傳遞引數，所以就要特別注意reference的位置是否為NULL，會不會造成segmentation fault。<br>以下例子就是我自己寫multi-thread程式的血淚經驗中得來的:</p>
+</code></pre><h3 id="pass-by-reference引起的segmentation-fault"><a href="#pass-by-reference引起的segmentation-fault" class="headerlink" title="pass by reference引起的segmentation fault"></a>pass by reference引起的segmentation fault</h3><p>因為受限於pthread_create本身的定義，pthread_create所有的參數都是使用指標，也就是用pass by reference的方式傳遞引數，所以就要特別注意reference的位置是否為NULL，會不會造成segmentation fault。<br>以下例子就是我自己寫multi-thread程式的血淚經驗中得來的:</p>
 <pre><code>struct testdata
 {
     int num;
@@ -426,7 +426,7 @@ num = -6947704
 name = ��y���Z�u
 print_data END
 </code></pre><p>以上程式有很大的機率會在執行時發生segmentation fault，原因是傳入的引數data1是定義在func()內，func()一結束區域變數data1就會被系統清除，而此時thread進行到<code>printf(&quot;num = %d\n&quot;, tt-&gt;num);</code>這行時，就會讀錯記憶體區塊，造成segmentation fault。</p>
-<h4 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h4><p>雖然所有pthread_create的動作都在main進行是最安全的作法，但程式越來越大，為了使程式結構化寫成function還是有必要的。所以我目前的解法是在thread handler function內一開始就把傳入指標指向的值copy一份，另外在pthread_create後也稍微delay確保copy引數值的動作完成才結束func()。</p>
+<h3 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h3><p>雖然所有pthread_create的動作都在main進行是最安全的作法，但程式越來越大，為了使程式結構化寫成function還是有必要的。所以我目前的解法是在thread handler function內一開始就把傳入指標指向的值copy一份，另外在pthread_create後也稍微delay確保copy引數值的動作完成才結束func()。</p>
 <pre><code>struct testdata
 {
     int num;
@@ -621,7 +621,7 @@ print_data END
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#函數定義"><span class="nav-number">1.</span> <span class="nav-text">函數定義</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#傳遞一個引數"><span class="nav-number">2.</span> <span class="nav-text">傳遞一個引數</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#傳遞多個引數"><span class="nav-number">3.</span> <span class="nav-text">傳遞多個引數</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pass-by-reference引起的segmentation-fault"><span class="nav-number">4.</span> <span class="nav-text">pass by reference引起的segmentation fault</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解決方法"><span class="nav-number">5.</span> <span class="nav-text">解決方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#函數定義"><span class="nav-number">1.</span> <span class="nav-text">函數定義</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#傳遞一個引數"><span class="nav-number">2.</span> <span class="nav-text">傳遞一個引數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#傳遞多個引數"><span class="nav-number">3.</span> <span class="nav-text">傳遞多個引數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pass-by-reference引起的segmentation-fault"><span class="nav-number">4.</span> <span class="nav-text">pass by reference引起的segmentation fault</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解決方法"><span class="nav-number">5.</span> <span class="nav-text">解決方法</span></a></li></ol></div>
             
           </div>
         </section>

@@ -68,7 +68,7 @@
 <link href="/ayablog/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Linux,C/C++,pthread," />
 
 
 
@@ -84,12 +84,19 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ayaya">
-<meta property="og:url" content="http://cathy1666.github.io/ayablog/index.html">
+<meta name="description" content="需求主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。
+問題使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何外部終止特定執行緒">
+<meta property="og:url" content="http://cathy1666.github.io/ayablog/2017/01/05/如何外部終止特定執行緒/index.html">
 <meta property="og:site_name" content="Ayaya">
+<meta property="og:description" content="需求主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。
+問題使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結">
+<meta property="og:updated_time" content="2017-01-04T14:45:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ayaya">
+<meta name="twitter:title" content="如何外部終止特定執行緒">
+<meta name="twitter:description" content="需求主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。
+問題使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結">
 
 
 
@@ -110,10 +117,10 @@
 
 
 
-  <link rel="canonical" href="http://cathy1666.github.io/ayablog/"/>
+  <link rel="canonical" href="http://cathy1666.github.io/ayablog/2017/01/05/如何外部終止特定執行緒/"/>
 
 
-  <title> Ayaya </title>
+  <title> 如何外部終止特定執行緒 | Ayaya </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="en">
@@ -134,9 +141,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -223,9 +228,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -245,277 +250,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/" itemprop="url">
-                  如何使用 pthread_create 傳遞多個引數
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-01-10T09:32:36+08:00" content="2017-01-10">
-              2017-01-10
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="函數定義"><a href="#函數定義" class="headerlink" title="函數定義"></a>函數定義</h4><pre><code>#include &lt;pthread.h&gt;
-int pthread_create( pthread_t *thread, 
-                    const pthread_attr_t *attr, 
-                    void *(*start_routine) (void *),
-                    void *arg);
-</code></pre><ul>
-<li><strong>pthread_t *thread</strong> 為pthread的指標，在使用thread之前必須要先宣告一個pthread_t的變數。</li>
-<li><strong>const pthread_attr_t *attr</strong> 為一個structure指標，內含創建此thread的屬性，預設是NULL，如果沒有其他特殊的需求直接填入NULL即可。</li>
-<li><strong>void *(*start_routine) (void *)</strong> 為function pointer，即所創建的thread要執行的handler function。</li>
-<li><strong>void *arg</strong> 為Function pointer所指function要帶的參數,需為指標型態。</li>
-</ul>
-<p><strong>RETURN VALUE:</strong> 如果執行成功則回傳0，如果執行失敗則回傳錯誤代碼。</p>
-<p><strong>EX:</strong></p>
-<pre><code>void *print_data(void *data);
-...
-pthread_t t1;
-int arg1 = 5;
-pthread_create( &amp;t1, NULL , print_data , (void *)&amp;arg1);
-</code></pre><h4 id="傳遞一個引數"><a href="#傳遞一個引數" class="headerlink" title="傳遞一個引數"></a>傳遞一個引數</h4><pre><code>void *print_data(void *data)
-{
-    //printf(&quot;data = %d\n&quot;, *data);//compile不會過
-
-    int tt = *(int*)data;
-
-    printf(&quot;print_data START\n&quot;);
-    printf(&quot;data = %d\n&quot;, tt);
-    printf(&quot;print_data END\n&quot;);
-
-    pthread_exit(NULL);
-}
-
-
-int main()
-{
-    int arg1 = 88;
-    pthread_t t1;
-
-    if (pthread_create(&amp;t1, NULL, print_data, (void *)&amp;arg1) != 0)
-    {
-        printf(&quot;create thread fail: %s\n&quot;, strerror(errno));
-    }
-    sleep(5); //避免thread還沒執行完main就結束
-    return 0;
-}
-</code></pre><p>(void *)指標型態的參數傳進function後，需要先指定是甚麼型態的指標才能使用，直接使用指標指向的值，compiler無法判斷要讀多長的記憶體空間，所以連compile都不會過:</p>
-<pre><code>warning: dereferencing &apos;void *&apos; pointer [enabled by default]
-error: invalid use of void expression
-</code></pre><h4 id="傳遞多個引數"><a href="#傳遞多個引數" class="headerlink" title="傳遞多個引數"></a>傳遞多個引數</h4><p>pthread_create的函數定義裡，只有一個欄位可以放傳入handler function的引數，所以要傳遞多個引數時，可以把需要的引數包成一個structure，再將此structure的pointer作為引數傳入。</p>
-<pre><code>struct testdata
-{
-    int num;
-    char name[10];
-};
-
-void *print_data(void *data)
-{
-    struct testdata* tt = (struct testdata*)data;
-
-    printf(&quot;print_data START\n&quot;);
-    printf(&quot;num = %d\n&quot;, tt-&gt;num);
-    printf(&quot;name = %s\n&quot;, tt-&gt;name);
-    printf(&quot;print_data END\n&quot;);
-
-    pthread_exit(NULL);
-}
-
-int main()
-{
-    struct testdata data1;
-    pthread_t t1;
-
-    data1.num = 100;
-    strcpy(data1.name, &quot;Hello&quot;);
-
-    if (pthread_create( &amp;t1, NULL , print_data , (void *)&amp;data1) != 0)
-    {
-        printf(&quot;create thread fail: %s\n&quot;, strerror(errno));
-    }
-    sleep(5); //避免thread還沒執行完main就結束
-    return 0;
-}
-</code></pre><h4 id="pass-by-reference引起的segmentation-fault"><a href="#pass-by-reference引起的segmentation-fault" class="headerlink" title="pass by reference引起的segmentation fault"></a>pass by reference引起的segmentation fault</h4><p>因為受限於pthread_create本身的定義，pthread_create所有的參數都是使用指標，也就是用pass by reference的方式傳遞引數，所以就要特別注意reference的位置是否為NULL，會不會造成segmentation fault。<br>以下例子就是我自己寫multi-thread程式的血淚經驗中得來的:</p>
-<pre><code>struct testdata
-{
-    int num;
-    char name[10];
-};
-
-void *print_data(void *data)
-{
-    struct testdata* tt = (struct testdata*)data;
-
-    printf(&quot;print_data START\n&quot;);
-    printf(&quot;num = %d\n&quot;, tt-&gt;num);
-    printf(&quot;name = %s\n&quot;, tt-&gt;name);
-    printf(&quot;print_data END\n&quot;);
-
-    pthread_exit(NULL);
-}    
-
-void func()
-{
-    struct testdata data1;
-    pthread_t t1;
-
-    data1.num = 100;
-    strcpy(data1.name, &quot;Hello&quot;);
-
-    if (pthread_create( &amp;t1, NULL , print_data , (void *)&amp;data1) != 0)
-    {
-        printf(&quot;create thread fail: %s\n&quot;, strerror(errno));
-    }
-}
-
-int main()
-{
-    func();
-
-    sleep(5); //避免thread還沒執行完main就結束
-    return 0;
-}
-</code></pre><p><strong>OUTPUT</strong></p>
-<pre><code>print_data START
-num = -6947704
-name = ��y���Z�u
-print_data END
-</code></pre><p>以上程式有很大的機率會在執行時發生segmentation fault，原因是傳入的引數data1是定義在func()內，func()一結束區域變數data1就會被系統清除，而此時thread進行到<code>printf(&quot;num = %d\n&quot;, tt-&gt;num);</code>這行時，就會讀錯記憶體區塊，造成segmentation fault。</p>
-<h4 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h4><p>雖然所有pthread_create的動作都在main進行是最安全的作法，但程式越來越大，為了使程式結構化寫成function還是有必要的。所以我目前的解法是在thread handler function內一開始就把傳入指標指向的值copy一份，另外在pthread_create後也稍微delay確保copy引數值的動作完成才結束func()。</p>
-<pre><code>struct testdata
-{
-    int num;
-    char name[10];
-};
-
-void *print_data(void *data)
-{
-    struct testdata tt = *(struct testdata*)data; // 直接copy值，而不是用reference的方法使用
-
-    printf(&quot;print_data START\n&quot;);
-    printf(&quot;num = %d\n&quot;, tt-&gt;num);
-    printf(&quot;name = %s\n&quot;, tt-&gt;name);
-    printf(&quot;print_data END\n&quot;);
-
-    pthread_exit(NULL);
-}    
-
-void func()
-{
-    struct testdata data1;
-    pthread_t t1;
-
-    data1.num = 100;
-    strcpy(data1.name, &quot;Hello&quot;);
-
-    if (pthread_create( &amp;t1, NULL , print_data , (void *)&amp;data1) != 0)
-    {
-        printf(&quot;create thread fail: %s\n&quot;, strerror(errno));
-    }
-    usleep(500000);//確保copy引數值的動作完成才結束func()
-}
-
-int main()
-{
-    func();
-
-    sleep(5); //避免thread還沒執行完main就結束
-    return 0;
-}
-</code></pre><p><strong>OUTPUT</strong></p>
-<pre><code>print_data START
-num = 100
-name = Hello
-print_data END
-</code></pre><p>當然，這不是最好的做法，畢竟做了delay，如果有發現更好的做法再來更新吧!</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/ayablog/2017/01/05/如何外部終止特定執行緒/" itemprop="url">
-                  如何外部終止特定執行緒
-                </a>
+                如何外部終止特定執行緒
               
             
           </h1>
@@ -555,9 +290,7 @@ print_data END
       
 
       
-        
-          
-            <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。</p>
+        <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。</p>
 <h3 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h3><p>使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結束，而此pthread_id被後來創建的執行緒C拿去用。所以用pthread_id在多執行緒的環境中無法識別執行特定工作的執行緒是否還沒結束，也就是說，用pthread_cancel()可能會終止掉非目標的執行緒，造成程式錯誤。</p>
 <h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>不使用pthread_id來識別執行緒，而是自己定義一個陣列記錄每個執行緒目前的狀態。但此陣列可能同時被多個執行緒存取，造成race condition, 所以需再加上mutex做保護。</p>
 <h3 id="Sameple-code"><a href="#Sameple-code" class="headerlink" title="Sameple code"></a>Sameple code</h3><pre><code>#include &lt;stdio.h&gt;
@@ -650,36 +383,63 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
     }
 </code></pre><h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://stackoverflow.com/questions/18826853/how-to-stop-a-running-pthread-thread" target="_blank" rel="external">How to stop a running pthread thread?</a></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/ayablog/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/ayablog/tags/C-C/" rel="tag">#C/C++</a>
+          
+            <a href="/ayablog/tags/pthread/" rel="tag">#pthread</a>
+          
+        </div>
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/" rel="prev" title="如何使用 pthread_create 傳遞多個引數">
+                如何使用 pthread_create 傳遞多個引數 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -687,6 +447,10 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -706,8 +470,17 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/ayablog/images/avatar.gif"
@@ -750,6 +523,17 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#問題"><span class="nav-number">2.</span> <span class="nav-text">問題</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法"><span class="nav-number">3.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sameple-code"><span class="nav-number">4.</span> <span class="nav-text">Sameple code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -853,6 +637,10 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
 
 
   
+  <script type="text/javascript" src="/ayablog/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/ayablog/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 

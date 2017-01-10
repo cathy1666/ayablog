@@ -68,7 +68,7 @@
 <link href="/ayablog/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Linux,C/C++,pthread," />
 
 
 
@@ -84,12 +84,28 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ayaya">
-<meta property="og:url" content="http://cathy1666.github.io/ayablog/index.html">
+<meta name="description" content="函數定義#include &amp;lt;pthread.h&amp;gt;
+int pthread_create( pthread_t *thread, 
+                    const pthread_attr_t *attr, 
+                    void *(*start_routine) (void *),
+                    void *a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用 pthread_create 傳遞多個引數">
+<meta property="og:url" content="http://cathy1666.github.io/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/index.html">
 <meta property="og:site_name" content="Ayaya">
+<meta property="og:description" content="函數定義#include &amp;lt;pthread.h&amp;gt;
+int pthread_create( pthread_t *thread, 
+                    const pthread_attr_t *attr, 
+                    void *(*start_routine) (void *),
+                    void *a">
+<meta property="og:updated_time" content="2017-01-10T01:31:26.781Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ayaya">
+<meta name="twitter:title" content="如何使用 pthread_create 傳遞多個引數">
+<meta name="twitter:description" content="函數定義#include &amp;lt;pthread.h&amp;gt;
+int pthread_create( pthread_t *thread, 
+                    const pthread_attr_t *attr, 
+                    void *(*start_routine) (void *),
+                    void *a">
 
 
 
@@ -110,10 +126,10 @@
 
 
 
-  <link rel="canonical" href="http://cathy1666.github.io/ayablog/"/>
+  <link rel="canonical" href="http://cathy1666.github.io/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/"/>
 
 
-  <title> Ayaya </title>
+  <title> 如何使用 pthread_create 傳遞多個引數 | Ayaya </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="en">
@@ -134,9 +150,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -223,9 +237,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -245,10 +259,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/" itemprop="url">
-                  如何使用 pthread_create 傳遞多個引數
-                </a>
+                如何使用 pthread_create 傳遞多個引數
               
             
           </h1>
@@ -288,9 +299,7 @@
       
 
       
-        
-          
-            <h4 id="函數定義"><a href="#函數定義" class="headerlink" title="函數定義"></a>函數定義</h4><pre><code>#include &lt;pthread.h&gt;
+        <h4 id="函數定義"><a href="#函數定義" class="headerlink" title="函數定義"></a>函數定義</h4><pre><code>#include &lt;pthread.h&gt;
 int pthread_create( pthread_t *thread, 
                     const pthread_attr_t *attr, 
                     void *(*start_routine) (void *),
@@ -465,221 +474,63 @@ name = Hello
 print_data END
 </code></pre><p>當然，這不是最好的做法，畢竟做了delay，如果有發現更好的做法再來更新吧!</p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/ayablog/2017/01/05/如何外部終止特定執行緒/" itemprop="url">
-                  如何外部終止特定執行緒
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-01-05T09:46:25+08:00" content="2017-01-05">
-              2017-01-05
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/ayablog/tags/Linux/" rel="tag">#Linux</a>
           
-            
+            <a href="/ayablog/tags/C-C/" rel="tag">#C/C++</a>
           
-
-          
-
-          
-          
-
+            <a href="/ayablog/tags/pthread/" rel="tag">#pthread</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。</p>
-<h3 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h3><p>使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結束，而此pthread_id被後來創建的執行緒C拿去用。所以用pthread_id在多執行緒的環境中無法識別執行特定工作的執行緒是否還沒結束，也就是說，用pthread_cancel()可能會終止掉非目標的執行緒，造成程式錯誤。</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>不使用pthread_id來識別執行緒，而是自己定義一個陣列記錄每個執行緒目前的狀態。但此陣列可能同時被多個執行緒存取，造成race condition, 所以需再加上mutex做保護。</p>
-<h3 id="Sameple-code"><a href="#Sameple-code" class="headerlink" title="Sameple code"></a>Sameple code</h3><pre><code>#include &lt;stdio.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;pthread.h&gt;
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/ayablog/2017/01/05/如何外部終止特定執行緒/" rel="next" title="如何外部終止特定執行緒">
+                <i class="fa fa-chevron-left"></i> 如何外部終止特定執行緒
+              </a>
+            
+          </div>
 
-
-#define DEV_MAX 5
-volatile int SendTrigThreadStop[DEV_MAX] = { 0 };
-pthread_mutex_t TrigStopMutex[DEV_MAX];
-pthread_t thread_SendTrigMsg[DEV_MAX];
-
-
-    void *func(void *param)
-    {    
-        //pthread_detach(pthread_self());
-        //在pthread_create後，在thread function中pthread_detach自己,資源在thread function退出時或調用pthread_exit()時會自動被釋放
-        //加了這行就不能被join了
-
-
-        int num = (int)param;
-        long long int count = 0;
-        printf(&quot;thread %d begin...\n&quot;, num);
-
-
-        while (getTrigThreadStat(num) == 0)
-        {
-            printf(&quot;thread[%d]: %d\n&quot;, num, count++);
-            sleep(1);
-        }
-        printf(&quot;thread %d end...\n&quot;, num);
-
-        pthread_exit(NULL);
-    }
-
-    int getTrigThreadStat(int dev_n)
-    {
-        int ret = 0;
-
-            pthread_mutex_lock(&amp;TrigStopMutex[dev_n]);
-            ret = SendTrigThreadStop[dev_n];
-            pthread_mutex_unlock(&amp;TrigStopMutex[dev_n]);
-
-        return ret;
-    }
-
-    void setTrigThreadStat(int dev_n, int val)
-    {
-            pthread_mutex_lock(&amp;TrigStopMutex[dev_n]);
-            SendTrigThreadStop[dev_n] = val;
-            pthread_mutex_unlock(&amp;TrigStopMutex[dev_n]);
-    }
-
-
-
-    int main(int argc, char *argv[])
-    {
-        int i;
-        int thread_n = 3;
-        // start thread
-        if (pthread_create(&amp;thread_SendTrigMsg[thread_n], NULL, func, (void*)thread_n)) 
-        {
-            printf(&quot;pthread_create %d error\n&quot;, thread_n);
-            return -1;
-        }
-
-        sleep(5);
-
-
-        setTrigThreadStat(thread_n, 1);
-        pthread_join(thread_SendTrigMsg[thread_n], NULL);
-        printf(&quot;main canceled thread %d\n\n&quot;, thread_n);
-        setTrigThreadStat(thread_n, 0);
-
-        thread_n = 1;
-        if (pthread_create(&amp;thread_SendTrigMsg[thread_n], NULL, func, (void*)thread_n))
-        {
-            printf(&quot;pthread_create %d error\n&quot;, thread_n);
-            return -1;
-        }
-
-        sleep(8);
-
-        setTrigThreadStat(thread_n, 1);
-        pthread_join(thread_SendTrigMsg[thread_n], NULL);
-        printf(&quot;main canceled thread %d\n\n&quot;, thread_n);
-        setTrigThreadStat(thread_n, 0);
-
-        return 0;
-    }
-</code></pre><h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://stackoverflow.com/questions/18826853/how-to-stop-a-running-pthread-thread" target="_blank" rel="external">How to stop a running pthread thread?</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -687,6 +538,10 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -706,8 +561,17 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/ayablog/images/avatar.gif"
@@ -750,6 +614,17 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#函數定義"><span class="nav-number">1.</span> <span class="nav-text">函數定義</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#傳遞一個引數"><span class="nav-number">2.</span> <span class="nav-text">傳遞一個引數</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#傳遞多個引數"><span class="nav-number">3.</span> <span class="nav-text">傳遞多個引數</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pass-by-reference引起的segmentation-fault"><span class="nav-number">4.</span> <span class="nav-text">pass by reference引起的segmentation fault</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解決方法"><span class="nav-number">5.</span> <span class="nav-text">解決方法</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -853,6 +728,10 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
 
 
   
+  <script type="text/javascript" src="/ayablog/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/ayablog/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 

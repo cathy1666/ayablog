@@ -68,7 +68,7 @@
 <link href="/ayablog/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,pthread,C/C++," />
+  <meta name="keywords" content="Linux,C/C++,pthread," />
 
 
 
@@ -98,7 +98,7 @@ int pthread_create( pthread_t *thread,
                     const pthread_attr_t *attr, 
                     void *(*start_routine) (void *),
                     void *a">
-<meta property="og:updated_time" content="2017-01-10T01:49:29.349Z">
+<meta property="og:updated_time" content="2017-01-10T05:10:54.919Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何使用 pthread_create 傳遞多個引數">
 <meta name="twitter:description" content="函數定義#include &amp;lt;pthread.h&amp;gt;
@@ -317,6 +317,8 @@ int pthread_create( pthread_t *thread,
 pthread_t t1;
 int arg1 = 5;
 pthread_create( &amp;t1, NULL , print_data , (void *)&amp;arg1);
+
+pthread_create( &amp;t1, NULL , (void *)print_data , (void *)&amp;arg1);
 </code></pre><h3 id="傳遞一個引數"><a href="#傳遞一個引數" class="headerlink" title="傳遞一個引數"></a>傳遞一個引數</h3><pre><code>void *print_data(void *data)
 {
     //printf(&quot;data = %d\n&quot;, *data);//compile不會過
@@ -425,7 +427,7 @@ int main()
 num = -6947704
 name = ��y���Z�u
 print_data END
-</code></pre><p>以上程式有很大的機率會在執行時發生segmentation fault，原因是傳入的引數data1是定義在func()內，func()一結束區域變數data1就會被系統清除，而此時thread進行到<code>printf(&quot;num = %d\n&quot;, tt-&gt;num);</code>這行時，就會讀錯記憶體區塊，造成segmentation fault。</p>
+</code></pre><p>以上程式有很大的機率會在執行時發生segmentation fault，原因是傳入的引數data1是定義在func()內，func()一結束區域變數data1就會被系統清除，而此時thread進行到<br><code>printf(&quot;num = %d\n&quot;, tt-&gt;num);</code><br>這行時，就會讀錯記憶體區塊，造成segmentation fault。</p>
 <h3 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h3><p>雖然所有pthread_create的動作都在main進行是最安全的作法，但程式越來越大，為了使程式結構化寫成function還是有必要的。所以我目前的解法是在thread handler function內一開始就把傳入指標指向的值copy一份，另外在pthread_create後也稍微delay確保copy引數值的動作完成才結束func()。</p>
 <pre><code>struct testdata
 {
@@ -435,16 +437,15 @@ print_data END
 
 void *print_data(void *data)
 {
-    // 直接copy值，而不是用reference的方法使用
-    struct testdata tt = *(struct testdata*)data; 
+    struct testdata tt = *(struct testdata*)data; // 直接copy值，而不是用reference的方法使用
 
     printf(&quot;print_data START\n&quot;);
-    printf(&quot;num = %d\n&quot;, tt-&gt;num);
-    printf(&quot;name = %s\n&quot;, tt-&gt;name);
+    printf(&quot;num = %d\n&quot;, tt.num);
+    printf(&quot;name = %s\n&quot;, tt.name);
     printf(&quot;print_data END\n&quot;);
 
     pthread_exit(NULL);
-}    
+}
 
 void func()
 {
@@ -454,7 +455,7 @@ void func()
     data1.num = 100;
     strcpy(data1.name, &quot;Hello&quot;);
 
-    if (pthread_create( &amp;t1, NULL , print_data , (void *)&amp;data1) != 0)
+    if (pthread_create(&amp;t1, NULL, print_data, (void *)&amp;data1) != 0)
     {
         printf(&quot;create thread fail: %s\n&quot;, strerror(errno));
     }
@@ -498,9 +499,9 @@ print_data END
           
             <a href="/ayablog/tags/Linux/" rel="tag">#Linux</a>
           
-            <a href="/ayablog/tags/pthread/" rel="tag">#pthread</a>
-          
             <a href="/ayablog/tags/C-C/" rel="tag">#C/C++</a>
+          
+            <a href="/ayablog/tags/pthread/" rel="tag">#pthread</a>
           
         </div>
       

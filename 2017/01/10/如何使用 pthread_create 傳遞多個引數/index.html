@@ -68,7 +68,7 @@
 <link href="/ayablog/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,C/C++,pthread," />
+  <meta name="keywords" content="Linux,pthread,C/C++," />
 
 
 
@@ -98,7 +98,7 @@ int pthread_create( pthread_t *thread,
                     const pthread_attr_t *attr, 
                     void *(*start_routine) (void *),
                     void *a">
-<meta property="og:updated_time" content="2017-01-10T01:46:12.330Z">
+<meta property="og:updated_time" content="2017-01-10T01:49:29.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何使用 pthread_create 傳遞多個引數">
 <meta name="twitter:description" content="函數定義#include &amp;lt;pthread.h&amp;gt;
@@ -435,7 +435,8 @@ print_data END
 
 void *print_data(void *data)
 {
-    struct testdata tt = *(struct testdata*)data; // 直接copy值，而不是用reference的方法使用
+    // 直接copy值，而不是用reference的方法使用
+    struct testdata tt = *(struct testdata*)data; 
 
     printf(&quot;print_data START\n&quot;);
     printf(&quot;num = %d\n&quot;, tt-&gt;num);
@@ -497,9 +498,9 @@ print_data END
           
             <a href="/ayablog/tags/Linux/" rel="tag">#Linux</a>
           
-            <a href="/ayablog/tags/C-C/" rel="tag">#C/C++</a>
-          
             <a href="/ayablog/tags/pthread/" rel="tag">#pthread</a>
+          
+            <a href="/ayablog/tags/C-C/" rel="tag">#C/C++</a>
           
         </div>
       

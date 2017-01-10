@@ -426,7 +426,8 @@ print_data END
 
 void *print_data(void *data)
 {
-    struct testdata tt = *(struct testdata*)data; // 直接copy值，而不是用reference的方法使用
+    // 直接copy值，而不是用reference的方法使用
+    struct testdata tt = *(struct testdata*)data; 
 
     printf(&quot;print_data START\n&quot;);
     printf(&quot;num = %d\n&quot;, tt-&gt;num);

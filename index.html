@@ -246,6 +246,140 @@
             
               
                 
+                <a class="post-title-link" href="/ayablog/2017/01/10/不定長度引數function寫法/" itemprop="url">
+                  不定長度引數function寫法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-01-10T17:21:51+08:00" content="2017-01-10">
+              2017-01-10
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出任意數量的變數。</p>
+<h3 id="Sample-Code"><a href="#Sample-Code" class="headerlink" title="Sample Code"></a>Sample Code</h3><pre><code>int printLog(char* hex, int len, char* char_p, ...)
+{
+    int i;
+    FILE *fp;
+    unsigned char* hex_p = (unsigned char*)hex;
+
+    fp = fopen(LOGFILE, &quot;a&quot;);
+    if (NULL == fp)
+    {
+        printf(&quot;open %s fail\n&quot;, LOGFILE);
+        return -1;
+    }    
+
+    char buffer[256];
+    va_list list_p;
+    va_start(list_p, char_p);
+    vsprintf(buffer, char_p, list_p);
+    va_end(list_p);
+
+    //print time stamp
+    fprintf(fp, &quot;%.24s   &quot;, getTime()); 
+
+    //print comment with variable-length argument 
+    fprintf(fp, &quot;%s&quot;, buffer);
+
+    //print hex string    
+    fprintf(fp, &quot;[ &quot;);
+    for (i = 0; i &lt; len; i++)
+    {
+        fprintf(fp, &quot;%02x &quot;, *hex_p++);
+    }
+    fprintf(fp, &quot;]\n&quot;);
+
+    fclose(fp);
+    return 0;    
+}
+</code></pre><p>這段code是reference內sample code變化應用，想知道細節就參考reference吧，裡面寫得很詳細!</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://ccd9527.blogspot.tw/2009/04/cc-variable-length-argument.html" target="_blank" rel="external">C/C++ : 不定長度引數（Variable-length argument）</a></p>
+<p><a href="http://www.programmer-club.com.tw/ShowSameTitleN/c/33173.html" target="_blank" rel="external">請問像printf()這樣參數數量不固定的函數如何實作? </a></p>
+<p><a href="http://www.cplusplus.com/reference/cstdio/vsprintf/" target="_blank" rel="external">vsprintf</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/" itemprop="url">
                   如何使用 pthread_create 傳遞多個引數
                 </a>
@@ -720,7 +854,7 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/ayablog/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

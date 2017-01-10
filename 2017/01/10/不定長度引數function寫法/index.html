@@ -68,7 +68,7 @@
 <link href="/ayablog/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C/C++," />
 
 
 
@@ -84,13 +84,31 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://cathy1666.github.io/ayablog/about/index.html">
+<meta name="description" content="需求把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出任意數量的變數。
+Sample Codeint printLog(char* hex, int len, char* char_p, ...)
+{
+    int i;
+    FILE *fp;
+    unsigned char* hex_p =">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不定長度引數function寫法">
+<meta property="og:url" content="http://cathy1666.github.io/ayablog/2017/01/10/不定長度引數function寫法/index.html">
 <meta property="og:site_name" content="Ayaya">
-<meta property="og:updated_time" content="2016-12-01T07:16:29.219Z">
+<meta property="og:description" content="需求把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出任意數量的變數。
+Sample Codeint printLog(char* hex, int len, char* char_p, ...)
+{
+    int i;
+    FILE *fp;
+    unsigned char* hex_p =">
+<meta property="og:updated_time" content="2017-01-10T09:21:23.332Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
+<meta name="twitter:title" content="不定長度引數function寫法">
+<meta name="twitter:description" content="需求把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出任意數量的變數。
+Sample Codeint printLog(char* hex, int len, char* char_p, ...)
+{
+    int i;
+    FILE *fp;
+    unsigned char* hex_p =">
 
 
 
@@ -111,16 +129,10 @@
 
 
 
-  <link rel="canonical" href="http://cathy1666.github.io/ayablog/about/"/>
+  <link rel="canonical" href="http://cathy1666.github.io/ayablog/2017/01/10/不定長度引數function寫法/"/>
 
 
-  <title>
-  
-
-  
-    about | Ayaya
-  
-</title>
+  <title> 不定長度引數function寫法 | Ayaya </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="en">
@@ -141,7 +153,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -231,9 +243,159 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                不定長度引數function寫法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-01-10T17:21:51+08:00" content="2017-01-10">
+              2017-01-10
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
-    
+      
+
+      
+        <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出任意數量的變數。</p>
+<h3 id="Sample-Code"><a href="#Sample-Code" class="headerlink" title="Sample Code"></a>Sample Code</h3><pre><code>int printLog(char* hex, int len, char* char_p, ...)
+{
+    int i;
+    FILE *fp;
+    unsigned char* hex_p = (unsigned char*)hex;
+
+    fp = fopen(LOGFILE, &quot;a&quot;);
+    if (NULL == fp)
+    {
+        printf(&quot;open %s fail\n&quot;, LOGFILE);
+        return -1;
+    }    
+
+    char buffer[256];
+    va_list list_p;
+    va_start(list_p, char_p);
+    vsprintf(buffer, char_p, list_p);
+    va_end(list_p);
+
+    //print time stamp
+    fprintf(fp, &quot;%.24s   &quot;, getTime()); 
+
+    //print comment with variable-length argument 
+    fprintf(fp, &quot;%s&quot;, buffer);
+
+    //print hex string    
+    fprintf(fp, &quot;[ &quot;);
+    for (i = 0; i &lt; len; i++)
+    {
+        fprintf(fp, &quot;%02x &quot;, *hex_p++);
+    }
+    fprintf(fp, &quot;]\n&quot;);
+
+    fclose(fp);
+    return 0;    
+}
+</code></pre><p>這段code是reference內sample code變化應用，想知道細節就參考reference吧，裡面寫得很詳細!</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://ccd9527.blogspot.tw/2009/04/cc-variable-length-argument.html" target="_blank" rel="external">C/C++ : 不定長度引數（Variable-length argument）</a></p>
+<p><a href="http://www.programmer-club.com.tw/ShowSameTitleN/c/33173.html" target="_blank" rel="external">請問像printf()這樣參數數量不固定的函數如何實作? </a></p>
+<p><a href="http://www.cplusplus.com/reference/cstdio/vsprintf/" target="_blank" rel="external">vsprintf</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/ayablog/tags/C-C/" rel="tag">#C/C++</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/" rel="next" title="如何使用 pthread_create 傳遞多個引數">
+                <i class="fa fa-chevron-left"></i> 如何使用 pthread_create 傳遞多個引數
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -265,8 +427,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/ayablog/images/avatar.gif"
@@ -309,6 +480,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample-Code"><span class="nav-number">2.</span> <span class="nav-text">Sample Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -412,6 +594,10 @@
 
 
   
+  <script type="text/javascript" src="/ayablog/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/ayablog/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 

@@ -68,7 +68,7 @@
 <link href="/ayablog/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,C/C++,pthread," />
+  <meta name="keywords" content="C/C++,Linux,pthread," />
 
 
 
@@ -98,7 +98,7 @@ int pthread_create( pthread_t *thread,
                     const pthread_attr_t *attr, 
                     void *(*start_routine) (void *),
                     void *a">
-<meta property="og:updated_time" content="2017-01-10T05:10:54.919Z">
+<meta property="og:updated_time" content="2017-01-11T01:20:16.948Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何使用 pthread_create 傳遞多個引數">
 <meta name="twitter:description" content="函數定義#include &amp;lt;pthread.h&amp;gt;
@@ -346,6 +346,7 @@ int main()
     return 0;
 }
 </code></pre><p>(void *)指標型態的參數傳進function後，需要先指定是甚麼型態的指標才能使用，直接使用指標指向的值，compiler無法判斷要讀多長的記憶體空間，所以連compile都不會過:</p>
+<p><strong>Compile Error:</strong></p>
 <pre><code>warning: dereferencing &apos;void *&apos; pointer [enabled by default]
 error: invalid use of void expression
 </code></pre><h3 id="傳遞多個引數"><a href="#傳遞多個引數" class="headerlink" title="傳遞多個引數"></a>傳遞多個引數</h3><p>pthread_create的函數定義裡，只有一個欄位可以放傳入handler function的引數，所以要傳遞多個引數時，可以把需要的引數包成一個structure，再將此structure的pointer作為引數傳入。</p>
@@ -497,9 +498,9 @@ print_data END
       
         <div class="post-tags">
           
-            <a href="/ayablog/tags/Linux/" rel="tag">#Linux</a>
-          
             <a href="/ayablog/tags/C-C/" rel="tag">#C/C++</a>
+          
+            <a href="/ayablog/tags/Linux/" rel="tag">#Linux</a>
           
             <a href="/ayablog/tags/pthread/" rel="tag">#pthread</a>
           
@@ -518,8 +519,8 @@ print_data END
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/ayablog/2017/01/10/不定長度引數function寫法/" rel="prev" title="不定長度引數function寫法">
-                不定長度引數function寫法 <i class="fa fa-chevron-right"></i>
+              <a href="/ayablog/2017/01/10/不定長度引數function寫法/" rel="prev" title="不定長度引數函數的寫法">
+                不定長度引數函數的寫法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

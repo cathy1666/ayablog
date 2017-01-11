@@ -247,7 +247,7 @@
               
                 
                 <a class="post-title-link" href="/ayablog/2017/01/10/不定長度引數function寫法/" itemprop="url">
-                  不定長度引數function寫法
+                  不定長度引數函數的寫法
                 </a>
               
             
@@ -290,7 +290,7 @@
       
         
           
-            <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出任意數量的變數。</p>
+            <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出含有任意數量的變數的string。</p>
 <h3 id="Sample-Code"><a href="#Sample-Code" class="headerlink" title="Sample Code"></a>Sample Code</h3><pre><code>int printLog(char* hex, int len, char* char_p, ...)
 {
     int i;
@@ -471,6 +471,7 @@ int main()
     return 0;
 }
 </code></pre><p>(void *)指標型態的參數傳進function後，需要先指定是甚麼型態的指標才能使用，直接使用指標指向的值，compiler無法判斷要讀多長的記憶體空間，所以連compile都不會過:</p>
+<p><strong>Compile Error:</strong></p>
 <pre><code>warning: dereferencing &apos;void *&apos; pointer [enabled by default]
 error: invalid use of void expression
 </code></pre><h3 id="傳遞多個引數"><a href="#傳遞多個引數" class="headerlink" title="傳遞多個引數"></a>傳遞多個引數</h3><p>pthread_create的函數定義裡，只有一個欄位可以放傳入handler function的引數，所以要傳遞多個引數時，可以把需要的引數包成一個structure，再將此structure的pointer作為引數傳入。</p>

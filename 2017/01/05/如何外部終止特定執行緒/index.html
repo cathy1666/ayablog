@@ -45,6 +45,12 @@
   
 
   
+    
+      
+    
+
+    
+  
 
   
 
@@ -55,7 +61,7 @@
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Crete Round:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -68,7 +74,7 @@
 <link href="/ayablog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,pthread,C/C++," />
+  <meta name="keywords" content="C/C++,Linux,pthread," />
 
 
 
@@ -92,7 +98,7 @@
 <meta property="og:site_name" content="Ayaya">
 <meta property="og:description" content="需求主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。
 問題使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結">
-<meta property="og:updated_time" content="2017-01-04T14:45:49.000Z">
+<meta property="og:updated_time" content="2017-01-16T05:11:37.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何外部終止特定執行緒">
 <meta name="twitter:description" content="需求主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。
@@ -443,11 +449,11 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
       
         <div class="post-tags">
           
+            <a href="/ayablog/tags/C-C/" rel="tag"># C/C++</a>
+          
             <a href="/ayablog/tags/Linux/" rel="tag"># Linux</a>
           
             <a href="/ayablog/tags/pthread/" rel="tag"># pthread</a>
-          
-            <a href="/ayablog/tags/C-C/" rel="tag"># C/C++</a>
           
         </div>
       

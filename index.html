@@ -1285,25 +1285,16 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
         
           
             <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>有一個在linux環境執行的server,以VM的方式架在Windows的PC上，所以希望PC開完機後自動執行此VM。</p>
-<h3 id="操作步驟如下："><a href="#操作步驟如下：" class="headerlink" title="操作步驟如下："></a>操作步驟如下：</h3><ol>
-<li>查看虛擬機器名稱</li>
-</ol>
-<p>開啟Oracle VM VirtualBox，確認虛擬機器名稱，在此例中虛擬機器叫做 “server_VM”<br><img src="VM_start_01.jpg" alt="VM_start_01"></p>
+<h3 id="操作步驟如下："><a href="#操作步驟如下：" class="headerlink" title="操作步驟如下："></a>操作步驟如下：</h3><h3 id="1-查看虛擬機器名稱"><a href="#1-查看虛擬機器名稱" class="headerlink" title="1. 查看虛擬機器名稱"></a>1. 查看虛擬機器名稱</h3><p>開啟Oracle VM VirtualBox，確認虛擬機器名稱，在此例中虛擬機器叫做 “server_VM”<br><img src="VM_start_01.jpg" alt="VM_start_01"></p>
 <p>另外也可以用command line的方式查詢(以後可寫成script檔)</p>
 <pre><code>開啟命令提示字元
 進入安裝Oracle VM VirtualBox資料夾
 輸入指令 VBoxManage list vms
 </code></pre><p><img src="VM_start_02.jpg" alt="VM_start_02"></p>
-<ol>
-<li>建立bat檔</li>
-</ol>
-<p>用notepad.exe建立一個副檔名為 bat 的檔案，然後將下面這一行指令給放進去。</p>
+<h3 id="2-建立bat檔"><a href="#2-建立bat檔" class="headerlink" title="2. 建立bat檔"></a>2. 建立bat檔</h3><p>用notepad.exe建立一個副檔名為 bat 的檔案，然後將下面這一行指令給放進去。</p>
 <pre><code>VBoxManage startvm server_VM
 </code></pre><p><img src="VM_start_03.jpg" alt="VM_start_03"></p>
-<ol>
-<li>將 bat 檔放到「啟動」資料夾</li>
-</ol>
-<p>每台電腦的「啟動」資料夾路徑可能不同，但win7可以從「開始」功能表找到「啟動」資料夾</p>
+<h3 id="3-將-bat-檔放到「啟動」資料夾"><a href="#3-將-bat-檔放到「啟動」資料夾" class="headerlink" title="3. 將 bat 檔放到「啟動」資料夾"></a>3. 將 bat 檔放到「啟動」資料夾</h3><p>每台電腦的「啟動」資料夾路徑可能不同，但win7可以從「開始」功能表找到「啟動」資料夾</p>
 <pre><code>開始&gt;&gt; 所有程式&gt;&gt; 啟動&gt;&gt; 右鍵&gt;&gt; 開啟
 </code></pre><p>然後直接把準備好的bat檔放進去即可。</p>
 <p><img src="VM_start_04.jpg" alt="VM_start_04"></p>

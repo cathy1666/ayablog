@@ -388,147 +388,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://cathy1666.github.io/ayablog/ayablog/2017/02/07/個人Blog架設筆記/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Cathy Chuang">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/ayablog/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Ayaya">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Ayaya" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/ayablog/2017/02/07/個人Blog架設筆記/" itemprop="url">
-                  Blog架設筆記 Hexo + Github page
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-07T12:24:50+08:00">
-                2017-02-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="My-Blog需求"><a href="#My-Blog需求" class="headerlink" title="My Blog需求"></a>My Blog需求</h3><ul>
-<li>版面簡潔易讀，重點是要好看!!</li>
-<li>版面風格有現成的可以套用，但也可自己更改</li>
-<li>支援markdown語法</li>
-<li>支援程式碼區塊顯示(行數,keyword hightlight)</li>
-</ul>
-<h3 id="Github-page"><a href="#Github-page" class="headerlink" title="Github page"></a>Github page</h3><h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><h3 id="架設步驟"><a href="#架設步驟" class="headerlink" title="架設步驟"></a>架設步驟</h3><p>1.<br>GitHub創新的Repostory <yourreponame><br>去Repostory <yourreponame>的”Settings”<br>GitHub Pages底下按Launch automatic page generator</yourreponame></yourreponame></p>
-<p>2.<br>安裝玩hexo<br>電腦中隨便一個path<br>    2016/11/23 似乎不能隨便選一個path??<br>        C:\Users\Cathy\Google\blog&gt;hexo d<br>        INFO  Deploying: git<br>        INFO  Setting up Git deployment…<br>        ‘git’ ???O?????Υ~???R?O?B?i??檺?{???Χ???C<br>        FATAL Something’s wrong. Maybe you can find the solution here: <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">http://hexo.io/docs/troubleshooting.html</a><br>        Error: spawn git ENOENT<br>    $npm install hexo-deployer-git –save<br>    安裝完就可以了<br>        C:\Users\Cathy\Google\blog&gt;hexo d<br>        INFO  Deploying: git<br>        INFO  Clearing .deploy_git folder…<br>        INFO  Copying files from public folder…<br>        fatal: Not a git repository (or any of the parent directories): .git<br>        FATAL Something’s wrong. Maybe you can find the solution here: <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">http://hexo.io/docs/troubleshooting.html</a><br>        FATAL fatal: Not a git repository (or any of the parent directories): .git<br>    (I)<br>    原因是hexo默认是以项目根目录下的.deploy_git作为git仓库，所以我们得把这个仓库与线上的xxx.github.io仓库绑定，<br>    如果绑定过其它目录下的仓库，可以直接把隐藏目录.git复制到.deploy_git目录下。<br>    再次运行hexo d<br>    (II)<br>    $ rm -rf .deploy<br>    $ hexo deploy</p>
-<p>$ hexo init <folder> //此<folder>不一定要跟github上的Repo一樣<br>$ cd <folder><br>$ npm install</folder></folder></folder></p>
-<p>3.<br>修改<folder>內的_config.yml</folder></p>
-<p>url: <a href="http://cathy1666.github.io/ayablog">http://cathy1666.github.io/ayablog</a></p>
-<p>root: /ayablog/</p>
-<p>//如果是用gh-page的方式deploy,_config.yml的root要改為你repository的名字 root: /your_repository/  不然連到https://<yourgithubname>.github.io/<yourreponame>/版面會跑掉只剩文字</yourreponame></yourgithubname></p>
-<p>deploy:<br>    type: git<br>    repository: git@github.com:<yourgithubname>/<yourreponame>.git<br>    branch: gh-pages</yourreponame></yourgithubname></p>
-<p>4.<br>$ hexo g //==hexo deploy #?建???面<br>$ hexo d //==hexo deploy #?布：清空.deploy_git/里文件，?public/复制新生成的文件</p>
-<p>若發生 ERROR Deployer not found: git，請執行以下指令試試<br>npm install hexo-deployer-git –save<br>再<br>$ hexo g //==hexo deploy<br>$ hexo d //==hexo deploy</p>
-<p>先hexo g再?行hexo d布署，也可使直接用hexo d -g</p>
-<p>5.<br>$ hexo server //==hexo s, 發佈前可以使用hexo的server功能來預覽網站<br><a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 可先在本地端預覽</p>
-<p>https://<yourgithubname>.github.io/<yourreponame>/</yourreponame></yourgithubname></p>
-<hr>
-<p>Q:<br>部署到github上時每次都要輸入入密?。如何免密碼部署呢？</p>
-<p>A:<br>github?例：<br>使用https需要密碼，如下：<br>deploy:<br>type: git<br>repo: <a href="https://github.com/yourname/yo" target="_blank" rel="external">https://github.com/yourname/yo</a>…<br>branch: master<br>使用ssh不需要密碼，如下：<br>deploy:<br>type: git<br>repo: git@github.com:yourname/yourname.github.io.git<br>branch: master<br>前提是配置好了github的ssh，也就是手動部署可以無需密碼了</p>
-<p>github为例：<br>使用https需要密码，如下：<br>deploy:<br>type: git<br>repo: <a href="https://github.com/yourname/yo" target="_blank" rel="external">https://github.com/yourname/yo</a>…<br>branch: master<br>使用ssh不需要密码，如下：<br>deploy:<br>type: git<br>repo: git@github.com:yourname/yourname.github.io.git<br>branch: master<br>前提是配置好了github的ssh，也就是手动部署可以无需密码了</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://cathy1666.github.io/ayablog/ayablog/2017/02/06/TOEIC準備心得/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1372,7 +1231,7 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
           
             <div class="site-state-item site-state-posts">
               <a href="/ayablog/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1383,7 +1242,7 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
           
             <div class="site-state-item site-state-tags">
               <a href="/ayablog/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

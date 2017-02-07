@@ -254,6 +254,139 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://cathy1666.github.io/ayablog/ayablog/2017/02/07/如何讓VM開機自動執行/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Cathy Chuang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/ayablog/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Ayaya">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Ayaya" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/ayablog/2017/02/07/如何讓VM開機自動執行/" itemprop="url">
+                  讓Virtualbox 的虛擬機器在 Windows 開機後自動啟動
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-07T20:46:25+08:00">
+                2017-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>有一個在linux環境執行的server,以VM的方式架在Windows的PC上，所以希望PC開完機後自動執行此VM。</p>
+<h3 id="操作步驟如下："><a href="#操作步驟如下：" class="headerlink" title="操作步驟如下："></a>操作步驟如下：</h3><h3 id="1-查看虛擬機器名稱"><a href="#1-查看虛擬機器名稱" class="headerlink" title="1. 查看虛擬機器名稱"></a>1. 查看虛擬機器名稱</h3><p>開啟Oracle VM VirtualBox，確認虛擬機器名稱，在此例中虛擬機器叫做 “server_VM”</p>
+<img src="/ayablog/2017/02/07/如何讓VM開機自動執行/VM_start_01.jpg" alt="VM_start_01" title="VM_start_01">
+<p>另外也可以用command line的方式查詢(以後可寫成script檔)</p>
+<pre><code>開啟命令提示字元
+進入安裝Oracle VM VirtualBox資料夾
+輸入指令 VBoxManage list vms
+</code></pre><img src="/ayablog/2017/02/07/如何讓VM開機自動執行/VM_start_02.jpg" alt="VM_start_02" title="VM_start_02">
+<h3 id="2-建立bat檔"><a href="#2-建立bat檔" class="headerlink" title="2. 建立bat檔"></a>2. 建立bat檔</h3><p>用notepad.exe建立一個副檔名為 bat 的檔案，然後將下面這一行指令給放進去。</p>
+<pre><code>VBoxManage startvm server_VM
+</code></pre><img src="/ayablog/2017/02/07/如何讓VM開機自動執行/VM_start_03.jpg" alt="VM_start_03" title="VM_start_03">
+<h3 id="3-將-bat-檔放到「啟動」資料夾"><a href="#3-將-bat-檔放到「啟動」資料夾" class="headerlink" title="3. 將 bat 檔放到「啟動」資料夾"></a>3. 將 bat 檔放到「啟動」資料夾</h3><p>每台電腦的「啟動」資料夾路徑可能不同，但win7可以從「開始」功能表找到「啟動」資料夾</p>
+<pre><code>開始&gt;&gt; 所有程式&gt;&gt; 啟動&gt;&gt; 右鍵&gt;&gt; 開啟
+</code></pre><p>然後直接把準備好的bat檔放進去即可。</p>
+<img src="/ayablog/2017/02/07/如何讓VM開機自動執行/VM_start_04.jpg" alt="VM_start_04" title="VM_start_04">
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://cathy1666.github.io/ayablog/ayablog/2017/02/07/個人Blog架設筆記/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1166,138 +1299,6 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
         return 0;
     }
 </code></pre><h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://stackoverflow.com/questions/18826853/how-to-stop-a-running-pthread-thread" target="_blank" rel="external">How to stop a running pthread thread?</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://cathy1666.github.io/ayablog/ayablog/2016/12/14/如何讓VM開機自動執行/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Cathy Chuang">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/ayablog/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Ayaya">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Ayaya" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/ayablog/2016/12/14/如何讓VM開機自動執行/" itemprop="url">
-                  讓Virtualbox 的虛擬機器在 Windows 開機後自動啟動
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-14T12:14:33+08:00">
-                2016-12-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>有一個在linux環境執行的server,以VM的方式架在Windows的PC上，所以希望PC開完機後自動執行此VM。</p>
-<h3 id="操作步驟如下："><a href="#操作步驟如下：" class="headerlink" title="操作步驟如下："></a>操作步驟如下：</h3><h3 id="1-查看虛擬機器名稱"><a href="#1-查看虛擬機器名稱" class="headerlink" title="1. 查看虛擬機器名稱"></a>1. 查看虛擬機器名稱</h3><p>開啟Oracle VM VirtualBox，確認虛擬機器名稱，在此例中虛擬機器叫做 “server_VM”<br><img src="/images/VM_start_01.jpg" alt="VM_start_01"></p>
-<p>另外也可以用command line的方式查詢(以後可寫成script檔)</p>
-<pre><code>開啟命令提示字元
-進入安裝Oracle VM VirtualBox資料夾
-輸入指令 VBoxManage list vms
-</code></pre><p><img src="/images/VM_start_02.jpg" alt="VM_start_02"></p>
-<h3 id="2-建立bat檔"><a href="#2-建立bat檔" class="headerlink" title="2. 建立bat檔"></a>2. 建立bat檔</h3><p>用notepad.exe建立一個副檔名為 bat 的檔案，然後將下面這一行指令給放進去。</p>
-<pre><code>VBoxManage startvm server_VM
-</code></pre><p><img src="/images/VM_start_03.jpg" alt="VM_start_03"></p>
-<h3 id="3-將-bat-檔放到「啟動」資料夾"><a href="#3-將-bat-檔放到「啟動」資料夾" class="headerlink" title="3. 將 bat 檔放到「啟動」資料夾"></a>3. 將 bat 檔放到「啟動」資料夾</h3><p>每台電腦的「啟動」資料夾路徑可能不同，但win7可以從「開始」功能表找到「啟動」資料夾</p>
-<pre><code>開始&gt;&gt; 所有程式&gt;&gt; 啟動&gt;&gt; 右鍵&gt;&gt; 開啟
-</code></pre><p>然後直接把準備好的bat檔放進去即可。</p>
-<p><img src="/images/VM_start_04.jpg" alt="VM_start_04"></p>
 
           
         

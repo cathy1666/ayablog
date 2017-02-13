@@ -283,14 +283,17 @@ body {
   margin-left: 5px;
   line-height: 1em;
   font-weight: bold;
+  font-family: "微軟正黑體";
 }
 .article-inner {
   background: #fff;
   border: 1px solid #eef1f8;
   border-radius: 3px;
+  font-family: "微軟正黑體";
 }
 .article-inner-night {
   background: #1d1e1f;
+  font-family: "微軟正黑體";
 }
 .article-entry h1,
 .widget h1 {
@@ -421,7 +424,7 @@ body {
   margin: 7px 0 20px;
   color: #a6a6a6;
   text-align: center;
-  font-family: "微軟正黑體", Oswald, Arial, Helvetica, sans-serif;
+  font-family: "微軟正黑體", "微軟正黑體", Oswald, Arial, Helvetica, sans-serif;
   font-size: 0.9em;
 }
 .article-meta:before,
@@ -465,7 +468,7 @@ body {
   margin: 0;
 }
 .ico-folder:before {
-  font-family: "FontAwesome";
+  font-family: "微軟正黑體", "FontAwesome";
   content: "\f07c";
   color: #333;
 }
@@ -474,7 +477,8 @@ body {
 }
 .article-header h1 {
   margin: 0 0 3px 0;
-  font-size: 2em;
+  font-size: 32px;
+  text-align: center;
   line-height: 1.2;
   font-weight: bold;
 }
@@ -578,13 +582,13 @@ a.article-title:hover {
 }
 .article-entry blockquote:before {
   float: left;
-  font-family: "FontAwesome";
+  font-family: "微軟正黑體", "FontAwesome";
   content: "\f10d";
   margin-left: -0.8em;
 }
 .article-entry blockquote:after {
   float: right;
-  font-family: "FontAwesome";
+  font-family: "微軟正黑體", "FontAwesome";
   content: "\f10e";
   margin-right: -0.8em;
   margin-top: -1.5em;
@@ -595,7 +599,7 @@ a.article-title:hover {
 .article-entry blockquote footer {
   font-size: 14px;
   margin: 1.6em 0;
-  font-family: -apple-system, "Arial", BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "微軟正黑體", -apple-system, "Arial", BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 .article-entry blockquote footer cite:before {
   content: "—";
@@ -612,18 +616,18 @@ a.article-title:hover {
   margin: 0;
 }
 .article-entry .pullquote p {
-  font-family: Georgia, Microsoft JhengHei, "sans serif";
+  font-family: "微軟正黑體", Georgia, Microsoft JhengHei, "sans serif";
   font-size: 19px;
 }
 .article-entry .pullquote:before {
   float: left;
-  font-family: "FontAwesome";
+  font-family: "微軟正黑體", "FontAwesome";
   content: "\f10d";
   margin-left: -0.5em;
 }
 .article-entry .pullquote:after {
   float: right;
-  font-family: "FontAwesome";
+  font-family: "微軟正黑體", "FontAwesome";
   content: "\f10e";
   margin-right: -0.5em;
   margin-top: -1em;
@@ -711,7 +715,7 @@ a.article-title:hover {
   -webkit-padding-start: 0px;
 }
 .ico-tags:before {
-  font-family: "FontAwesome";
+  font-family: "微軟正黑體", "FontAwesome";
   content: "\f02c";
   color: #333;
   margin-left: 20px !important;
@@ -725,7 +729,7 @@ a.article-title:hover {
 }
 .article-comment-link:before {
   content: "\f075";
-  font-family: FontAwesome;
+  font-family: "微軟正黑體", FontAwesome;
   padding-right: 8px;
 }
 .article-share-link {
@@ -735,7 +739,7 @@ a.article-title:hover {
 }
 .article-share-link:before {
   content: "\f064";
-  font-family: FontAwesome;
+  font-family: "微軟正黑體", FontAwesome;
   padding-right: 6px;
 }
 #article-nav {
@@ -836,7 +840,7 @@ a.article-title:hover {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font: 14px -apple-system, "Arial", BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font: 14px "微軟正黑體", -apple-system, "Arial", BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   padding: 0 15px;
   color: #333;
   outline: none;
@@ -872,7 +876,7 @@ a.article-title:hover {
 .article-share-pinterest:before,
 .article-share-google:before {
   font-size: 20px;
-  font-family: FontAwesome;
+  font-family: "微軟正黑體", FontAwesome;
   width: 20px;
   height: 20px;
   position: absolute;
@@ -946,7 +950,7 @@ a.article-title:hover {
   font-size: 120%;
 }
 .toc-title:before {
-  font-family: "FontAwesome";
+  font-family: "微軟正黑體", "FontAwesome";
   content: "\f0ca";
   margin-right: 0.5em;
 }
@@ -989,7 +993,7 @@ a.article-title:hover {
   font-weight: bold;
 }
 .nav-link {
-  font-family: "futura-pt", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", Microsoft JhengHei, WenQuanYi Micro Hei, "Microsoft YaHei", sans-serif;
+  font-family: "微軟正黑體", "futura-pt", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", Microsoft JhengHei, WenQuanYi Micro Hei, "Microsoft YaHei", sans-serif;
   color: color-link;
   padding: 1px !important;
 }
@@ -1030,7 +1034,7 @@ a.article-title:hover {
   color: #333;
 }
 .archive-year:before {
-  font-family: "FontAwesome";
+  font-family: "微軟正黑體", "FontAwesome";
   content: "\f273";
   margin-right: 0.2em;
 }
@@ -1056,7 +1060,7 @@ a.article-title:hover {
   color: #333;
 }
 .archive-tag:before {
-  font-family: "FontAwesome";
+  font-family: "微軟正黑體", "FontAwesome";
   content: "\f02c";
   margin-right: 0.2em;
 }
@@ -1081,7 +1085,7 @@ a.article-title:hover {
   color: #1fa0ae;
 }
 .archives-category-wrap blockquote a:before {
-  font-family: "FontAwesome";
+  font-family: "微軟正黑體", "FontAwesome";
   content: "\f0da";
   margin-right: 0.5em;
 }
@@ -1090,7 +1094,7 @@ a.article-title:hover {
   color: #333;
 }
 .archive-category:before {
-  font-family: "FontAwesome";
+  font-family: "微軟正黑體", "FontAwesome";
   content: "\f07c";
   margin-right: 0.3em;
 }
@@ -1195,7 +1199,7 @@ a.article-title:hover {
   float: left;
 }
 #page-nav .prev:before {
-  font-family: "FontAwesome";
+  font-family: "微軟正黑體", "FontAwesome";
   content: "\f053";
   margin-right: 0.5em;
 }
@@ -1205,7 +1209,7 @@ a.article-title:hover {
   float: right;
 }
 #page-nav .next:after {
-  font-family: "FontAwesome";
+  font-family: "微軟正黑體", "FontAwesome";
   content: "\f054";
   margin-left: 0.5em;
 }
@@ -1328,7 +1332,7 @@ a.article-title:hover {
 .article-entry .gist .gist-file .gist-meta {
   background: #f8f8f8;
   color: $highlight-comment;
-  font: 0.85em -apple-system, "Arial", BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font: 0.85em "微軟正黑體", -apple-system, "Arial", BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   text-shadow: 0 0;
   padding: 0;
   margin-top: 1em;
@@ -1721,7 +1725,6 @@ pre .xml .cdata {
 .widget {
   line-height: 1.6em;
   word-wrap: break-word;
-  font-family: "微軟正黑體";
   font-size: 1.2em;
 }
 .widget ul,

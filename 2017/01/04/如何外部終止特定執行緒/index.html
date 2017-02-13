@@ -3,39 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>不定長度引數函數的寫法 | Aya Blog</title>
+  <title>如何外部終止特定執行緒 | Aya Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="C/C++" />
+  <meta name="keywords" content="C/C++Linuxpthread" />
   
   
   
   
-  <meta name="description" content="需求把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出含有任意數量的變數的string。
-Sample Codeint printLog(char* hex, int len, char* char_p, ...)
-{
-    int i;
-    FILE *fp;
-    unsigned char">
+  <meta name="description" content="需求主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。
+問題使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結">
 <meta property="og:type" content="article">
-<meta property="og:title" content="不定長度引數函數的寫法">
-<meta property="og:url" content="http://cathy1666.github.io/ayablog/2017/01/10/不定長度引數function寫法/index.html">
+<meta property="og:title" content="如何外部終止特定執行緒">
+<meta property="og:url" content="http://cathy1666.github.io/ayablog/2017/01/04/如何外部終止特定執行緒/index.html">
 <meta property="og:site_name" content="Aya Blog">
-<meta property="og:description" content="需求把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出含有任意數量的變數的string。
-Sample Codeint printLog(char* hex, int len, char* char_p, ...)
-{
-    int i;
-    FILE *fp;
-    unsigned char">
-<meta property="og:updated_time" content="2017-01-11T01:25:48.328Z">
+<meta property="og:description" content="需求主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。
+問題使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結">
+<meta property="og:updated_time" content="2017-01-16T05:11:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="不定長度引數函數的寫法">
-<meta name="twitter:description" content="需求把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出含有任意數量的變數的string。
-Sample Codeint printLog(char* hex, int len, char* char_p, ...)
-{
-    int i;
-    FILE *fp;
-    unsigned char">
+<meta name="twitter:title" content="如何外部終止特定執行緒">
+<meta name="twitter:description" content="需求主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。
+問題使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結">
   
     <link rel="alternate" href="/atom.xml" title="Aya Blog" type="application/atom+xml">
   
@@ -116,7 +104,7 @@ Sample Codeint printLog(char* hex, int len, char* char_p, ...)
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-不定長度引數function寫法" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-如何外部終止特定執行緒" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -124,7 +112,7 @@ Sample Codeint printLog(char* hex, int len, char* char_p, ...)
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      不定長度引數函數的寫法
+      如何外部終止特定執行緒
     </h1>
   
 
@@ -132,55 +120,106 @@ Sample Codeint printLog(char* hex, int len, char* char_p, ...)
     
     <div class="article-meta">
       
-	<a href="/ayablog/2017/01/10/不定長度引數function寫法/" class="article-date">
-	  <time datetime="2017-01-10T09:21:51.599Z" itemprop="datePublished">January 10, 2017</time>
+	<a href="/ayablog/2017/01/04/如何外部終止特定執行緒/" class="article-date">
+	  <time datetime="2017-01-04T14:46:35.706Z" itemprop="datePublished">January 4, 2017</time>
 	</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出含有任意數量的變數的string。</p>
-<h3 id="Sample-Code"><a href="#Sample-Code" class="headerlink" title="Sample Code"></a>Sample Code</h3><pre><code>int printLog(char* hex, int len, char* char_p, ...)
-{
-    int i;
-    FILE *fp;
-    unsigned char* hex_p = (unsigned char*)hex;
+        <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。</p>
+<h3 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h3><p>使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結束，而此pthread_id被後來創建的執行緒C拿去用。所以用pthread_id在多執行緒的環境中無法識別執行特定工作的執行緒是否還沒結束，也就是說，用pthread_cancel()可能會終止掉非目標的執行緒，造成程式錯誤。</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>不使用pthread_id來識別執行緒，而是自己定義一個陣列記錄每個執行緒目前的狀態。但此陣列可能同時被多個執行緒存取，造成race condition, 所以需再加上mutex做保護。</p>
+<h3 id="Sameple-code"><a href="#Sameple-code" class="headerlink" title="Sameple code"></a>Sameple code</h3><pre><code>#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;pthread.h&gt;
 
-    fp = fopen(LOGFILE, &quot;a&quot;);
-    if (NULL == fp)
-    {
-        printf(&quot;open %s fail\n&quot;, LOGFILE);
-        return -1;
-    }    
 
-    char buffer[256];
-    va_list list_p;
-    va_start(list_p, char_p);
-    vsprintf(buffer, char_p, list_p);
-    va_end(list_p);
+#define DEV_MAX 5
+volatile int SendTrigThreadStop[DEV_MAX] = { 0 };
+pthread_mutex_t TrigStopMutex[DEV_MAX];
+pthread_t thread_SendTrigMsg[DEV_MAX];
 
-    //print time stamp
-    fprintf(fp, &quot;%.24s   &quot;, getTime()); 
 
-    //print comment with variable-length argument 
-    fprintf(fp, &quot;%s&quot;, buffer);
+    void *func(void *param)
+    {    
+        //pthread_detach(pthread_self());
+        //在pthread_create後，在thread function中pthread_detach自己,資源在thread function退出時或調用pthread_exit()時會自動被釋放
+        //加了這行就不能被join了
 
-    //print hex string    
-    fprintf(fp, &quot;[ &quot;);
-    for (i = 0; i &lt; len; i++)
-    {
-        fprintf(fp, &quot;%02x &quot;, *hex_p++);
+
+        int num = (int)param;
+        long long int count = 0;
+        printf(&quot;thread %d begin...\n&quot;, num);
+
+
+        while (getTrigThreadStat(num) == 0)
+        {
+            printf(&quot;thread[%d]: %d\n&quot;, num, count++);
+            sleep(1);
+        }
+        printf(&quot;thread %d end...\n&quot;, num);
+
+        pthread_exit(NULL);
     }
-    fprintf(fp, &quot;]\n&quot;);
 
-    fclose(fp);
-    return 0;    
-}
-</code></pre><p>這段code是reference內sample code變化應用，想知道細節就參考reference吧，裡面寫得很詳細!</p>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://ccd9527.blogspot.tw/2009/04/cc-variable-length-argument.html" target="_blank" rel="external">C/C++ : 不定長度引數（Variable-length argument）</a></p>
-<p><a href="http://www.programmer-club.com.tw/ShowSameTitleN/c/33173.html" target="_blank" rel="external">請問像printf()這樣參數數量不固定的函數如何實作? </a></p>
-<p><a href="http://www.cplusplus.com/reference/cstdio/vsprintf/" target="_blank" rel="external">vsprintf</a></p>
+    int getTrigThreadStat(int dev_n)
+    {
+        int ret = 0;
+
+            pthread_mutex_lock(&amp;TrigStopMutex[dev_n]);
+            ret = SendTrigThreadStop[dev_n];
+            pthread_mutex_unlock(&amp;TrigStopMutex[dev_n]);
+
+        return ret;
+    }
+
+    void setTrigThreadStat(int dev_n, int val)
+    {
+            pthread_mutex_lock(&amp;TrigStopMutex[dev_n]);
+            SendTrigThreadStop[dev_n] = val;
+            pthread_mutex_unlock(&amp;TrigStopMutex[dev_n]);
+    }
+
+
+
+    int main(int argc, char *argv[])
+    {
+        int i;
+        int thread_n = 3;
+        // start thread
+        if (pthread_create(&amp;thread_SendTrigMsg[thread_n], NULL, func, (void*)thread_n)) 
+        {
+            printf(&quot;pthread_create %d error\n&quot;, thread_n);
+            return -1;
+        }
+
+        sleep(5);
+
+
+        setTrigThreadStat(thread_n, 1);
+        pthread_join(thread_SendTrigMsg[thread_n], NULL);
+        printf(&quot;main canceled thread %d\n\n&quot;, thread_n);
+        setTrigThreadStat(thread_n, 0);
+
+        thread_n = 1;
+        if (pthread_create(&amp;thread_SendTrigMsg[thread_n], NULL, func, (void*)thread_n))
+        {
+            printf(&quot;pthread_create %d error\n&quot;, thread_n);
+            return -1;
+        }
+
+        sleep(8);
+
+        setTrigThreadStat(thread_n, 1);
+        pthread_join(thread_SendTrigMsg[thread_n], NULL);
+        printf(&quot;main canceled thread %d\n\n&quot;, thread_n);
+        setTrigThreadStat(thread_n, 0);
+
+        return 0;
+    }
+</code></pre><h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://stackoverflow.com/questions/18826853/how-to-stop-a-running-pthread-thread" target="_blank" rel="external">How to stop a running pthread thread?</a></p>
 
       
     </div>
@@ -188,32 +227,7 @@ Sample Codeint printLog(char* hex, int len, char* char_p, ...)
       
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/C-C/">C/C++</a></li></ul>
-
-      
-        
-	<div id="comment">
-	
-	<!-- 多说评论框 start -->
-	 <div class="ds-thread" data-thread-key="/ayablog/2017/01/10/不定長度引數function寫法/" data-title="不定長度引數函數的寫法" data-url="http://cathy1666.github.io/ayablog/ayablog/2017/01/10/不定長度引數function寫法/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"iTimeTraveler"};
-	  (function() {
-	    var ds = document.createElement('script');
-	    ds.type = 'text/javascript';ds.async = true;
-	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-	    ds.charset = 'UTF-8';
-	    (document.getElementsByTagName('head')[0] 
-	     || document.getElementsByTagName('body')[0]).appendChild(ds);
-	  })();
-	  </script>
-	<!-- 多说公共JS代码 end -->
-	
-	</div>
-	<link rel="stylesheet" href="/ayablog/css/comment.css">
-
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/pthread/">pthread</a></li></ul>
 
       
     </footer>
@@ -223,19 +237,19 @@ Sample Codeint printLog(char* hex, int len, char* char_p, ...)
     
 <nav id="article-nav">
   
-    <a href="/ayablog/2017/02/06/TOEIC準備心得/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/ayablog/2017/01/12/不定長度引數function寫法/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          TOEIC準備心得
+          不定長度引數函數的寫法
         
       </div>
     </a>
   
   
-    <a href="/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/ayablog/2016/12/23/如何讓VM開機自動執行/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">如何使用 pthread_create 傳遞多個引數</div>
+      <div class="article-nav-title">讓Virtualbox 的虛擬機器在 Windows 開機後自動啟動</div>
     </a>
   
 </nav>
@@ -249,7 +263,7 @@ Sample Codeint printLog(char* hex, int len, char* char_p, ...)
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample-Code"><span class="nav-number">2.</span> <span class="nav-text">Sample Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#問題"><span class="nav-number">2.</span> <span class="nav-text">問題</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法"><span class="nav-number">3.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sameple-code"><span class="nav-number">4.</span> <span class="nav-text">Sameple code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol>
     
     </div>
   </aside>

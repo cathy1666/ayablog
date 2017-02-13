@@ -114,7 +114,7 @@
     <div class="article-meta">
       
 	<a href="/ayablog/2017/02/06/TOEIC準備心得/" class="article-date">
-	  <time datetime="2017-02-06T03:11:06.036Z" itemprop="datePublished">February 6, 2017</time>
+	  <time datetime="2017-02-06T14:36:36.773Z" itemprop="datePublished">February 6, 2017</time>
 	</a>
 
       
@@ -168,90 +168,6 @@
 <!-- Table of Contents -->
 
   
-    <article id="post-不定長度引數function寫法"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/ayablog/2017/01/10/不定長度引數function寫法/">不定長度引數函數的寫法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/ayablog/2017/01/10/不定長度引數function寫法/" class="article-date">
-	  <time datetime="2017-01-10T09:21:51.599Z" itemprop="datePublished">January 10, 2017</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出含有任意數量的變數的string。</p>
-<h3 id="Sample-Code"><a href="#Sample-Code" class="headerlink" title="Sample Code"></a>Sample Code</h3><pre><code>int printLog(char* hex, int len, char* char_p, ...)
-{
-    int i;
-    FILE *fp;
-    unsigned char* hex_p = (unsigned char*)hex;
-
-    fp = fopen(LOGFILE, &quot;a&quot;);
-    if (NULL == fp)
-    {
-        printf(&quot;open %s fail\n&quot;, LOGFILE);
-        return -1;
-    }    
-
-    char buffer[256];
-    va_list list_p;
-    va_start(list_p, char_p);
-    vsprintf(buffer, char_p, list_p);
-    va_end(list_p);
-
-    //print time stamp
-    fprintf(fp, &quot;%.24s   &quot;, getTime()); 
-
-    //print comment with variable-length argument 
-    fprintf(fp, &quot;%s&quot;, buffer);
-
-    //print hex string    
-    fprintf(fp, &quot;[ &quot;);
-    for (i = 0; i &lt; len; i++)
-    {
-        fprintf(fp, &quot;%02x &quot;, *hex_p++);
-    }
-    fprintf(fp, &quot;]\n&quot;);
-
-    fclose(fp);
-    return 0;    
-}
-</code></pre><p>這段code是reference內sample code變化應用，想知道細節就參考reference吧，裡面寫得很詳細!</p>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://ccd9527.blogspot.tw/2009/04/cc-variable-length-argument.html" target="_blank" rel="external">C/C++ : 不定長度引數（Variable-length argument）</a></p>
-<p><a href="http://www.programmer-club.com.tw/ShowSameTitleN/c/33173.html" target="_blank" rel="external">請問像printf()這樣參數數量不固定的函數如何實作? </a></p>
-<p><a href="http://www.cplusplus.com/reference/cstdio/vsprintf/" target="_blank" rel="external">vsprintf</a></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/C-C/">C/C++</a></li></ul>
-
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
     <article id="post-如何使用 pthread_create 傳遞多個引數"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -260,7 +176,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/">如何使用 pthread_create 傳遞多個引數</a>
+      <a class="article-title" href="/ayablog/2017/01/12/如何使用 pthread_create 傳遞多個引數/">如何使用 pthread_create 傳遞多個引數</a>
     </h1>
   
 
@@ -268,8 +184,8 @@
     
     <div class="article-meta">
       
-	<a href="/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/" class="article-date">
-	  <time datetime="2017-01-10T01:32:36.719Z" itemprop="datePublished">January 10, 2017</time>
+	<a href="/ayablog/2017/01/12/如何使用 pthread_create 傳遞多個引數/" class="article-date">
+	  <time datetime="2017-01-12T13:05:20.544Z" itemprop="datePublished">January 12, 2017</time>
 	</a>
 
       
@@ -472,6 +388,90 @@ print_data END
 <!-- Table of Contents -->
 
   
+    <article id="post-不定長度引數function寫法"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/ayablog/2017/01/12/不定長度引數function寫法/">不定長度引數函數的寫法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/ayablog/2017/01/12/不定長度引數function寫法/" class="article-date">
+	  <time datetime="2017-01-12T13:05:18.613Z" itemprop="datePublished">January 12, 2017</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出含有任意數量的變數的string。</p>
+<h3 id="Sample-Code"><a href="#Sample-Code" class="headerlink" title="Sample Code"></a>Sample Code</h3><pre><code>int printLog(char* hex, int len, char* char_p, ...)
+{
+    int i;
+    FILE *fp;
+    unsigned char* hex_p = (unsigned char*)hex;
+
+    fp = fopen(LOGFILE, &quot;a&quot;);
+    if (NULL == fp)
+    {
+        printf(&quot;open %s fail\n&quot;, LOGFILE);
+        return -1;
+    }    
+
+    char buffer[256];
+    va_list list_p;
+    va_start(list_p, char_p);
+    vsprintf(buffer, char_p, list_p);
+    va_end(list_p);
+
+    //print time stamp
+    fprintf(fp, &quot;%.24s   &quot;, getTime()); 
+
+    //print comment with variable-length argument 
+    fprintf(fp, &quot;%s&quot;, buffer);
+
+    //print hex string    
+    fprintf(fp, &quot;[ &quot;);
+    for (i = 0; i &lt; len; i++)
+    {
+        fprintf(fp, &quot;%02x &quot;, *hex_p++);
+    }
+    fprintf(fp, &quot;]\n&quot;);
+
+    fclose(fp);
+    return 0;    
+}
+</code></pre><p>這段code是reference內sample code變化應用，想知道細節就參考reference吧，裡面寫得很詳細!</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://ccd9527.blogspot.tw/2009/04/cc-variable-length-argument.html" target="_blank" rel="external">C/C++ : 不定長度引數（Variable-length argument）</a></p>
+<p><a href="http://www.programmer-club.com.tw/ShowSameTitleN/c/33173.html" target="_blank" rel="external">請問像printf()這樣參數數量不固定的函數如何實作? </a></p>
+<p><a href="http://www.cplusplus.com/reference/cstdio/vsprintf/" target="_blank" rel="external">vsprintf</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/C-C/">C/C++</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-如何外部終止特定執行緒"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -480,7 +480,7 @@ print_data END
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/ayablog/2017/01/05/如何外部終止特定執行緒/">如何外部終止特定執行緒</a>
+      <a class="article-title" href="/ayablog/2017/01/04/如何外部終止特定執行緒/">如何外部終止特定執行緒</a>
     </h1>
   
 
@@ -488,8 +488,8 @@ print_data END
     
     <div class="article-meta">
       
-	<a href="/ayablog/2017/01/05/如何外部終止特定執行緒/" class="article-date">
-	  <time datetime="2017-01-05T01:46:25.748Z" itemprop="datePublished">January 5, 2017</time>
+	<a href="/ayablog/2017/01/04/如何外部終止特定執行緒/" class="article-date">
+	  <time datetime="2017-01-04T14:46:35.706Z" itemprop="datePublished">January 4, 2017</time>
 	</a>
 
       
@@ -768,8 +768,8 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/ayablog/2017/01/10/不定長度引數function寫法/">不定長度引數函數的寫法</a></h6>
-              <span>January 10, 2017</span>
+              <h6 style="margin: 0;"><a href="/ayablog/2017/01/12/如何使用 pthread_create 傳遞多個引數/">如何使用 pthread_create 傳遞多個引數</a></h6>
+              <span>January 12, 2017</span>
             </div>
 
           </li>
@@ -780,8 +780,8 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/">如何使用 pthread_create 傳遞多個引數</a></h6>
-              <span>January 10, 2017</span>
+              <h6 style="margin: 0;"><a href="/ayablog/2017/01/12/不定長度引數function寫法/">不定長度引數函數的寫法</a></h6>
+              <span>January 12, 2017</span>
             </div>
 
           </li>
@@ -792,8 +792,8 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/ayablog/2017/01/05/如何外部終止特定執行緒/">如何外部終止特定執行緒</a></h6>
-              <span>January 5, 2017</span>
+              <h6 style="margin: 0;"><a href="/ayablog/2017/01/04/如何外部終止特定執行緒/">如何外部終止特定執行緒</a></h6>
+              <span>January 4, 2017</span>
             </div>
 
           </li>

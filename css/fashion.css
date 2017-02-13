@@ -548,12 +548,12 @@ object {
 	}
 
 
-/* LAYOUT
+/* LAYOUT 
 ----------------------------------------------- */
 .container {
-	width: 980px;
+	width: 1150px;
 	padding: 0;
-	}
+	}/* 最上方標題寬 */
 .content-area {
 	width: 100%;
 	float: left;

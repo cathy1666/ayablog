@@ -123,7 +123,7 @@ body {
 }
 body {
   background: #fff;
-  font: 14px Arial, Helvetica, sans-serif, "Hiragino Sans GB", "Hiragino Sans GB W3", Microsoft JhengHei;
+  font: 14px "微軟正黑體", Arial, Helvetica, sans-serif, "Hiragino Sans GB", "Hiragino Sans GB W3", Microsoft JhengHei;
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizelegibility;
 }
@@ -214,7 +214,7 @@ body {
   transform: scale(1.4, 3.2);
 }
 .outer {
-  max-width: 1040px;
+  max-width: 1210px;
   margin: 40px auto;
   padding: 0 20px;
 }
@@ -229,8 +229,8 @@ body {
 .inner {
   display: inline;
   float: left;
-  width: 98.0392156862745%;
-  margin: 0 0.980392156862745%;
+  width: 98.31932773109243%;
+  margin: 0 0.840336134453782%;
 }
 .left,
 .alignleft {
@@ -267,8 +267,8 @@ body {
   #main {
     display: inline;
     float: left;
-    width: 64.70588235294117%;
-    margin: 0 0.980392156862745%;
+    width: 69.74789915966386%;
+    margin: 0 0.840336134453782%;
   }
 }
 .archive-year,
@@ -294,19 +294,23 @@ body {
 }
 .article-entry h1,
 .widget h1 {
-  font-size: 25px;
+  font-size: 32px;
 }
 .article-entry h2,
 .widget h2 {
-  font-size: 23px;
+  font-size: 28px;
 }
 .article-entry h3,
 .widget h3 {
-  font-size: 20px;
+  font-size: 25px;
 }
 .article-entry h4,
 .widget h4 {
-  font-size: 17px;
+  font-size: 20px;
+}
+.article-entry p,
+.widget p {
+  font-size: 16px;
 }
 .article-entry h5,
 .widget h5 {
@@ -323,7 +327,8 @@ body {
 }
 .article-entry strong,
 .widget strong {
-  font-weight: bold;
+  font-weight: 800;
+  color: #fb6d19;
 }
 .article-entry em,
 .widget em,
@@ -480,6 +485,7 @@ body {
 .article-title {
   text-decoration: none;
   font-weight: bold;
+  text-align: center;
   color: #555;
   line-height: 1.1em;
   -webkit-transition: color 0.2s;
@@ -1144,7 +1150,7 @@ a.article-title:hover {
   margin-right: 15px;
   display: block;
   font-size: 1.1em;
-  font-family: "futura-pt", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", Microsoft JhengHei, WenQuanYi Micro Hei, "Microsoft YaHei", sans-serif;
+  font-family: "微軟正黑體", "futura-pt", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", Microsoft JhengHei, WenQuanYi Micro Hei, "Microsoft YaHei", sans-serif;
 }
 .archive-article-date:hover {
   color: #1fa0ae;
@@ -1237,7 +1243,7 @@ a.article-title:hover {
 }
 .article-entry pre,
 .article-entry code {
-  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+  font-family: "微軟正黑體", "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
 }
 .article-entry code {
   background: rgba(208,211,248,0.2);
@@ -1299,7 +1305,7 @@ a.article-title:hover {
 }
 .article-entry .gist .gist-file {
   border: none;
-  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+  font-family: "微軟正黑體", "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
   margin: 0;
 }
 .article-entry .gist .gist-file .gist-data {
@@ -1644,8 +1650,8 @@ pre .xml .cdata {
   #sidebar {
     display: inline;
     float: left;
-    width: 31.372549019607842%;
-    margin: 0 0.980392156862745%;
+    width: 26.89075630252101%;
+    margin: 0 0.840336134453782%;
   }
 }
 @media screen and (max-width: 479px) {
@@ -1715,7 +1721,8 @@ pre .xml .cdata {
 .widget {
   line-height: 1.6em;
   word-wrap: break-word;
-  font-size: 0.9em;
+  font-family: "微軟正黑體";
+  font-size: 1.2em;
 }
 .widget ul,
 .widget ol {

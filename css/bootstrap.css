@@ -69,19 +69,23 @@ footer>.container>.row>p>a:hover  {
   color: #f33;
 }
 
+/*
 h1 {
   margin: 0.67em 0;
   font-size: 2em;
 }
+*/
 
 abbr[title] {
   border-bottom: 1px dotted;
 }
 
+/*
 b,
 strong {
-  
+  font-weight: bold;
 }
+*/
 
 dfn {
   font-style: italic;

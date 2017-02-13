@@ -599,7 +599,7 @@ a.article-title:hover {
 .article-entry blockquote footer {
   font-size: 14px;
   margin: 1.6em 0;
-  font-family: "微軟正黑體", -apple-system, "Arial", BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "微軟正黑體", "微軟正黑體", -apple-system, "Arial", BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 .article-entry blockquote footer cite:before {
   content: "—";
@@ -1154,13 +1154,13 @@ a.article-title:hover {
   margin-right: 15px;
   display: block;
   font-size: 1.1em;
-  font-family: "微軟正黑體", "futura-pt", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", Microsoft JhengHei, WenQuanYi Micro Hei, "Microsoft YaHei", sans-serif;
+  font-family: "微軟正黑體", "微軟正黑體", "futura-pt", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", Microsoft JhengHei, WenQuanYi Micro Hei, "Microsoft YaHei", sans-serif;
 }
 .archive-article-date:hover {
   color: #1fa0ae;
 }
 #page-nav {
-  font-family: "微軟正黑體", Oswald, Arial, Helvetica, sans-serif;
+  font-family: "微軟正黑體", "微軟正黑體", Oswald, Arial, Helvetica, sans-serif;
   font-size: 1.2em;
   font-weight: 300;
   text-transform: uppercase;
@@ -1549,7 +1549,7 @@ pre .xml .cdata {
   box-sizing: border-box;
   padding: 12px 28px 12px 20px;
   border-bottom: 1px solid #e2e2e2;
-  font-family: "Microsoft Yahei Light", "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font-family: "微軟正黑體", "Microsoft Yahei Light", "Microsoft Yahei", Helvetica, Arial, sans-serif;
 }
 .ins-close {
   top: 50%;
@@ -1712,7 +1712,7 @@ pre .xml .cdata {
   text-transform: uppercase;
   line-height: 1.2;
   color: #222;
-  font-family: "微軟正黑體", Oswald, Arial, Helvetica, sans-serif;
+  font-family: "微軟正黑體", "微軟正黑體", Oswald, Arial, Helvetica, sans-serif;
 }
 .widget_athemes_tabs .widget ul li a:hover {
   color: #1fa0ae;

@@ -51,32 +51,10 @@
 
 
   
-  
-  <div class="site-header-image">
-    <img id="originBg" width="100%" alt="Hike News" src="">
-  </div>
-
-  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
-    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
-  </div>
-
-  <script>
-        var imgUrls = "css/images/pose02.jpg,http://t.cn/RMbvEza".split(",");
-        var random = Math.floor((Math.random() * imgUrls.length ));
-        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
-          document.getElementById("originBg").src=imgUrls[random];
-          document.getElementById("blurBg").src=imgUrls[random];
-        } else {
-          document.getElementById("originBg").src='/ayablog/' + imgUrls[random];
-          document.getElementById("blurBg").src='/ayablog/' + imgUrls[random];
-        }
-    </script>
-
-
 
 
 <header id="allheader" class="site-header" role="banner" 
-   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+   >
   <div class="clearfix container">
       <div class="site-branding">
 
@@ -98,8 +76,6 @@
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/ayablog/">Home</a> </li>
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/ayablog/archives">Archives</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/ayablog/categories">Categories</a> </li>
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/ayablog/tags">Tags</a> </li>
                     
@@ -209,22 +185,7 @@
 
     	<ul class="clearfix widget-social-icons">   
     	
-   			<li><a href="https://github.com/iTimeTraveler" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a></li> 
-
-   		
-   			<li><a href="null" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a></li> 
-
-   		
-   			<li><a href="null" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li> 
-
-   		
-   			<li><a href="null" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li> 
-
-   		
-   			<li><a href="null" title="Google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li> 
-
-   		
-   			<li><a href="null" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> 
+   			<li><a href="https://github.com/cathy1666" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a></li> 
 
    		
    		</ul>
@@ -319,9 +280,6 @@
 
   
     
-
-  
-    
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
@@ -329,6 +287,9 @@
     </div>
   </div>
 
+
+  
+    
 
   
     
@@ -362,8 +323,6 @@
   
     <a href="/ayablog/archives" class="mobile-nav-link">Archives</a>
   
-    <a href="/ayablog/categories" class="mobile-nav-link">Categories</a>
-  
     <a href="/ayablog/tags" class="mobile-nav-link">Tags</a>
   
     <a href="/ayablog/about" class="mobile-nav-link">About</a>
@@ -394,9 +353,6 @@
 
 
     <!-- headerblur min height -->
-    
-      var headerblur = document.getElementById("header-blur");
-      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
     
     
 </script>

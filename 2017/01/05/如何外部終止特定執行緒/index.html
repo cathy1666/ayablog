@@ -6,7 +6,7 @@
   <title>如何外部終止特定執行緒 | Aya Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="C/C++Linuxpthread" />
+  <meta name="keywords" content="LinuxCpthread" />
   
   
   
@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="Aya Blog">
 <meta property="og:description" content="需求主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。
 問題使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結">
-<meta property="og:updated_time" content="2017-02-14T08:24:25.915Z">
+<meta property="og:updated_time" content="2017-02-14T09:20:34.038Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何外部終止特定執行緒">
 <meta name="twitter:description" content="需求主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。
@@ -140,7 +140,7 @@
       
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/pthread/">pthread</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/pthread/">pthread</a></li></ul>
 
       
     </footer>

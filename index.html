@@ -114,7 +114,7 @@
     <div class="article-meta">
       
 	<a href="/ayablog/2017/02/06/TOEIC準備心得/" class="article-date">
-	  <time datetime="2017-02-06T14:36:36.773Z" itemprop="datePublished">February 6, 2017</time>
+	  <time datetime="2017-02-06T03:11:06.036Z" itemprop="datePublished">February 6, 2017</time>
 	</a>
 
       
@@ -168,226 +168,6 @@
 <!-- Table of Contents -->
 
   
-    <article id="post-如何使用 pthread_create 傳遞多個引數"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/ayablog/2017/01/12/如何使用 pthread_create 傳遞多個引數/">如何使用 pthread_create 傳遞多個引數</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/ayablog/2017/01/12/如何使用 pthread_create 傳遞多個引數/" class="article-date">
-	  <time datetime="2017-01-12T13:05:20.544Z" itemprop="datePublished">January 12, 2017</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="函數定義"><a href="#函數定義" class="headerlink" title="函數定義"></a>函數定義</h3><pre><code>#include &lt;pthread.h&gt;
-int pthread_create( pthread_t *thread, 
-                    const pthread_attr_t *attr, 
-                    void *(*start_routine) (void *),
-                    void *arg);
-</code></pre><ul>
-<li><strong>pthread_t *thread</strong> 為pthread的指標，在使用thread之前必須要先宣告一個pthread_t的變數。</li>
-<li><strong>const pthread_attr_t *attr</strong> 為一個structure指標，內含創建此thread的屬性，預設是NULL，如果沒有其他特殊的需求直接填入NULL即可。</li>
-<li><strong>void *(*start_routine) (void *)</strong> 為function pointer，即所創建的thread要執行的handler function。</li>
-<li><strong>void *arg</strong> 為Function pointer所指function要帶的參數,需為指標型態。</li>
-</ul>
-<p><strong>RETURN VALUE:</strong> 如果執行成功則回傳0，如果執行失敗則回傳錯誤代碼。</p>
-<p><strong>EX:</strong></p>
-<pre><code>void *print_data(void *data);
-...
-pthread_t t1;
-int arg1 = 5;
-pthread_create( &amp;t1, NULL , print_data , (void *)&amp;arg1);
-
-pthread_create( &amp;t1, NULL , (void *)print_data , (void *)&amp;arg1);
-</code></pre><h3 id="傳遞一個引數"><a href="#傳遞一個引數" class="headerlink" title="傳遞一個引數"></a>傳遞一個引數</h3><pre><code>void *print_data(void *data)
-{
-    //printf(&quot;data = %d\n&quot;, *data);//compile不會過
-
-    int tt = *(int*)data;
-
-    printf(&quot;print_data START\n&quot;);
-    printf(&quot;data = %d\n&quot;, tt);
-    printf(&quot;print_data END\n&quot;);
-
-    pthread_exit(NULL);
-}
-
-
-int main()
-{
-    int arg1 = 88;
-    pthread_t t1;
-
-    if (pthread_create(&amp;t1, NULL, print_data, (void *)&amp;arg1) != 0)
-    {
-        printf(&quot;create thread fail: %s\n&quot;, strerror(errno));
-    }
-    sleep(5); //避免thread還沒執行完main就結束
-    return 0;
-}
-</code></pre><p>(void *)指標型態的參數傳進function後，需要先指定是甚麼型態的指標才能使用，直接使用指標指向的值，compiler無法判斷要讀多長的記憶體空間，所以連compile都不會過:</p>
-<p><strong>Compile Error:</strong></p>
-<pre><code>warning: dereferencing &apos;void *&apos; pointer [enabled by default]
-error: invalid use of void expression
-</code></pre><h3 id="傳遞多個引數"><a href="#傳遞多個引數" class="headerlink" title="傳遞多個引數"></a>傳遞多個引數</h3><p>pthread_create的函數定義裡，只有一個欄位可以放傳入handler function的引數，所以要傳遞多個引數時，可以把需要的引數包成一個structure，再將此structure的pointer作為引數傳入。</p>
-<pre><code>struct testdata
-{
-    int num;
-    char name[10];
-};
-
-void *print_data(void *data)
-{
-    struct testdata* tt = (struct testdata*)data;
-
-    printf(&quot;print_data START\n&quot;);
-    printf(&quot;num = %d\n&quot;, tt-&gt;num);
-    printf(&quot;name = %s\n&quot;, tt-&gt;name);
-    printf(&quot;print_data END\n&quot;);
-
-    pthread_exit(NULL);
-}
-
-int main()
-{
-    struct testdata data1;
-    pthread_t t1;
-
-    data1.num = 100;
-    strcpy(data1.name, &quot;Hello&quot;);
-
-    if (pthread_create( &amp;t1, NULL , print_data , (void *)&amp;data1) != 0)
-    {
-        printf(&quot;create thread fail: %s\n&quot;, strerror(errno));
-    }
-    sleep(5); //避免thread還沒執行完main就結束
-    return 0;
-}
-</code></pre><h3 id="pass-by-reference引起的segmentation-fault"><a href="#pass-by-reference引起的segmentation-fault" class="headerlink" title="pass by reference引起的segmentation fault"></a>pass by reference引起的segmentation fault</h3><p>因為受限於pthread_create本身的定義，pthread_create所有的參數都是使用指標，也就是用pass by reference的方式傳遞引數，所以就要特別注意reference的位置是否為NULL，會不會造成segmentation fault。<br>以下例子就是我自己寫multi-thread程式的血淚經驗中得來的:</p>
-<pre><code>struct testdata
-{
-    int num;
-    char name[10];
-};
-
-void *print_data(void *data)
-{
-    struct testdata* tt = (struct testdata*)data;
-
-    printf(&quot;print_data START\n&quot;);
-    printf(&quot;num = %d\n&quot;, tt-&gt;num);
-    printf(&quot;name = %s\n&quot;, tt-&gt;name);
-    printf(&quot;print_data END\n&quot;);
-
-    pthread_exit(NULL);
-}    
-
-void func()
-{
-    struct testdata data1;
-    pthread_t t1;
-
-    data1.num = 100;
-    strcpy(data1.name, &quot;Hello&quot;);
-
-    if (pthread_create( &amp;t1, NULL , print_data , (void *)&amp;data1) != 0)
-    {
-        printf(&quot;create thread fail: %s\n&quot;, strerror(errno));
-    }
-}
-
-int main()
-{
-    func();
-
-    sleep(5); //避免thread還沒執行完main就結束
-    return 0;
-}
-</code></pre><p><strong>OUTPUT</strong></p>
-<pre><code>print_data START
-num = -6947704
-name = ��y���Z�u
-print_data END
-</code></pre><p>以上程式有很大的機率會在執行時發生segmentation fault，原因是傳入的引數data1是定義在func()內，func()一結束區域變數data1就會被系統清除，而此時thread進行到<br><code>printf(&quot;num = %d\n&quot;, tt-&gt;num);</code><br>這行時，就會讀錯記憶體區塊，造成segmentation fault。</p>
-<h3 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h3><p>雖然所有pthread_create的動作都在main進行是最安全的作法，但程式越來越大，為了使程式結構化寫成function還是有必要的。所以我目前的解法是在thread handler function內一開始就把傳入指標指向的值copy一份，另外在pthread_create後也稍微delay確保copy引數值的動作完成才結束func()。</p>
-<pre><code>struct testdata
-{
-    int num;
-    char name[10];
-};
-
-void *print_data(void *data)
-{
-    struct testdata tt = *(struct testdata*)data; // 直接copy值，而不是用reference的方法使用
-
-    printf(&quot;print_data START\n&quot;);
-    printf(&quot;num = %d\n&quot;, tt.num);
-    printf(&quot;name = %s\n&quot;, tt.name);
-    printf(&quot;print_data END\n&quot;);
-
-    pthread_exit(NULL);
-}
-
-void func()
-{
-    struct testdata data1;
-    pthread_t t1;
-
-    data1.num = 100;
-    strcpy(data1.name, &quot;Hello&quot;);
-
-    if (pthread_create(&amp;t1, NULL, print_data, (void *)&amp;data1) != 0)
-    {
-        printf(&quot;create thread fail: %s\n&quot;, strerror(errno));
-    }
-    usleep(500000);//確保copy引數值的動作完成才結束func()
-}
-
-int main()
-{
-    func();
-
-    sleep(5); //避免thread還沒執行完main就結束
-    return 0;
-}
-</code></pre><p><strong>OUTPUT</strong></p>
-<pre><code>print_data START
-num = 100
-name = Hello
-print_data END
-</code></pre><p>當然，這不是最好的做法，畢竟做了delay，如果有發現更好的做法再來更新吧!</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/pthread/">pthread</a></li></ul>
-
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
     <article id="post-不定長度引數function寫法"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -396,7 +176,7 @@ print_data END
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/ayablog/2017/01/12/不定長度引數function寫法/">不定長度引數函數的寫法</a>
+      <a class="article-title" href="/ayablog/2017/01/10/不定長度引數function寫法/">不定長度引數函數的寫法</a>
     </h1>
   
 
@@ -404,8 +184,8 @@ print_data END
     
     <div class="article-meta">
       
-	<a href="/ayablog/2017/01/12/不定長度引數function寫法/" class="article-date">
-	  <time datetime="2017-01-12T13:05:18.613Z" itemprop="datePublished">January 12, 2017</time>
+	<a href="/ayablog/2017/01/10/不定長度引數function寫法/" class="article-date">
+	  <time datetime="2017-01-10T09:21:51.599Z" itemprop="datePublished">January 10, 2017</time>
 	</a>
 
       
@@ -472,6 +252,81 @@ print_data END
 <!-- Table of Contents -->
 
   
+    <article id="post-如何使用 pthread_create 傳遞多個引數"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/">如何使用 pthread_create 傳遞多個引數</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/" class="article-date">
+	  <time datetime="2017-01-10T01:32:36.719Z" itemprop="datePublished">January 10, 2017</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="函數定義"><a href="#函數定義" class="headerlink" title="函數定義"></a>函數定義</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#include &lt;pthread.h&gt;</div><div class="line">int pthread_create( pthread_t *thread, </div><div class="line">					const pthread_attr_t *attr, </div><div class="line">					void *(*start_routine) (void *),</div><div class="line">					void *arg);</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>pthread_t *thread</strong> 為pthread的指標，在使用thread之前必須要先宣告一個pthread_t的變數。</li>
+<li><strong>const pthread_attr_t *attr</strong> 為一個structure指標，內含創建此thread的屬性，預設是NULL，如果沒有其他特殊的需求直接填入NULL即可。</li>
+<li><strong>void *(*start_routine) (void *)</strong> 為function pointer，即所創建的thread要執行的handler function。</li>
+<li><strong>void *arg</strong> 為Function pointer所指function要帶的參數,需為指標型態。</li>
+</ul>
+<p><strong>RETURN VALUE:</strong> 如果執行成功則回傳0，如果執行失敗則回傳錯誤代碼。</p>
+<p><strong>EX:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">void *print_data(void *data);</div><div class="line">...</div><div class="line">pthread_t t1;</div><div class="line">int arg1 = 5;</div><div class="line">pthread_create( &amp;t1, NULL , print_data , (void *)&amp;arg1);</div><div class="line"></div><div class="line">pthread_create( &amp;t1, NULL , (void *)print_data , (void *)&amp;arg1);</div></pre></td></tr></table></figure></p>
+<h3 id="傳遞一個引數"><a href="#傳遞一個引數" class="headerlink" title="傳遞一個引數"></a>傳遞一個引數</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">void *print_data(void *data)</div><div class="line">&#123;</div><div class="line">	//printf(&quot;data = %d\n&quot;, *data);//compile不會過</div><div class="line"></div><div class="line">	int tt = *(int*)data;</div><div class="line"></div><div class="line">	printf(&quot;print_data START\n&quot;);</div><div class="line">	printf(&quot;data = %d\n&quot;, tt);</div><div class="line">	printf(&quot;print_data END\n&quot;);</div><div class="line"></div><div class="line">	pthread_exit(NULL);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	int arg1 = 88;</div><div class="line">	pthread_t t1;</div><div class="line"></div><div class="line">	if (pthread_create(&amp;t1, NULL, print_data, (void *)&amp;arg1) != 0)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;create thread fail: %s\n&quot;, strerror(errno));</div><div class="line">	&#125;</div><div class="line">	sleep(5); //避免thread還沒執行完main就結束</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>(void *)指標型態的參數傳進function後，需要先指定是甚麼型態的指標才能使用，直接使用指標指向的值，compiler無法判斷要讀多長的記憶體空間，所以連compile都不會過:</p>
+<p><strong>Compile Error:</strong></p>
+<pre><code>warning: dereferencing &apos;void *&apos; pointer [enabled by default]
+error: invalid use of void expression
+</code></pre><h3 id="傳遞多個引數"><a href="#傳遞多個引數" class="headerlink" title="傳遞多個引數"></a>傳遞多個引數</h3><p>pthread_create的函數定義裡，只有一個欄位可以放傳入handler function的引數，所以要傳遞多個引數時，可以把需要的引數包成一個structure，再將此structure的pointer作為引數傳入。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">struct testdata</div><div class="line">&#123;</div><div class="line">	int num;</div><div class="line">	char name[10];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">void *print_data(void *data)</div><div class="line">&#123;</div><div class="line">	struct testdata* tt = (struct testdata*)data;</div><div class="line"></div><div class="line">	printf(&quot;print_data START\n&quot;);</div><div class="line">	printf(&quot;num = %d\n&quot;, tt-&gt;num);</div><div class="line">	printf(&quot;name = %s\n&quot;, tt-&gt;name);</div><div class="line">	printf(&quot;print_data END\n&quot;);</div><div class="line"></div><div class="line">	pthread_exit(NULL);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	struct testdata data1;</div><div class="line">	pthread_t t1;</div><div class="line"></div><div class="line">	data1.num = 100;</div><div class="line">	strcpy(data1.name, &quot;Hello&quot;);</div><div class="line">	</div><div class="line">	if (pthread_create( &amp;t1, NULL , print_data , (void *)&amp;data1) != 0)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;create thread fail: %s\n&quot;, strerror(errno));</div><div class="line">	&#125;</div><div class="line">	sleep(5); //避免thread還沒執行完main就結束</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="pass-by-reference引起的segmentation-fault"><a href="#pass-by-reference引起的segmentation-fault" class="headerlink" title="pass by reference引起的segmentation fault"></a>pass by reference引起的segmentation fault</h3><p>因為受限於pthread_create本身的定義，pthread_create所有的參數都是使用指標，也就是用pass by reference的方式傳遞引數，所以就要特別注意reference的位置是否為NULL，會不會造成segmentation fault。<br>以下例子就是我自己寫multi-thread程式的血淚經驗中得來的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">struct testdata</div><div class="line">&#123;</div><div class="line">	int num;</div><div class="line">	char name[10];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">void *print_data(void *data)</div><div class="line">&#123;</div><div class="line">	struct testdata* tt = (struct testdata*)data;</div><div class="line"></div><div class="line">	printf(&quot;print_data START\n&quot;);</div><div class="line">	printf(&quot;num = %d\n&quot;, tt-&gt;num);</div><div class="line">	printf(&quot;name = %s\n&quot;, tt-&gt;name);</div><div class="line">	printf(&quot;print_data END\n&quot;);</div><div class="line"></div><div class="line">	pthread_exit(NULL);</div><div class="line">&#125;	</div><div class="line"></div><div class="line">void func()</div><div class="line">&#123;</div><div class="line">	struct testdata data1;</div><div class="line">	pthread_t t1;</div><div class="line"></div><div class="line">	data1.num = 100;</div><div class="line">	strcpy(data1.name, &quot;Hello&quot;);</div><div class="line">	</div><div class="line">	if (pthread_create( &amp;t1, NULL , print_data , (void *)&amp;data1) != 0)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;create thread fail: %s\n&quot;, strerror(errno));</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	func();</div><div class="line">	</div><div class="line">	sleep(5); //避免thread還沒執行完main就結束</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>OUTPUT</strong></p>
+<pre><code>print_data START
+num = -6947704
+name = ��y���Z�u
+print_data END
+</code></pre><p>以上程式有很大的機率會在執行時發生segmentation fault，原因是傳入的引數data1是定義在func()內，func()一結束區域變數data1就會被系統清除，而此時thread進行到<br><code>printf(&quot;num = %d\n&quot;, tt-&gt;num);</code><br>這行時，就會讀錯記憶體區塊，造成segmentation fault。</p>
+<h3 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h3><p>雖然所有pthread_create的動作都在main進行是最安全的作法，但程式越來越大，為了使程式結構化寫成function還是有必要的。所以我目前的解法是在thread handler function內一開始就把傳入指標指向的值copy一份，另外在pthread_create後也稍微delay確保copy引數值的動作完成才結束func()。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">struct testdata</div><div class="line">&#123;</div><div class="line">	int num;</div><div class="line">	char name[10];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">void *print_data(void *data)</div><div class="line">&#123;</div><div class="line">	struct testdata tt = *(struct testdata*)data; // 直接copy值，而不是用reference的方法使用</div><div class="line"></div><div class="line">	printf(&quot;print_data START\n&quot;);</div><div class="line">	printf(&quot;num = %d\n&quot;, tt.num);</div><div class="line">	printf(&quot;name = %s\n&quot;, tt.name);</div><div class="line">	printf(&quot;print_data END\n&quot;);</div><div class="line"></div><div class="line">	pthread_exit(NULL);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void func()</div><div class="line">&#123;</div><div class="line">	struct testdata data1;</div><div class="line">	pthread_t t1;</div><div class="line"></div><div class="line">	data1.num = 100;</div><div class="line">	strcpy(data1.name, &quot;Hello&quot;);</div><div class="line"></div><div class="line">	if (pthread_create(&amp;t1, NULL, print_data, (void *)&amp;data1) != 0)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;create thread fail: %s\n&quot;, strerror(errno));</div><div class="line">	&#125;</div><div class="line">	usleep(500000);//確保copy引數值的動作完成才結束func()</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	func();</div><div class="line"></div><div class="line">	sleep(5); //避免thread還沒執行完main就結束</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>OUTPUT</strong></p>
+<pre><code>print_data START
+num = 100
+name = Hello
+print_data END
+</code></pre><p>當然，這不是最好的做法，畢竟做了delay，如果有發現更好的做法再來更新吧!</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/pthread/">pthread</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-如何外部終止特定執行緒"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -480,7 +335,7 @@ print_data END
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/ayablog/2017/01/04/如何外部終止特定執行緒/">如何外部終止特定執行緒</a>
+      <a class="article-title" href="/ayablog/2017/01/05/如何外部終止特定執行緒/">如何外部終止特定執行緒</a>
     </h1>
   
 
@@ -488,8 +343,8 @@ print_data END
     
     <div class="article-meta">
       
-	<a href="/ayablog/2017/01/04/如何外部終止特定執行緒/" class="article-date">
-	  <time datetime="2017-01-04T14:46:35.706Z" itemprop="datePublished">January 4, 2017</time>
+	<a href="/ayablog/2017/01/05/如何外部終止特定執行緒/" class="article-date">
+	  <time datetime="2017-01-05T01:46:25.748Z" itemprop="datePublished">January 5, 2017</time>
 	</a>
 
       
@@ -768,8 +623,8 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/ayablog/2017/01/12/如何使用 pthread_create 傳遞多個引數/">如何使用 pthread_create 傳遞多個引數</a></h6>
-              <span>January 12, 2017</span>
+              <h6 style="margin: 0;"><a href="/ayablog/2017/01/10/不定長度引數function寫法/">不定長度引數函數的寫法</a></h6>
+              <span>January 10, 2017</span>
             </div>
 
           </li>
@@ -780,8 +635,8 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/ayablog/2017/01/12/不定長度引數function寫法/">不定長度引數函數的寫法</a></h6>
-              <span>January 12, 2017</span>
+              <h6 style="margin: 0;"><a href="/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/">如何使用 pthread_create 傳遞多個引數</a></h6>
+              <span>January 10, 2017</span>
             </div>
 
           </li>
@@ -792,8 +647,8 @@ pthread_t thread_SendTrigMsg[DEV_MAX];
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/ayablog/2017/01/04/如何外部終止特定執行緒/">如何外部終止特定執行緒</a></h6>
-              <span>January 4, 2017</span>
+              <h6 style="margin: 0;"><a href="/ayablog/2017/01/05/如何外部終止特定執行緒/">如何外部終止特定執行緒</a></h6>
+              <span>January 5, 2017</span>
             </div>
 
           </li>

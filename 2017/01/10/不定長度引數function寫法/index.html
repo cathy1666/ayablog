@@ -12,30 +12,18 @@
   
   
   <meta name="description" content="需求把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出含有任意數量的變數的string。
-Sample Codeint printLog(char* hex, int len, char* char_p, ...)
-{
-    int i;
-    FILE *fp;
-    unsigned char">
+Sample Code123456789101112131415161718192021222324252627282930313233343536int printLog(char* hex, int len,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="不定長度引數函數的寫法">
 <meta property="og:url" content="http://cathy1666.github.io/ayablog/2017/01/10/不定長度引數function寫法/index.html">
 <meta property="og:site_name" content="Aya Blog">
 <meta property="og:description" content="需求把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出含有任意數量的變數的string。
-Sample Codeint printLog(char* hex, int len, char* char_p, ...)
-{
-    int i;
-    FILE *fp;
-    unsigned char">
-<meta property="og:updated_time" content="2017-01-11T01:25:48.328Z">
+Sample Code123456789101112131415161718192021222324252627282930313233343536int printLog(char* hex, int len,">
+<meta property="og:updated_time" content="2017-02-14T08:24:01.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不定長度引數函數的寫法">
 <meta name="twitter:description" content="需求把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出含有任意數量的變數的string。
-Sample Codeint printLog(char* hex, int len, char* char_p, ...)
-{
-    int i;
-    FILE *fp;
-    unsigned char">
+Sample Code123456789101112131415161718192021222324252627282930313233343536int printLog(char* hex, int len,">
   
     <link rel="alternate" href="/atom.xml" title="Aya Blog" type="application/atom+xml">
   
@@ -141,43 +129,8 @@ Sample Codeint printLog(char* hex, int len, char* char_p, ...)
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出含有任意數量的變數的string。</p>
-<h3 id="Sample-Code"><a href="#Sample-Code" class="headerlink" title="Sample Code"></a>Sample Code</h3><pre><code>int printLog(char* hex, int len, char* char_p, ...)
-{
-    int i;
-    FILE *fp;
-    unsigned char* hex_p = (unsigned char*)hex;
-
-    fp = fopen(LOGFILE, &quot;a&quot;);
-    if (NULL == fp)
-    {
-        printf(&quot;open %s fail\n&quot;, LOGFILE);
-        return -1;
-    }    
-
-    char buffer[256];
-    va_list list_p;
-    va_start(list_p, char_p);
-    vsprintf(buffer, char_p, list_p);
-    va_end(list_p);
-
-    //print time stamp
-    fprintf(fp, &quot;%.24s   &quot;, getTime()); 
-
-    //print comment with variable-length argument 
-    fprintf(fp, &quot;%s&quot;, buffer);
-
-    //print hex string    
-    fprintf(fp, &quot;[ &quot;);
-    for (i = 0; i &lt; len; i++)
-    {
-        fprintf(fp, &quot;%02x &quot;, *hex_p++);
-    }
-    fprintf(fp, &quot;]\n&quot;);
-
-    fclose(fp);
-    return 0;    
-}
-</code></pre><p>這段code是reference內sample code變化應用，想知道細節就參考reference吧，裡面寫得很詳細!</p>
+<h3 id="Sample-Code"><a href="#Sample-Code" class="headerlink" title="Sample Code"></a>Sample Code</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">printLog</span><span class="params">(<span class="keyword">char</span>* hex, <span class="keyword">int</span> len, <span class="keyword">char</span>* char_p, ...)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	FILE *fp;</div><div class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span>* hex_p = (<span class="keyword">unsigned</span> <span class="keyword">char</span>*)hex;</div><div class="line"></div><div class="line">	fp = fopen(LOGFILE, <span class="string">"a"</span>);</div><div class="line">	<span class="keyword">if</span> (<span class="literal">NULL</span> == fp)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"open %s fail\n"</span>, LOGFILE);</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	&#125;	</div><div class="line">	</div><div class="line">	<span class="keyword">char</span> buffer[<span class="number">256</span>];</div><div class="line">	va_list list_p;</div><div class="line">	va_start(list_p, char_p);</div><div class="line">	<span class="built_in">vsprintf</span>(buffer, char_p, list_p);</div><div class="line">	va_end(list_p);</div><div class="line">	</div><div class="line">	<span class="comment">//print time stamp</span></div><div class="line">	<span class="built_in">fprintf</span>(fp, <span class="string">"%.24s   "</span>, getTime()); </div><div class="line">	</div><div class="line">	<span class="comment">//print comment with variable-length argument </span></div><div class="line">	<span class="built_in">fprintf</span>(fp, <span class="string">"%s"</span>, buffer);</div><div class="line"></div><div class="line">	<span class="comment">//print hex string	</span></div><div class="line">	<span class="built_in">fprintf</span>(fp, <span class="string">"[ "</span>);</div><div class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">fprintf</span>(fp, <span class="string">"%02x "</span>, *hex_p++);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">fprintf</span>(fp, <span class="string">"]\n"</span>);</div><div class="line">	</div><div class="line">	fclose(fp);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>這段code是reference內sample code變化應用，想知道細節就參考reference吧，裡面寫得很詳細!</p>
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://ccd9527.blogspot.tw/2009/04/cc-variable-length-argument.html" target="_blank" rel="external">C/C++ : 不定長度引數（Variable-length argument）</a></p>
 <p><a href="http://www.programmer-club.com.tw/ShowSameTitleN/c/33173.html" target="_blank" rel="external">請問像printf()這樣參數數量不固定的函數如何實作? </a></p>
 <p><a href="http://www.cplusplus.com/reference/cstdio/vsprintf/" target="_blank" rel="external">vsprintf</a></p>

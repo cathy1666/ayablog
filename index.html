@@ -193,43 +193,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>把開 特定檔案、寫入帶有當下時間的log、關檔案 整個流程寫成一個function，且此function要有像printf的介面，可以自動偵測印出含有任意數量的變數的string。</p>
-<h3 id="Sample-Code"><a href="#Sample-Code" class="headerlink" title="Sample Code"></a>Sample Code</h3><pre><code>int printLog(char* hex, int len, char* char_p, ...)
-{
-    int i;
-    FILE *fp;
-    unsigned char* hex_p = (unsigned char*)hex;
-
-    fp = fopen(LOGFILE, &quot;a&quot;);
-    if (NULL == fp)
-    {
-        printf(&quot;open %s fail\n&quot;, LOGFILE);
-        return -1;
-    }    
-
-    char buffer[256];
-    va_list list_p;
-    va_start(list_p, char_p);
-    vsprintf(buffer, char_p, list_p);
-    va_end(list_p);
-
-    //print time stamp
-    fprintf(fp, &quot;%.24s   &quot;, getTime()); 
-
-    //print comment with variable-length argument 
-    fprintf(fp, &quot;%s&quot;, buffer);
-
-    //print hex string    
-    fprintf(fp, &quot;[ &quot;);
-    for (i = 0; i &lt; len; i++)
-    {
-        fprintf(fp, &quot;%02x &quot;, *hex_p++);
-    }
-    fprintf(fp, &quot;]\n&quot;);
-
-    fclose(fp);
-    return 0;    
-}
-</code></pre><p>這段code是reference內sample code變化應用，想知道細節就參考reference吧，裡面寫得很詳細!</p>
+<h3 id="Sample-Code"><a href="#Sample-Code" class="headerlink" title="Sample Code"></a>Sample Code</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">printLog</span><span class="params">(<span class="keyword">char</span>* hex, <span class="keyword">int</span> len, <span class="keyword">char</span>* char_p, ...)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	FILE *fp;</div><div class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span>* hex_p = (<span class="keyword">unsigned</span> <span class="keyword">char</span>*)hex;</div><div class="line"></div><div class="line">	fp = fopen(LOGFILE, <span class="string">"a"</span>);</div><div class="line">	<span class="keyword">if</span> (<span class="literal">NULL</span> == fp)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"open %s fail\n"</span>, LOGFILE);</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	&#125;	</div><div class="line">	</div><div class="line">	<span class="keyword">char</span> buffer[<span class="number">256</span>];</div><div class="line">	va_list list_p;</div><div class="line">	va_start(list_p, char_p);</div><div class="line">	<span class="built_in">vsprintf</span>(buffer, char_p, list_p);</div><div class="line">	va_end(list_p);</div><div class="line">	</div><div class="line">	<span class="comment">//print time stamp</span></div><div class="line">	<span class="built_in">fprintf</span>(fp, <span class="string">"%.24s   "</span>, getTime()); </div><div class="line">	</div><div class="line">	<span class="comment">//print comment with variable-length argument </span></div><div class="line">	<span class="built_in">fprintf</span>(fp, <span class="string">"%s"</span>, buffer);</div><div class="line"></div><div class="line">	<span class="comment">//print hex string	</span></div><div class="line">	<span class="built_in">fprintf</span>(fp, <span class="string">"[ "</span>);</div><div class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">fprintf</span>(fp, <span class="string">"%02x "</span>, *hex_p++);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">fprintf</span>(fp, <span class="string">"]\n"</span>);</div><div class="line">	</div><div class="line">	fclose(fp);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>這段code是reference內sample code變化應用，想知道細節就參考reference吧，裡面寫得很詳細!</p>
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://ccd9527.blogspot.tw/2009/04/cc-variable-length-argument.html" target="_blank" rel="external">C/C++ : 不定長度引數（Variable-length argument）</a></p>
 <p><a href="http://www.programmer-club.com.tw/ShowSameTitleN/c/33173.html" target="_blank" rel="external">請問像printf()這樣參數數量不固定的函數如何實作? </a></p>
 <p><a href="http://www.cplusplus.com/reference/cstdio/vsprintf/" target="_blank" rel="external">vsprintf</a></p>
@@ -351,95 +316,8 @@ print_data END
         <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。</p>
 <h3 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h3><p>使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結束，而此pthread_id被後來創建的執行緒C拿去用。所以用pthread_id在多執行緒的環境中無法識別執行特定工作的執行緒是否還沒結束，也就是說，用pthread_cancel()可能會終止掉非目標的執行緒，造成程式錯誤。</p>
 <h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>不使用pthread_id來識別執行緒，而是自己定義一個陣列記錄每個執行緒目前的狀態。但此陣列可能同時被多個執行緒存取，造成race condition, 所以需再加上mutex做保護。</p>
-<h3 id="Sameple-code"><a href="#Sameple-code" class="headerlink" title="Sameple code"></a>Sameple code</h3><pre><code>#include &lt;stdio.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;pthread.h&gt;
-
-
-#define DEV_MAX 5
-volatile int SendTrigThreadStop[DEV_MAX] = { 0 };
-pthread_mutex_t TrigStopMutex[DEV_MAX];
-pthread_t thread_SendTrigMsg[DEV_MAX];
-
-
-    void *func(void *param)
-    {    
-        //pthread_detach(pthread_self());
-        //在pthread_create後，在thread function中pthread_detach自己,資源在thread function退出時或調用pthread_exit()時會自動被釋放
-        //加了這行就不能被join了
-
-
-        int num = (int)param;
-        long long int count = 0;
-        printf(&quot;thread %d begin...\n&quot;, num);
-
-
-        while (getTrigThreadStat(num) == 0)
-        {
-            printf(&quot;thread[%d]: %d\n&quot;, num, count++);
-            sleep(1);
-        }
-        printf(&quot;thread %d end...\n&quot;, num);
-
-        pthread_exit(NULL);
-    }
-
-    int getTrigThreadStat(int dev_n)
-    {
-        int ret = 0;
-
-            pthread_mutex_lock(&amp;TrigStopMutex[dev_n]);
-            ret = SendTrigThreadStop[dev_n];
-            pthread_mutex_unlock(&amp;TrigStopMutex[dev_n]);
-
-        return ret;
-    }
-
-    void setTrigThreadStat(int dev_n, int val)
-    {
-            pthread_mutex_lock(&amp;TrigStopMutex[dev_n]);
-            SendTrigThreadStop[dev_n] = val;
-            pthread_mutex_unlock(&amp;TrigStopMutex[dev_n]);
-    }
-
-
-
-    int main(int argc, char *argv[])
-    {
-        int i;
-        int thread_n = 3;
-        // start thread
-        if (pthread_create(&amp;thread_SendTrigMsg[thread_n], NULL, func, (void*)thread_n)) 
-        {
-            printf(&quot;pthread_create %d error\n&quot;, thread_n);
-            return -1;
-        }
-
-        sleep(5);
-
-
-        setTrigThreadStat(thread_n, 1);
-        pthread_join(thread_SendTrigMsg[thread_n], NULL);
-        printf(&quot;main canceled thread %d\n\n&quot;, thread_n);
-        setTrigThreadStat(thread_n, 0);
-
-        thread_n = 1;
-        if (pthread_create(&amp;thread_SendTrigMsg[thread_n], NULL, func, (void*)thread_n))
-        {
-            printf(&quot;pthread_create %d error\n&quot;, thread_n);
-            return -1;
-        }
-
-        sleep(8);
-
-        setTrigThreadStat(thread_n, 1);
-        pthread_join(thread_SendTrigMsg[thread_n], NULL);
-        printf(&quot;main canceled thread %d\n\n&quot;, thread_n);
-        setTrigThreadStat(thread_n, 0);
-
-        return 0;
-    }
-</code></pre><h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://stackoverflow.com/questions/18826853/how-to-stop-a-running-pthread-thread" target="_blank" rel="external">How to stop a running pthread thread?</a></p>
+<h3 id="Sameple-code"><a href="#Sameple-code" class="headerlink" title="Sameple code"></a>Sameple code</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> DEV_MAX 5</span></div><div class="line"><span class="keyword">volatile</span> <span class="keyword">int</span> SendTrigThreadStop[DEV_MAX] = &#123; <span class="number">0</span> &#125;;</div><div class="line"><span class="keyword">pthread_mutex_t</span> TrigStopMutex[DEV_MAX];</div><div class="line"><span class="keyword">pthread_t</span> thread_SendTrigMsg[DEV_MAX];</div><div class="line"></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> *<span class="title">func</span><span class="params">(<span class="keyword">void</span> *param)</span></span></div><div class="line">	&#123;	</div><div class="line">		<span class="comment">//pthread_detach(pthread_self());</span></div><div class="line">		<span class="comment">//在pthread_create後，在thread function中pthread_detach自己,資源在thread function退出時或調用pthread_exit()時會自動被釋放</span></div><div class="line">		<span class="comment">//加了這行就不能被join了</span></div><div class="line">		</div><div class="line">	</div><div class="line">		<span class="keyword">int</span> num = (<span class="keyword">int</span>)param;</div><div class="line">		<span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"thread %d begin...\n"</span>, num);</div><div class="line">	</div><div class="line">	</div><div class="line">		<span class="keyword">while</span> (getTrigThreadStat(num) == <span class="number">0</span>)</div><div class="line">		&#123;</div><div class="line">			<span class="built_in">printf</span>(<span class="string">"thread[%d]: %d\n"</span>, num, count++);</div><div class="line">			sleep(<span class="number">1</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"thread %d end...\n"</span>, num);</div><div class="line">		</div><div class="line">		pthread_exit(<span class="literal">NULL</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getTrigThreadStat</span><span class="params">(<span class="keyword">int</span> dev_n)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> ret = <span class="number">0</span>;</div><div class="line">	</div><div class="line">			pthread_mutex_lock(&amp;TrigStopMutex[dev_n]);</div><div class="line">			ret = SendTrigThreadStop[dev_n];</div><div class="line">			pthread_mutex_unlock(&amp;TrigStopMutex[dev_n]);</div><div class="line">	</div><div class="line">		<span class="keyword">return</span> ret;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setTrigThreadStat</span><span class="params">(<span class="keyword">int</span> dev_n, <span class="keyword">int</span> val)</span></span></div><div class="line">	&#123;</div><div class="line">			pthread_mutex_lock(&amp;TrigStopMutex[dev_n]);</div><div class="line">			SendTrigThreadStop[dev_n] = val;</div><div class="line">			pthread_mutex_unlock(&amp;TrigStopMutex[dev_n]);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> i;</div><div class="line">		<span class="keyword">int</span> thread_n = <span class="number">3</span>;</div><div class="line">		<span class="comment">// start thread</span></div><div class="line">		<span class="keyword">if</span> (pthread_create(&amp;thread_SendTrigMsg[thread_n], <span class="literal">NULL</span>, func, (<span class="keyword">void</span>*)thread_n)) </div><div class="line">		&#123;</div><div class="line">			<span class="built_in">printf</span>(<span class="string">"pthread_create %d error\n"</span>, thread_n);</div><div class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">		&#125;</div><div class="line">	</div><div class="line">		sleep(<span class="number">5</span>);</div><div class="line">	</div><div class="line">	</div><div class="line">		setTrigThreadStat(thread_n, <span class="number">1</span>);</div><div class="line">		pthread_join(thread_SendTrigMsg[thread_n], <span class="literal">NULL</span>);</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"main canceled thread %d\n\n"</span>, thread_n);</div><div class="line">		setTrigThreadStat(thread_n, <span class="number">0</span>);</div><div class="line">	</div><div class="line">		thread_n = <span class="number">1</span>;</div><div class="line">		<span class="keyword">if</span> (pthread_create(&amp;thread_SendTrigMsg[thread_n], <span class="literal">NULL</span>, func, (<span class="keyword">void</span>*)thread_n))</div><div class="line">		&#123;</div><div class="line">			<span class="built_in">printf</span>(<span class="string">"pthread_create %d error\n"</span>, thread_n);</div><div class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">		&#125;</div><div class="line">	</div><div class="line">		sleep(<span class="number">8</span>);</div><div class="line">	</div><div class="line">		setTrigThreadStat(thread_n, <span class="number">1</span>);</div><div class="line">		pthread_join(thread_SendTrigMsg[thread_n], <span class="literal">NULL</span>);</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"main canceled thread %d\n\n"</span>, thread_n);</div><div class="line">		setTrigThreadStat(thread_n, <span class="number">0</span>);</div><div class="line">	</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://stackoverflow.com/questions/18826853/how-to-stop-a-running-pthread-thread" target="_blank" rel="external">How to stop a running pthread thread?</a></p>
 
       
     </div>

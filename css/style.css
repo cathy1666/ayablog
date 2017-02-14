@@ -283,17 +283,14 @@ body {
   margin-left: 5px;
   line-height: 1em;
   font-weight: bold;
-  font-family: "微軟正黑體";
 }
 .article-inner {
   background: #fff;
   border: 1px solid #eef1f8;
   border-radius: 3px;
-  font-family: "微軟正黑體";
 }
 .article-inner-night {
   background: #1d1e1f;
-  font-family: "微軟正黑體";
 }
 .article-entry h1,
 .widget h1 {

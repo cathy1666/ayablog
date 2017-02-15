@@ -1,5 +1,5 @@
 @font-face {
-	font-family: 'athemes-glyphs';
+	font-family: "微軟正黑體", 'athemes-glyphs';
 	src: url('fonts/athemes-glyphs.eot?48303859');
 	src: url('fonts/athemes-glyphs.eot?48303859#iefix') format('embedded-opentype'),
 		 url('fonts/athemes-glyphs.woff?48303859') format('woff'),
@@ -22,8 +22,8 @@
  
  [class^="ico-"]:before, [class*=" ico-"]:before,
  [class^="fa-"]:before, [class*=" fa-"]:before {
-	font-family: "athemes-glyphs";
-	font-family: 'FontAwesome';
+	font-family: "微軟正黑體", "athemes-glyphs";
+	font-family: "微軟正黑體", 'FontAwesome';
 	font-style: normal;
 	font-weight: normal;
 	speak: none;

@@ -106,7 +106,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, serif;
+  font-family: "微軟正黑體", monospace, serif;
   font-size: 1em;
 }
 
@@ -162,7 +162,7 @@ input,
 select,
 textarea {
   margin: 0;
-  font-family: inherit;
+  font-family: "微軟正黑體", inherit;
   font-size: 100%;
 }
 
@@ -312,7 +312,7 @@ html {
 }
 
 body {
-  font-family: Helvetica Neue,Helvetica,Arial,sans-serif
+  font-family: "微軟正黑體", Helvetica Neue,Helvetica,Arial,sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
@@ -323,7 +323,7 @@ input,
 button,
 select,
 textarea {
-  font-family: inherit;
+  font-family: "微軟正黑體", inherit;
   font-size: inherit;
   line-height: inherit;
 }
@@ -488,7 +488,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: -apple-system,"Helvetica Neue",Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+  font-family: "微軟正黑體", -apple-system,"Helvetica Neue",Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
@@ -746,7 +746,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+  font-family: "微軟正黑體", Monaco, Menlo, Consolas, "Courier New", monospace;
 }
 
 code {
@@ -1898,7 +1898,7 @@ select[size] {
 }
 
 select optgroup {
-  font-family: inherit;
+  font-family: "微軟正黑體", inherit;
   font-size: inherit;
   font-style: inherit;
 }
@@ -2637,7 +2637,7 @@ input[type="button"].btn-block {
 }
 
 @font-face {
-  font-family: 'Glyphicons Halflings';
+  font-family: "微軟正黑體", 'Glyphicons Halflings';
   src: url('../fonts/glyphicons-halflings-regular.eot');
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
@@ -2646,7 +2646,7 @@ input[type="button"].btn-block {
   position: relative;
   top: 1px;
   display: inline-block;
-  font-family: 'Glyphicons Halflings';
+  font-family: "微軟正黑體", 'Glyphicons Halflings';
   -webkit-font-smoothing: antialiased;
   font-style: normal;
   font-weight: normal;
@@ -6506,7 +6506,7 @@ button.close {
   height: 20px;
   margin-top: -10px;
   margin-left: -10px;
-  font-family: serif;
+  font-family: "微軟正黑體", serif;
 }
 
 .carousel-control .icon-prev:before {

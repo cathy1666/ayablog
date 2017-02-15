@@ -320,7 +320,6 @@ body {
 .widget h6 {
   font-size: 0.9em;
   color: #999;
-  font-family: "微軟正黑體";
 }
 .article-entry hr,
 .widget hr {
@@ -1157,7 +1156,7 @@ a.article-title:hover {
   margin-right: 15px;
   display: block;
   font-size: 1.1em;
-  font-family: "微軟正黑體", "futura-pt", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", Microsoft JhengHei, WenQuanYi Micro Hei, "Microsoft YaHei", sans-serif;
+  font-family: "微軟正黑體", "微軟正黑體", "futura-pt", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", Microsoft JhengHei, WenQuanYi Micro Hei, "Microsoft YaHei", sans-serif;
 }
 .archive-article-date:hover {
   color: #1fa0ae;

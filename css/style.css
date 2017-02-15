@@ -1130,7 +1130,7 @@ a.article-title:hover {
 }
 .archive-article-title {
   font-family: "微軟正黑體";
-  font-size: 1.2em;
+  font-size: 0.9em;
   text-decoration: none;
   color: #333;
   -webkit-transition: color 0.2s;

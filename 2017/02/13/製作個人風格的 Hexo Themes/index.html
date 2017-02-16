@@ -12,20 +12,20 @@
   
   
   <meta name="description" content="套用現成的 Theme學習一個新的東西，最快的方式就是模仿。所以我是先套用一個別人寫好現成的 theme，再慢慢修改成自己的風格。試了很多 theme，我最後選擇 hipaper 這個，簡單大方排版符合我的需求， code 又不會太複雜的 theme 做為基礎來修改。
-檢查一下 hipaper 的 License 是 MIT授權 所以可以任意修改使用，只要附上此許可聲明即可。
+檢查一下 hipaper 的 License，是 MIT授權 所以可以任意修改使用，只要附上此許可聲明即可。
 Hexo Theme">
 <meta property="og:type" content="article">
 <meta property="og:title" content="製作個人風格的 Hexo Theme">
 <meta property="og:url" content="http://cathy1666.github.io/ayablog/2017/02/13/製作個人風格的 Hexo Themes/index.html">
 <meta property="og:site_name" content="Aya Blog">
 <meta property="og:description" content="套用現成的 Theme學習一個新的東西，最快的方式就是模仿。所以我是先套用一個別人寫好現成的 theme，再慢慢修改成自己的風格。試了很多 theme，我最後選擇 hipaper 這個，簡單大方排版符合我的需求， code 又不會太複雜的 theme 做為基礎來修改。
-檢查一下 hipaper 的 License 是 MIT授權 所以可以任意修改使用，只要附上此許可聲明即可。
+檢查一下 hipaper 的 License，是 MIT授權 所以可以任意修改使用，只要附上此許可聲明即可。
 Hexo Theme">
-<meta property="og:updated_time" content="2017-02-15T08:36:50.116Z">
+<meta property="og:updated_time" content="2017-02-16T07:04:50.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="製作個人風格的 Hexo Theme">
 <meta name="twitter:description" content="套用現成的 Theme學習一個新的東西，最快的方式就是模仿。所以我是先套用一個別人寫好現成的 theme，再慢慢修改成自己的風格。試了很多 theme，我最後選擇 hipaper 這個，簡單大方排版符合我的需求， code 又不會太複雜的 theme 做為基礎來修改。
-檢查一下 hipaper 的 License 是 MIT授權 所以可以任意修改使用，只要附上此許可聲明即可。
+檢查一下 hipaper 的 License，是 MIT授權 所以可以任意修改使用，只要附上此許可聲明即可。
 Hexo Theme">
   
     <link rel="alternate" href="/atom.xml" title="Aya Blog" type="application/atom+xml">
@@ -132,20 +132,25 @@ Hexo Theme">
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="套用現成的-Theme"><a href="#套用現成的-Theme" class="headerlink" title="套用現成的 Theme"></a>套用現成的 Theme</h3><p>學習一個新的東西，最快的方式就是模仿。所以我是先套用一個別人寫好現成的 theme，再慢慢修改成自己的風格。<br>試了很多 theme，我最後選擇 <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank" rel="external">hipaper</a> 這個，簡單大方排版符合我的需求， code 又不會太複雜的 theme 做為基礎來修改。</p>
-<p>檢查一下 hipaper 的 <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper/blob/master/LICENSE" target="_blank" rel="external">License</a> 是 <a href="https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89" target="_blank" rel="external">MIT授權</a> 所以可以任意修改使用，只要附上此許可聲明即可。</p>
+<p>檢查一下 hipaper 的 <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper/blob/master/LICENSE" target="_blank" rel="external">License</a>，是 <a href="https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89" target="_blank" rel="external">MIT授權</a> 所以可以任意修改使用，只要附上此許可聲明即可。</p>
 <p>Hexo Theme 的套用方式照著 hipaper 的 README 做就行了。</p>
 <h3 id="解析-hipaper-Themes-Source-Code"><a href="#解析-hipaper-Themes-Source-Code" class="headerlink" title="解析 hipaper Themes Source Code"></a>解析 hipaper Themes Source Code</h3><p>themes/hipaper 資量夾中，除了圖片資源和字型檔之外，source code 的部分包含四種類型檔案：.js .ejs .css .styl，所以要先知道這四種類型檔案在幹嘛</p>
 <h3 id="css"><a href="#css" class="headerlink" title=".css"></a>.css</h3><p>這應該不用解釋，就是 CSS 語言寫成的檔案。</p>
 <h3 id="styl"><a href="#styl" class="headerlink" title=".styl"></a>.styl</h3><p>Stylus 是一個 Node.js 架構下的 CSS 前處理器，是一種程式語言，它簡化了 CSS 語法再加入函數與運算的功能，讓使用上更加彈性。<br>以 Stylus 程式語言撰寫的檔案，附檔名為 .styl。</p>
 <p>與 CSS 的對照語法請參考：</p>
-<p><a href="http://blogger.gtwang.org/2014/02/stylus-css-preprocessor-based-on-nodejs.html" target="_blank" rel="external">Stylus：Node.js 架構下的 CSS 前處理器</a></p>
-<p><a href="http://stylus-lang.com/" target="_blank" rel="external">Stylus 官網</a></p>
+<ul>
+<li><a href="http://blogger.gtwang.org/2014/02/stylus-css-preprocessor-based-on-nodejs.html" target="_blank" rel="external">Stylus：Node.js 架構下的 CSS 前處理器</a></li>
+<li><a href="http://stylus-lang.com/" target="_blank" rel="external">Stylus 官網</a></li>
+</ul>
 <p>所以 Stylus 可以直接翻譯成 CSS，也就是說這兩種類型的檔案主要功用是相同的，就是做靜態網頁的圖文格式設定及排版。</p>
-<h3 id="js"><a href="#js" class="headerlink" title=".js"></a>.js</h3><p>javascript的附檔名。</p>
-<h3 id="ejs"><a href="#ejs" class="headerlink" title=".ejs"></a>.ejs</h3><p>EJS 是 Effective JavaScript 的縮寫，是一種可以內嵌在 HTML 程式的 JavaScript 函式庫，因為程式主架構還是 HTML，而不是使用 JavaScript 來產生 HTML 程式碼，所以網頁架構比較明確易讀，也比較好維護。</p>
+<h3 id="js"><a href="#js" class="headerlink" title=".js"></a>.js</h3><p>就是javascript的附檔名。</p>
+<h3 id="ejs"><a href="#ejs" class="headerlink" title=".ejs"></a>.ejs</h3><p>EJS 為 Effective JavaScript 的縮寫，是一種可以內嵌在 HTML 程式的 JavaScript 函式庫，因為程式主架構還是 HTML，所以比起用 JavaScript 來產生 HTML 程式碼，在讀程式碼時，網頁架構比較明確易讀，也比較好維護。</p>
 <p>EJS 使用 <strong>&lt;% %&gt;</strong> 或 <strong>[% %]</strong> 作為內崁 JavaScript 的關鍵符號，也就是說放在這中間的部分就會被視為 JavaScript 來執行，另外如果放在 <strong>&lt;%= %&gt;</strong> 裡面的 JavaScript 變數，則會以 toString() 的方式將其轉換為字串，並加入至網頁中。</p>
-<p><a href="https://blog.gtwang.org/programming/ejs-embedded-javascript/" target="_blank" rel="external">EJS：Client 端嵌入式（Embedded）JavaScript</a></p>
-<p><a href="http://ejs.co/" target="_blank" rel="external">EJS 官網</a></p>
+<p>其他內容請參考：</p>
+<ul>
+<li><a href="https://blog.gtwang.org/programming/ejs-embedded-javascript/" target="_blank" rel="external">EJS：Client 端嵌入式（Embedded）JavaScript</a></li>
+<li><a href="http://ejs.co/" target="_blank" rel="external">EJS 官網</a></li>
+</ul>
 
       
     </div>

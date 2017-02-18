@@ -125,9 +125,8 @@
 <h3 id="套用現成的-Theme"><a href="#套用現成的-Theme" class="headerlink" title="套用現成的 Theme"></a>套用現成的 Theme</h3><p>學習一個新的東西，最快的方式就是模仿。所以我是先套用一個別人寫好現成的 theme，再慢慢修改成自己的風格。試了很多 theme，我最後選擇 <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank" rel="external">hipaper</a>，簡單大方排版符合我的需求， code 又不會太複雜的 theme 做為基礎來修改。</p>
 <p>檢查一下 hipaper 的 <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper/blob/master/LICENSE" target="_blank" rel="external">License</a>，是 <a href="https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89" target="_blank" rel="external">MIT授權</a> 所以可以任意修改使用，只要附上此許可聲明即可。</p>
 <p>Hexo Theme 的套用方式照著 hipaper 的 README 做就行了。</p>
-<h3 id="解析-hipaper-Themes-Source-Code"><a href="#解析-hipaper-Themes-Source-Code" class="headerlink" title="解析 hipaper Themes Source Code"></a>解析 hipaper Themes Source Code</h3><p>首先先來了解一下這個專案的整體架構：<br>在 cmd 打入下列指令，可以得到資料夾內容樹狀圖</p>
-<pre><code>cd hipaper資料夾路徑
-tree /F hipaper資料夾路徑 &gt; .\tree.txt
+<h3 id="解析-hipaper-Themes-Source-Code"><a href="#解析-hipaper-Themes-Source-Code" class="headerlink" title="解析 hipaper Themes Source Code"></a>解析 hipaper Themes Source Code</h3><p>首先，先來了解一下這個專案的整體架構：<br>在 cmd 打入下列指令，可以得到資料夾內容樹狀圖</p>
+<pre><code>tree /F hipaper資料夾路徑 &gt; .\tree.txt
 </code></pre><p>打開 tree.txt 可得到如下樹狀圖：</p>
 <img src="/ayablog/2017/02/13/製作個人風格的%20Hexo%20Themes/tree.png" alt="tree.png" title="">
 <p>從以上樹狀架構圖中可以發現，除了圖片資源(.png .jpg .ico)、字型檔(\source\css\fonts)和翻譯對照檔(\languages)之外，source code 的部分包含四種類型檔案：.js .ejs .css .styl，所以要先知道這四種類型檔案在幹嘛</p>

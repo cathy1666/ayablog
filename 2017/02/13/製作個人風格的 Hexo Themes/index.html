@@ -22,7 +22,7 @@
 套用現成的 Theme學習一個新的東西，最快的方式就是模仿。所以我是先套用一個別人寫好現成的 theme，再慢慢修改成自己的風格。試了很多 theme，我最後選擇 hipaper，簡單大方排版符合我的需求， code 又不會太複雜的 theme 做為基礎來修改。
 檢查一下 hipa">
 <meta property="og:image" content="http://cathy1666.github.io/ayablog/ayablog/2017/02/13/製作個人風格的%20Hexo%20Themes/tree.png">
-<meta property="og:updated_time" content="2017-02-18T05:31:03.986Z">
+<meta property="og:updated_time" content="2017-02-18T05:35:50.482Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="製作個人風格的 Hexo Theme">
 <meta name="twitter:description" content="目標套用現成別人寫好的版面，試著看看別人版面的寫法，再找出可以修改字型顏色大小、版面長寬的地方，為自己的版面做微調。
@@ -140,7 +140,7 @@
 <h3 id="解析-hipaper-Themes-Source-Code"><a href="#解析-hipaper-Themes-Source-Code" class="headerlink" title="解析 hipaper Themes Source Code"></a>解析 hipaper Themes Source Code</h3><p>首先，先來了解一下這個專案的整體架構：<br>在 cmd 打入下列指令，可以得到資料夾內容樹狀圖</p>
 <pre><code>tree /F hipaper資料夾路徑 &gt; .\tree.txt
 </code></pre><p>打開 tree.txt 可得到如下樹狀圖：</p>
-<img src="/ayablog/2017/02/13/製作個人風格的%20Hexo%20Themes/tree.png" alt="tree.png" title="">
+<img src="/ayablog/2017/02/13/製作個人風格的%20Hexo%20Themes/tree.png" alt="tree" title="tree">
 <p>從以上樹狀架構圖中可以發現，除了圖片資源(.png .jpg .ico)、字型檔(\source\css\fonts)和翻譯對照檔(\languages)之外，source code 的部分包含四種類型檔案：.js .ejs .css .styl，所以要先知道這四種類型檔案在幹嘛</p>
 <h3 id="css"><a href="#css" class="headerlink" title=".css"></a>.css</h3><p>這應該不用解釋，就是 CSS 語言寫成的檔案。</p>
 <h3 id="styl"><a href="#styl" class="headerlink" title=".styl"></a>.styl</h3><p>Stylus 是一個 Node.js 架構下的 CSS 前處理器，是一種程式語言，它簡化了 CSS 語法再加入函數與運算的功能，讓使用上更加彈性。<br>以 Stylus 程式語言撰寫的檔案，附檔名為 .styl。</p>

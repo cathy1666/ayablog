@@ -34,7 +34,7 @@
 
 資料蒐集與傳送蒐集 Data 並將 Data 上傳雲端是 Device 主要的兩項工作，但為了做到傳資料到雲端，Device 還需要有向雲端註冊，打通連線的功能。而 Device 是代表所有在現場端可產生感興趣資訊的設備，例如：">
 <meta property="og:image" content="http://cathy1666.github.io/ayablog/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/AzureIoTReferenceArchitecture.png">
-<meta property="og:updated_time" content="2017-03-02T05:21:57.406Z">
+<meta property="og:updated_time" content="2017-03-02T05:26:04.727Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Azure IoT Wokeshop筆記">
 <meta name="twitter:description" content="General IOT Architecture
@@ -224,10 +224,11 @@
 <li>做成報表</li>
 <li>dashboard</li>
 </ul>
-<h3 id="設備控制"><a href="#設備控制" class="headerlink" title="設備控制"></a>設備控制</h3><p>控制的部分在這張架構圖沒有明確畫出來，但是會選擇使用 Clould 架構的主要原因之一，就是要做遠端控制。<br>像我們目前遇到的需求，就是希望可以手機APP在外面直接透過 3G/4G 網路，控制現場端的設備。</p>
-<p>其實設備控制的動作跟第一階段的資料傳送的架構很像，都是現場端 GW 與 Clould GW 之間做通訊的動作，差別在於資料傳送是由現場端 GW <strong>主動</strong> 建立連線傳送資料，而設備控制是則由 Clould GW <strong>主動</strong> 發起連線，所以現場端 GW 與 Clould GW 之間需要有雙向溝通的機制<br>不過這樣也只是從雲端的Portal介面去下控制命令而已，若是需要從手機APP透過雲端對設備做控制，還需要額外有一個 APP Server 的角色來接起手機和雲端之間的通訊，而實際架構會長怎樣就有很多種做法了，所以沒話在這張圖中，下面舉例 Azure 架構下可實行的一些做法。</p>
+<h3 id="設備控制"><a href="#設備控制" class="headerlink" title="設備控制"></a>設備控制</h3><p>控制的部分在這張架構圖沒有明確畫出來，但是會選擇使用 cloud 架構的主要原因之一，就是要做遠端控制。像我們目前遇到的需求，就是希望可以手機APP在外面直接透過 3G/4G 網路，控制現場端的設備。</p>
+<p>其實設備控制的動作跟第一階段的資料傳送的架構很像，都是現場端 gateway 與 cloud gateway 之間做通訊的動作，差別在於資料傳送是由現場端 gateway 「主動」 建立連線傳送資料，而設備控制是則由 cloud gateway 「主動」 發起連線，所以現場端 gateway 與 cloud gateway 之間需要有雙向溝通的機制。</p>
+<p>不過這樣也只是從雲端的 portal 介面去下控制命令而已，若是需要從手機 APP 透過雲端對設備做控制，還需要額外有一個 APP Server 的角色來接起手機和雲端之間的通訊，而實際架構會長怎樣就有很多種做法了，所以沒話在這張圖中，下面舉例 Azure 架構下可實行的一些做法。</p>
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://docs.microsoft.com/en-us/azure/iot-suite/iot-security-architecture" target="_blank" rel="external">Internet of Things security architecture</a></p>
-<h2 id="Microsof-Azure-服務架構圖"><a href="#Microsof-Azure-服務架構圖" class="headerlink" title="Microsof Azure 服務架構圖"></a>Microsof Azure 服務架構圖</h2><p>這張是對應上面一般性架構圖，講解微軟 Azure IoT Platform 的架構、目前有的服務，以及可提供的支援，當然還有$$$$$。</p>
+<h2 id="Microsof-Azure-服務架構圖"><a href="#Microsof-Azure-服務架構圖" class="headerlink" title="Microsof Azure 服務架構圖"></a>Microsof Azure 服務架構圖</h2><p>這張是對應上面一般性架構圖，講解微軟 Azure IoT Platform 的架構、目前有的服務，以及可提供的支援，當然還有/$/$/$。</p>
 
 <h3 id="Device-Field-Gateway"><a href="#Device-Field-Gateway" class="headerlink" title="Device / Field Gateway"></a>Device / Field Gateway</h3><p>如同上一段介紹的，和雲端通訊的工作，必須根據現場端(On-Prem)資料收集設備的能力，來決定是否需要多加一個 Field Gateway。</p>
 <h4 id="Field-Gateway種類"><a href="#Field-Gateway種類" class="headerlink" title="Field Gateway種類"></a>Field Gateway種類</h4><p>如果決定外加一個 Field Gateway，那通常就是由 Field Gateway 統整完當下所有 device 的 data 後，在包成一條 message 給 cloud ，這樣比較省錢，因為 cloud 收費除了看流量也有看筆數。至於那條 message 要怎麼包，依需求又可分為兩種做法:</p>
@@ -387,15 +388,6 @@
   
     
 <nav id="article-nav">
-  
-    <a href="/ayablog/2017/03/02/Azure IoT Wokeshop筆記/Azure補充/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
   
     <a href="/ayablog/2017/02/06/TOEIC準備心得/" id="article-nav-older" class="article-nav-link-wrap">

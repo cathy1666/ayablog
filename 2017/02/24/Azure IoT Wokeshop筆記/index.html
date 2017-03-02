@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>azure iot wokeshop筆記 | Aya Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="AzureIoT" />
+  
+  
+  
+  
+  <meta name="description" content="General IOT Architecture
+上圖為一般性的IoT Solution架構，我把它分成四大階段:
+
+資料蒐集與傳送
+雲端運算及管理
+數據呈現
+設備控制
+
+資料蒐集與傳送蒐集 Data 並將 Data 上傳雲端是 Device 主要的兩項工作，但為了做到傳資料到雲端，Device 還需要有向雲端註冊，打通連線的功能。而 Device 是代表所有在現場端可產生感興趣資訊的設備，例如：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure IoT Wokeshop筆記">
+<meta property="og:url" content="http://cathy1666.github.io/ayablog/2017/02/24/Azure IoT Wokeshop筆記/index.html">
+<meta property="og:site_name" content="Aya Blog">
+<meta property="og:description" content="General IOT Architecture
+上圖為一般性的IoT Solution架構，我把它分成四大階段:
+
+資料蒐集與傳送
+雲端運算及管理
+數據呈現
+設備控制
+
+資料蒐集與傳送蒐集 Data 並將 Data 上傳雲端是 Device 主要的兩項工作，但為了做到傳資料到雲端，Device 還需要有向雲端註冊，打通連線的功能。而 Device 是代表所有在現場端可產生感興趣資訊的設備，例如：">
+<meta property="og:image" content="http://cathy1666.github.io/ayablog/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/AzureIoTReferenceArchitecture.png">
+<meta property="og:updated_time" content="2017-03-02T05:21:57.406Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Azure IoT Wokeshop筆記">
+<meta name="twitter:description" content="General IOT Architecture
+上圖為一般性的IoT Solution架構，我把它分成四大階段:
+
+資料蒐集與傳送
+雲端運算及管理
+數據呈現
+設備控制
+
+資料蒐集與傳送蒐集 Data 並將 Data 上傳雲端是 Device 主要的兩項工作，但為了做到傳資料到雲端，Device 還需要有向雲端註冊，打通連線的功能。而 Device 是代表所有在現場端可產生感興趣資訊的設備，例如：">
+<meta name="twitter:image" content="http://cathy1666.github.io/ayablog/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/AzureIoTReferenceArchitecture.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Aya Blog" type="application/atom+xml">
+  
+  <link rel="icon" href="/ayablog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/ayablog/css/style.css">
+
+  <script src="/ayablog/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/ayablog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/ayablog/css/fashion.css" >
+  <link rel="stylesheet" href="/ayablog/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/ayablog/" title="Aya Blog" rel="home"> Aya Blog </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/ayablog/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/ayablog/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/ayablog/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/ayablog/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Azure IoT Wokeshop筆記" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Azure IoT Wokeshop筆記
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/ayablog/2017/02/24/Azure IoT Wokeshop筆記/" class="article-date">
+	  <time datetime="2017-02-23T16:00:00.000Z" itemprop="datePublished">February 24, 2017</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="General-IOT-Architecture"><a href="#General-IOT-Architecture" class="headerlink" title="General IOT Architecture"></a>General IOT Architecture</h2><img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/AzureIoTReferenceArchitecture.png" alt="IoT_general_架構圖" title="IoT_general_架構圖">
+<p>上圖為一般性的IoT Solution架構，我把它分成四大階段:</p>
+<ul>
+<li>資料蒐集與傳送</li>
+<li>雲端運算及管理</li>
+<li>數據呈現</li>
+<li>設備控制</li>
+</ul>
+<h3 id="資料蒐集與傳送"><a href="#資料蒐集與傳送" class="headerlink" title="資料蒐集與傳送"></a>資料蒐集與傳送</h3><p>蒐集 Data 並將 Data 上傳雲端是 Device 主要的兩項工作，但為了做到傳資料到雲端，Device 還需要有向雲端註冊，打通連線的功能。<br>而 Device 是代表所有在現場端可產生感興趣資訊的設備，例如：</p>
+<ul>
+<li>智慧家庭應用中，Device 就是電視、冰箱、冷氣等設備</li>
+<li>醫療場所則可能為血壓計、血糖機、睡眠偵測儀等</li>
+<li>應用在工廠則可把機械手臂視作Device。</li>
+</ul>
+<p>在這個架構中，Device 又分成兩類：</p>
+<ol>
+<li>IP capable device<ul>
+<li>有運算能力且有連網能力，可以直接在 device 上寫程式，由 device自行完成上傳資料的工作</li>
+</ul>
+</li>
+<li>Legacy IoT device / Low power device<ul>
+<li>低功率設備,較老舊,無連網能力,需在現場而外再接一個 field gateway，透過 len protocol 跟 field gateway溝通聯網，這種就是在 field gateway上寫程式。</li>
+<li>ex: 工廠機械手臂</li>
+</ul>
+</li>
+</ol>
+<h3 id="雲端運算及管理"><a href="#雲端運算及管理" class="headerlink" title="雲端運算及管理"></a>雲端運算及管理</h3><p>雖然圖中分成好幾個區塊，但從 Clould Gateway 開始整個都是在雲端上進行的了。</p>
+<ul>
+<li>Clould Gateway<ul>
+<li>和現場端溝通的介面</li>
+<li>收現場資料</li>
+<li>對現場設備發指令</li>
+<li>考慮scale很重要(需連線多少台現場設備?)</li>
+</ul>
+</li>
+<li>Device Management Portal<ul>
+<li>雲端管理操作介面，可能是一個網頁，可以透過此介面設定及查看雲端需處理的工作項目，甚至是透過此介面可直接開發雲端程式。</li>
+</ul>
+</li>
+<li>Provisioning API<ul>
+<li>設備身分驗證註冊</li>
+</ul>
+</li>
+<li>Identity &amp; Registry Stores<ul>
+<li>身分管理</li>
+<li>可能是Portal進入雲端的使用者權限管理，例如一般使用者只能查看設備狀態，開發者可以坐雲端設定的更動等等</li>
+<li>另外也有可能不同案場使用同一個雲來管理，就規劃某Portal帳號只能查看或控制該案場所屬的那些設備</li>
+</ul>
+</li>
+<li>Device State Store<ul>
+<li>設備目前狀態查詢，因為上傳一定多少會有delay，所以不能保證是及時，但可以保證是最新的一筆資料。</li>
+</ul>
+</li>
+<li>Stream Event Processor<ul>
+<li>做IoT最關心的是”資料”，此模組是對即時流進來的資料做處理，例如設定一個門檻值，如果工廠機器溫度過高就立刻下命令關掉它。</li>
+</ul>
+</li>
+<li>Storage<ul>
+<li>所有raw data歷史資料儲存區域，為了將來可以做大數據分析，一般是建議即使是現在沒用到的資料都要完整保存。這部分的重點在於data要用怎樣的方式存取，資料庫欄位要如何設計等。</li>
+</ul>
+</li>
+<li>Analytics / Machine Learning<ul>
+<li>用蒐集來的資料做大數據分析，預測一些事情，或是做機器學習讓一些應用流程更加自動化。</li>
+<li>ex: 預測冷氣何時需要換濾心</li>
+<li>ex: 預測工廠何時需要維修，何時會壞掉需要更換</li>
+</ul>
+</li>
+</ul>
+<h3 id="數據呈現"><a href="#數據呈現" class="headerlink" title="數據呈現"></a>數據呈現</h3><p>用人能了解的方式把你的資料呈現給使用著看，此部分注重的是資料更新的頻率，以及成現的方式，一般的作法有：</p>
+<ul>
+<li>做成報表</li>
+<li>dashboard</li>
+</ul>
+<h3 id="設備控制"><a href="#設備控制" class="headerlink" title="設備控制"></a>設備控制</h3><p>控制的部分在這張架構圖沒有明確畫出來，但是會選擇使用 Clould 架構的主要原因之一，就是要做遠端控制。<br>像我們目前遇到的需求，就是希望可以手機APP在外面直接透過 3G/4G 網路，控制現場端的設備。</p>
+<p>其實設備控制的動作跟第一階段的資料傳送的架構很像，都是現場端 GW 與 Clould GW 之間做通訊的動作，差別在於資料傳送是由現場端 GW <strong>主動</strong> 建立連線傳送資料，而設備控制是則由 Clould GW <strong>主動</strong> 發起連線，所以現場端 GW 與 Clould GW 之間需要有雙向溝通的機制<br>不過這樣也只是從雲端的Portal介面去下控制命令而已，若是需要從手機APP透過雲端對設備做控制，還需要額外有一個 APP Server 的角色來接起手機和雲端之間的通訊，而實際架構會長怎樣就有很多種做法了，所以沒話在這張圖中，下面舉例 Azure 架構下可實行的一些做法。</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://docs.microsoft.com/en-us/azure/iot-suite/iot-security-architecture" target="_blank" rel="external">Internet of Things security architecture</a></p>
+<h2 id="Microsof-Azure-服務架構圖"><a href="#Microsof-Azure-服務架構圖" class="headerlink" title="Microsof Azure 服務架構圖"></a>Microsof Azure 服務架構圖</h2><p>這張是對應上面一般性架構圖，講解微軟 Azure IoT Platform 的架構、目前有的服務，以及可提供的支援，當然還有$$$$$。</p>
+
+<h3 id="Device-Field-Gateway"><a href="#Device-Field-Gateway" class="headerlink" title="Device / Field Gateway"></a>Device / Field Gateway</h3><p>如同上一段介紹的，和雲端通訊的工作，必須根據現場端(On-Prem)資料收集設備的能力，來決定是否需要多加一個 Field Gateway。</p>
+<h4 id="Field-Gateway種類"><a href="#Field-Gateway種類" class="headerlink" title="Field Gateway種類"></a>Field Gateway種類</h4><p>如果決定外加一個 Field Gateway，那通常就是由 Field Gateway 統整完當下所有 device 的 data 後，在包成一條 message 給 cloud ，這樣比較省錢，因為 cloud 收費除了看流量也有看筆數。至於那條 message 要怎麼包，依需求又可分為兩種做法:</p>
+<ol>
+<li>Transparence Field Gateway:</li>
+</ol>
+<p>上傳給 Cloud 的 message 中記載每個 data 各自從一個 device 得到，相當於 Cloud 直接從 device 得到 data，而不會知道 Field Gateway 是誰，此種 Gateway 就是透明的(transparence)。</p>
+<ol>
+<li>Opaque Field Gateway:</li>
+</ol>
+<p>message 只有記錄 Field Gateway 的 ID，Clould 只認得 Field Gateway，此種 Gateway 就是不透明的(opaque)。</p>
+<h4 id="Microsoft支援"><a href="#Microsoft支援" class="headerlink" title="Microsoft支援"></a>Microsoft支援</h4><p>不論 Device 還是 Field Gateway 都是由客戶自行準備的，programing的部分也是客戶自行處理，而 Microsoft 能提供的就是針對終端設備，支援多 OS 及多語言 SDK(lib)，讓現有設備可以順利跟 Azure Clould 做通訊。</p>
+<ul>
+<li>OS<ul>
+<li>Windows</li>
+<li>Android</li>
+<li>iOS</li>
+<li>Linux</li>
+<li>RTOS</li>
+<li>MBED</li>
+</ul>
+</li>
+<li>SDK<ul>
+<li>.NET</li>
+<li>C#</li>
+<li>JavaScript(Note.js)</li>
+<li>C</li>
+<li>Java</li>
+<li>Python</li>
+</ul>
+</li>
+</ul>
+<h4 id="通訊-protocol"><a href="#通訊-protocol" class="headerlink" title="通訊 protocol"></a>通訊 protocol</h4><p>若 Device / Field Gateway 成功 port 上 SDK，則 library 就已經把所需的通訊 protocol 及連線模式都做完了，可直接 call function 使用，但若是 SDK 不相容，Device 端就需自行處理通訊相關的部分，Azure 支援四種 protocol:</p>
+<ul>
+<li>MQTT: 優先建議，lightweight (最小可到 2 byte), reliable, long polling (連線持續建立，而非每次傳送都重建一次連線)</li>
+<li>AMQP: 次之，long polling</li>
+<li>HTTP: 協定本身太笨重，帶有太多不必要資訊所以不建議，但因本來就是80443比較不會有防火牆問題</li>
+<li>AMQT/MQTT over WebSocket: 若有防火牆問題，使用 WebSocket 可穿透客戶端防火牆</li>
+</ul>
+
+<h3 id="Iot-hub"><a href="#Iot-hub" class="headerlink" title="Iot hub"></a>Iot hub</h3><ul>
+<li>Azure Cloud 中直接對現場端的介面</li>
+<li>對現場端設備雙向通訊，可對設備做讀取及控制，</li>
+<li>資料可暫存1-7天</li>
+</ul>
+<h3 id="Iot-Hub-收費方式"><a href="#Iot-Hub-收費方式" class="headerlink" title="Iot Hub 收費方式"></a>Iot Hub 收費方式</h3><p>三個層級,每隔層級有各自的價錢</p>
+<ul>
+<li>S1：一個單位(單位可以設1~200): 每天(IDx筆數) = 40萬筆資料 (total$ = S1$+單位數x單位$)</li>
+<li>S2：每天(IDx筆數) = 600萬筆資料</li>
+<li>S3：每天(IDx筆數) = 3億筆資料</li>
+</ul>
+<p>傳送之 data 256K 以內算一筆資料，超過257~512K算兩筆，以此類推，需要時可隨時調整單位大小及換層級</p>
+
+<p>這階段的主要工作是從Iot hub撈資料，在存進資料庫前先做初步的處理</p>
+<h3 id="Stream-Analytics"><a href="#Stream-Analytics" class="headerlink" title="Stream Analytics"></a>Stream Analytics</h3><ul>
+<li>可以即時把感興趣的資料抓出來</li>
+<li>可寫SQL Script,SQL可做到的都可以做</li>
+<li>一個filter,篩資料後送到某處</li>
+</ul>
+<h3 id="Event-Processor-Host"><a href="#Event-Processor-Host" class="headerlink" title="Event Processor Host"></a>Event Processor Host</h3><ul>
+<li>太複雜的判斷可直接寫程式</li>
+<li>是個 SDK,可直接執行的 console 程式</li>
+<li>用 SDK 寫程式已經做完protocol溝通(AMQP)的工作了</li>
+</ul>
+
+<p>此階段為 Azure 提供的各種型態的資料庫。<br>一般來說資料性質可分成兩種:</p>
+<ul>
+<li>熱資料:需即時處理</li>
+<li>冷資料:不需即時處理</li>
+</ul>
+<p>以微軟的經驗，客戶通常不會只用一種儲存體，同一筆資料可以同時存到不同的儲存體，在不同的地方做不同的處理。建議完整的資料先存一份檔案(BLOB)，因為在還沒分析之前可能不知道自己要拿這個資料來做甚麼，但要未來要做大數據分析需要收及足夠大量的資料。</p>
+<h3 id="BLOB"><a href="#BLOB" class="headerlink" title="BLOB"></a>BLOB</h3><ul>
+<li>資料量很大時適用</li>
+<li>500T</li>
+<li>以「檔案」形式儲存</li>
+<li>便宜，容量大</li>
+</ul>
+<h3 id="SQL-Server"><a href="#SQL-Server" class="headerlink" title="SQL Server"></a>SQL Server</h3><ul>
+<li>一般常用的資料庫</li>
+<li>適合用來做報表</li>
+</ul>
+<h3 id="QUEUE"><a href="#QUEUE" class="headerlink" title="QUEUE"></a>QUEUE</h3><ul>
+<li>需要與異質系統溝通</li>
+<li>類似一個信箱</li>
+</ul>
+<h3 id="Document-DB"><a href="#Document-DB" class="headerlink" title="Document DB"></a>Document DB</h3><ul>
+<li>大量,頻繁,單獨物件查詢</li>
+<li>若要用 join 這種交叉查詢請用 SQL server</li>
+</ul>
+<h3 id="Event-Hub"><a href="#Event-Hub" class="headerlink" title="Event Hub"></a>Event Hub</h3><ul>
+<li>和 QUEUE 角色很像</li>
+<li>需要與異質系統溝通</li>
+<li>類似一個信箱</li>
+<li>throuthput 比 QUEUE 高，百萬等級</li>
+</ul>
+<h3 id="Data-Factory"><a href="#Data-Factory" class="headerlink" title="Data Factory"></a>Data Factory</h3><ul>
+<li>雲端版SSIS</li>
+<li>和SSIS不同，可以有些資料在雲端有些資料在地端, SSIS 則一定要全部在雲端或是全在地端</li>
+<li>適合需要排程的資料搬移情境,最小單位是 15min, so不適合即時處理</li>
+</ul>
+
+<h3 id="Power-BI"><a href="#Power-BI" class="headerlink" title="Power BI"></a>Power BI</h3><ul>
+<li>微軟雲端報表工具</li>
+<li>用拖拉的方式建報表</li>
+<li>付費版本，資料有即時push，可當作 dashboard 使用</li>
+<li>免費版本 20~30 才 refresh 一次</li>
+</ul>
+<h3 id="Azure-ML"><a href="#Azure-ML" class="headerlink" title="Azure ML"></a>Azure ML</h3><ul>
+<li>機器學習</li>
+<li>可以”預測”一些事情</li>
+<li>需有足夠的資料量才能”學習”</li>
+<li>doman專家</li>
+<li>資料科學家:(把大量資料+doman專家的知識)轉化成數學模型,再用大量資料去training,一直修改模型</li>
+<li>機器學習最欠缺的是資料科學家，需要時微軟也可提供支援</li>
+</ul>
+
+<p>流程自動化階段，</p>
+<ul>
+<li>設 threadhold 超過就做通知(人or控制機器關機)</li>
+<li>提供API通知推播平台，只做通知,推播還是該平台做</li>
+</ul>
+<h3 id="Logic-APP"><a href="#Logic-APP" class="headerlink" title="Logic APP"></a>Logic APP</h3><ul>
+<li>視覺化工具</li>
+<li>用拖拉元件的方式寫介面</li>
+</ul>
+<h3 id="Web-Apps"><a href="#Web-Apps" class="headerlink" title="Web Apps"></a>Web Apps</h3><ul>
+<li>Web hosting</li>
+<li>可直接從 Iot hub 讀資料(跳過中間步驟) show 在網站上</li>
+</ul>
+<h3 id="Mobile-Apps"><a href="#Mobile-Apps" class="headerlink" title="Mobile Apps"></a>Mobile Apps</h3><ul>
+<li>APP後台</li>
+<li>用一些方式幫你把 API &amp; 資料庫建好</li>
+</ul>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>做Iot第一個會遇到的挑戰是設備連線的問題，而硬體設備連線大部分是SSL問題。另外資料上雲端一定會稍微延遲，需允許2~3秒的延遲，如果需要做到「真正」的即時，通常是直接在 field GW 上處理。</p>
+<h2 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://channel9.msdn.com/Azure" target="_blank" rel="external">Azure@Channel 9</a></li>
+<li><a href="https://azure.microsoft.com/zh-tw/updates/" target="_blank" rel="external">Service Update</a></li>
+<li>Azure IOT Blogs<ul>
+<li><a href="https://dotblogs.com.tw/maduka/series/1?qq=Azure" target="_blank" rel="external">Blog1</a>: 一個從2016年3月開始的實際專案，有建置時的詳細步驟記錄</li>
+<li><a href="http://blog.michaelchi.net/" target="_blank" rel="external">Blog2</a>: 講師自己的Blog，記錄客戶Q&amp;A</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/Azure/">Azure</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/IoT/">IoT</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/ayablog/2017/03/02/Azure IoT Wokeshop筆記/Azure補充/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/ayablog/2017/02/06/TOEIC準備心得/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">TOEIC準備心得</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#General-IOT-Architecture"><span class="nav-number">1.</span> <span class="nav-text">General IOT Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#資料蒐集與傳送"><span class="nav-number">1.1.</span> <span class="nav-text">資料蒐集與傳送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#雲端運算及管理"><span class="nav-number">1.2.</span> <span class="nav-text">雲端運算及管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#數據呈現"><span class="nav-number">1.3.</span> <span class="nav-text">數據呈現</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設備控制"><span class="nav-number">1.4.</span> <span class="nav-text">設備控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">1.5.</span> <span class="nav-text">Reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Microsof-Azure-服務架構圖"><span class="nav-number">2.</span> <span class="nav-text">Microsof Azure 服務架構圖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Device-Field-Gateway"><span class="nav-number">2.1.</span> <span class="nav-text">Device / Field Gateway</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Field-Gateway種類"><span class="nav-number">2.1.1.</span> <span class="nav-text">Field Gateway種類</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Microsoft支援"><span class="nav-number">2.1.2.</span> <span class="nav-text">Microsoft支援</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通訊-protocol"><span class="nav-number">2.1.3.</span> <span class="nav-text">通訊 protocol</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iot-hub"><span class="nav-number">2.2.</span> <span class="nav-text">Iot hub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iot-Hub-收費方式"><span class="nav-number">2.3.</span> <span class="nav-text">Iot Hub 收費方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-Analytics"><span class="nav-number">2.4.</span> <span class="nav-text">Stream Analytics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Processor-Host"><span class="nav-number">2.5.</span> <span class="nav-text">Event Processor Host</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BLOB"><span class="nav-number">2.6.</span> <span class="nav-text">BLOB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Server"><span class="nav-number">2.7.</span> <span class="nav-text">SQL Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QUEUE"><span class="nav-number">2.8.</span> <span class="nav-text">QUEUE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Document-DB"><span class="nav-number">2.9.</span> <span class="nav-text">Document DB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Hub"><span class="nav-number">2.10.</span> <span class="nav-text">Event Hub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Factory"><span class="nav-number">2.11.</span> <span class="nav-text">Data Factory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Power-BI"><span class="nav-number">2.12.</span> <span class="nav-text">Power BI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Azure-ML"><span class="nav-number">2.13.</span> <span class="nav-text">Azure ML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logic-APP"><span class="nav-number">2.14.</span> <span class="nav-text">Logic APP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-Apps"><span class="nav-number">2.15.</span> <span class="nav-text">Web Apps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mobile-Apps"><span class="nav-number">2.16.</span> <span class="nav-text">Mobile Apps</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結語"><span class="nav-number">3.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference-1"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/ayablog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/ayablog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/ayablog/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/ayablog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 Aya Blog All Rights Reserved.
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/ayablog/fancybox/jquery.fancybox.css">
+  <script src="/ayablog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/ayablog/js/script.js"></script>
+<script src="/ayablog/js/bootstrap.js"></script>
+<script src="/ayablog/js/main.js"></script>
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+</body>
+</html>

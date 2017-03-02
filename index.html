@@ -199,7 +199,7 @@
 <p>不過這樣也只是從雲端的 portal 介面去下控制命令而已，若是需要從手機 APP 透過雲端對設備做控制，還需要額外有一個 APP Server 的角色來接起手機和雲端之間的通訊，而實際架構會長怎樣就有很多種做法了，所以沒話在這張圖中，下面舉例 Azure 架構下可實行的一些做法。</p>
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://docs.microsoft.com/en-us/azure/iot-suite/iot-security-architecture" target="_blank" rel="external">Internet of Things security architecture</a></p>
 <h2 id="Microsof-Azure-服務架構圖"><a href="#Microsof-Azure-服務架構圖" class="headerlink" title="Microsof Azure 服務架構圖"></a>Microsof Azure 服務架構圖</h2><p>這張是對應上面一般性架構圖，講解微軟 Azure IoT Platform 的架構、目前有的服務，以及可提供的支援，當然還有/$/$/$。</p>
-
+<img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform01.png" alt="Microsof_Azure_架構圖" title="Microsof_Azure_架構圖">
 <h3 id="Device-Field-Gateway"><a href="#Device-Field-Gateway" class="headerlink" title="Device / Field Gateway"></a>Device / Field Gateway</h3><p>如同上一段介紹的，和雲端通訊的工作，必須根據現場端(On-Prem)資料收集設備的能力，來決定是否需要多加一個 Field Gateway。</p>
 <h4 id="Field-Gateway種類"><a href="#Field-Gateway種類" class="headerlink" title="Field Gateway種類"></a>Field Gateway種類</h4><p>如果決定外加一個 Field Gateway，那通常就是由 Field Gateway 統整完當下所有 device 的 data 後，在包成一條 message 給 cloud ，這樣比較省錢，因為 cloud 收費除了看流量也有看筆數。至於那條 message 要怎麼包，依需求又可分為兩種做法:</p>
 <ol>

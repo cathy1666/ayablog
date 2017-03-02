@@ -199,7 +199,7 @@
 <p>不過這樣也只是從雲端的 portal 介面去下控制命令而已，若是需要從手機 APP 透過雲端對設備做控制，還需要額外有一個 APP Server 的角色來接起手機和雲端之間的通訊，而實際架構會長怎樣就有很多種做法了，所以沒話在這張圖中，下面舉例 Azure 架構下可實行的一些做法。</p>
 <hr>
 <h2 id="Microsof-Azure-服務架構圖"><a href="#Microsof-Azure-服務架構圖" class="headerlink" title="Microsof Azure 服務架構圖"></a>Microsof Azure 服務架構圖</h2><p>這張是對應上面一般性架構圖，講解微軟 Azure IoT Platform 的架構、目前有的服務，以及可提供的支援，當然還有\$\$\$。</p>
-<img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform01.png" alt="Microsof_Azure_架構圖" title="Microsof_Azure_架構圖">
+<img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform01.png" alt="Microsoft_Azure_架構圖" title="Microsoft_Azure_架構圖">
 <h3 id="On-Prem-Device"><a href="#On-Prem-Device" class="headerlink" title="On-Prem Device"></a>On-Prem Device</h3><p>如同上一段介紹的，和雲端通訊的工作，必須根據現場端(On-Prem)資料收集設備的能力，來決定是否需要多加一個 Field Gateway。</p>
 <h4 id="Field-Gateway-種類"><a href="#Field-Gateway-種類" class="headerlink" title="Field Gateway 種類"></a>Field Gateway 種類</h4><p>如果決定外加一個 Field Gateway，那通常就是由 Field Gateway 統整完當下所有 device 的 data 後，在包成一條 message 給 cloud ，這樣比較省錢，因為 cloud 收費除了看流量也有看筆數。至於那條 message 要怎麼包，依需求又可分為兩種做法:</p>
 <ol>
@@ -239,7 +239,7 @@
 <li>AMQT/MQTT over WebSocket: 若有防火牆問題，使用 WebSocket 可穿透客戶端防火牆</li>
 </ul>
 <hr>
-<img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform02.png" alt="Microsof_Azure_架構圖" title="Microsof_Azure_架構圖">
+<img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform02.png" alt="Microsoft_Azure_架構圖" title="Microsoft_Azure_架構圖">
 <h3 id="IoT-Hub"><a href="#IoT-Hub" class="headerlink" title="IoT Hub"></a>IoT Hub</h3><p>Azure Cloud 中直接對現場端的介面，相當於 Cloud Gateway 的角色。</p>
 <h4 id="主要工作"><a href="#主要工作" class="headerlink" title="主要工作"></a>主要工作</h4><ul>
 <li>對現場端設備雙向通訊，可對設備做讀取及控制，</li>
@@ -253,7 +253,7 @@
 </ul>
 <p>傳送之 data 256K 以內算一筆資料，超過257~512K算兩筆，以此類推，需要時可隨時調整單位大小及換層級</p>
 <hr>
-<img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform03.png" alt="Microsof_Azure_架構圖" title="Microsof_Azure_架構圖">
+<img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform03.png" alt="Microsoft_Azure_架構圖" title="Microsoft_Azure_架構圖">
 <h3 id="Real-Time-Processing"><a href="#Real-Time-Processing" class="headerlink" title="Real Time Processing"></a>Real Time Processing</h3><p>這階段的主要工作是從 Iot Hub 撈資料，在存進資料庫前先做初步的處理</p>
 <h4 id="Stream-Analytics"><a href="#Stream-Analytics" class="headerlink" title="Stream Analytics"></a>Stream Analytics</h4><ul>
 <li>可以即時把感興趣的資料抓出來</li>
@@ -266,7 +266,7 @@
 <li>用 SDK 寫程式已經做完protocol溝通(AMQP)的工作了</li>
 </ul>
 <hr>
-<img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform04.png" alt="Microsof_Azure_架構圖" title="Microsof_Azure_架構圖">
+<img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform04.png" alt="Microsoft_Azure_架構圖" title="Microsoft_Azure_架構圖">
 <h3 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h3><p>此階段為 Azure 提供的各種型態的資料庫。<br>一般來說資料性質可分成兩種:</p>
 <ul>
 <li>熱資料:需即時處理</li>
@@ -303,13 +303,13 @@
 <li>適合需要排程的資料搬移情境,最小單位是 15min, so不適合即時處理</li>
 </ul>
 <hr>
-<img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform05.png" alt="Microsof_Azure_架構圖" title="Microsof_Azure_架構圖">
+<img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform05.png" alt="Microsoft_Azure_架構圖" title="Microsoft_Azure_架構圖">
 <h3 id="Analytics-amp-Presentation"><a href="#Analytics-amp-Presentation" class="headerlink" title="Analytics &amp; Presentation"></a>Analytics &amp; Presentation</h3><p>這個階段是將收集到的大量資料做後續處理，大數據分析，或是以使用者感興趣的方式呈現。</p>
 <h4 id="Power-BI"><a href="#Power-BI" class="headerlink" title="Power BI"></a>Power BI</h4><ul>
 <li>微軟雲端報表工具</li>
 <li>用拖拉的方式建報表</li>
-<li>付費版本，資料有即時push，可當作 dashboard 使用</li>
-<li>免費版本 20~30 才 refresh 一次</li>
+<li>付費版本資料有即時push，可當作 dashboard 使用</li>
+<li>免費版本 20~30m 才 refresh 一次</li>
 </ul>
 <h4 id="Azure-ML"><a href="#Azure-ML" class="headerlink" title="Azure ML"></a>Azure ML</h4><ul>
 <li>機器學習</li>
@@ -320,7 +320,7 @@
 <li>機器學習最欠缺的是資料科學家，需要時微軟也可提供支援</li>
 </ul>
 <hr>
-<img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform06.png" alt="Microsof_Azure_架構圖" title="Microsof_Azure_架構圖">
+<img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform06.png" alt="Microsoft_Azure_架構圖" title="Microsoft_Azure_架構圖">
 <h3 id="Process-Automation"><a href="#Process-Automation" class="headerlink" title="Process Automation"></a>Process Automation</h3><p>流程自動化階段，概括來說就是，根據得到的資料判斷後，做後續「處理動作」的階段，也包含以 Web 以及 APP 介接的處理。</p>
 <h4 id="Logic-APP"><a href="#Logic-APP" class="headerlink" title="Logic APP"></a>Logic APP</h4><ul>
 <li>視覺化工具</li>

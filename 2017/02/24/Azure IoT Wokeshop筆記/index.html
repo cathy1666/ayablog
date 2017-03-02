@@ -40,7 +40,7 @@
 <meta property="og:image" content="http://cathy1666.github.io/ayablog/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform04.png">
 <meta property="og:image" content="http://cathy1666.github.io/ayablog/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform05.png">
 <meta property="og:image" content="http://cathy1666.github.io/ayablog/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform06.png">
-<meta property="og:updated_time" content="2017-03-02T05:35:26.633Z">
+<meta property="og:updated_time" content="2017-03-02T06:26:21.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Azure IoT Wokeshop筆記">
 <meta name="twitter:description" content="General IOT Architecture
@@ -233,12 +233,11 @@
 <h3 id="設備控制"><a href="#設備控制" class="headerlink" title="設備控制"></a>設備控制</h3><p>控制的部分在這張架構圖沒有明確畫出來，但是會選擇使用 cloud 架構的主要原因之一，就是要做遠端控制。像我們目前遇到的需求，就是希望可以手機APP在外面直接透過 3G/4G 網路，控制現場端的設備。</p>
 <p>其實設備控制的動作跟第一階段的資料傳送的架構很像，都是現場端 gateway 與 cloud gateway 之間做通訊的動作，差別在於資料傳送是由現場端 gateway 「主動」 建立連線傳送資料，而設備控制是則由 cloud gateway 「主動」 發起連線，所以現場端 gateway 與 cloud gateway 之間需要有雙向溝通的機制。</p>
 <p>不過這樣也只是從雲端的 portal 介面去下控制命令而已，若是需要從手機 APP 透過雲端對設備做控制，還需要額外有一個 APP Server 的角色來接起手機和雲端之間的通訊，而實際架構會長怎樣就有很多種做法了，所以沒話在這張圖中，下面舉例 Azure 架構下可實行的一些做法。</p>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://docs.microsoft.com/en-us/azure/iot-suite/iot-security-architecture" target="_blank" rel="external">Internet of Things security architecture</a></p>
 <hr>
 <h2 id="Microsof-Azure-服務架構圖"><a href="#Microsof-Azure-服務架構圖" class="headerlink" title="Microsof Azure 服務架構圖"></a>Microsof Azure 服務架構圖</h2><p>這張是對應上面一般性架構圖，講解微軟 Azure IoT Platform 的架構、目前有的服務，以及可提供的支援，當然還有\$\$\$。</p>
 <img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform01.png" alt="Microsof_Azure_架構圖" title="Microsof_Azure_架構圖">
-<h3 id="Device-Field-Gateway"><a href="#Device-Field-Gateway" class="headerlink" title="Device / Field Gateway"></a>Device / Field Gateway</h3><p>如同上一段介紹的，和雲端通訊的工作，必須根據現場端(On-Prem)資料收集設備的能力，來決定是否需要多加一個 Field Gateway。</p>
-<h5 id="Field-Gateway-種類"><a href="#Field-Gateway-種類" class="headerlink" title="Field Gateway 種類"></a>Field Gateway 種類</h5><p>如果決定外加一個 Field Gateway，那通常就是由 Field Gateway 統整完當下所有 device 的 data 後，在包成一條 message 給 cloud ，這樣比較省錢，因為 cloud 收費除了看流量也有看筆數。至於那條 message 要怎麼包，依需求又可分為兩種做法:</p>
+<h3 id="On-Prem-Device"><a href="#On-Prem-Device" class="headerlink" title="On-Prem Device"></a>On-Prem Device</h3><p>如同上一段介紹的，和雲端通訊的工作，必須根據現場端(On-Prem)資料收集設備的能力，來決定是否需要多加一個 Field Gateway。</p>
+<h4 id="Field-Gateway-種類"><a href="#Field-Gateway-種類" class="headerlink" title="Field Gateway 種類"></a>Field Gateway 種類</h4><p>如果決定外加一個 Field Gateway，那通常就是由 Field Gateway 統整完當下所有 device 的 data 後，在包成一條 message 給 cloud ，這樣比較省錢，因為 cloud 收費除了看流量也有看筆數。至於那條 message 要怎麼包，依需求又可分為兩種做法:</p>
 <ol>
 <li>Transparence Field Gateway:</li>
 </ol>
@@ -247,7 +246,7 @@
 <li>Opaque Field Gateway:</li>
 </ol>
 <p>message 只有記錄 Field Gateway 的 ID，Clould 只認得 Field Gateway，此種 Gateway 就是不透明的(opaque)。</p>
-<h5 id="Microsoft支援"><a href="#Microsoft支援" class="headerlink" title="Microsoft支援"></a>Microsoft支援</h5><p>不論 Device 還是 Field Gateway 都是由客戶自行準備的，programing的部分也是客戶自行處理，而 Microsoft 能提供的就是針對終端設備，支援多 OS 及多語言 SDK(lib)，讓現有設備可以順利跟 Azure Clould 做通訊。</p>
+<h4 id="Microsoft支援"><a href="#Microsoft支援" class="headerlink" title="Microsoft支援"></a>Microsoft支援</h4><p>不論 Device 還是 Field Gateway 都是由客戶自行準備的，programing的部分也是客戶自行處理，而 Microsoft 能提供的就是針對終端設備，支援多 OS 及多語言 SDK(lib)，讓現有設備可以順利跟 Azure Clould 做通訊。</p>
 <ul>
 <li>OS<ul>
 <li>Windows</li>
@@ -268,7 +267,7 @@
 </ul>
 </li>
 </ul>
-<h5 id="通訊-protocol"><a href="#通訊-protocol" class="headerlink" title="通訊 protocol"></a>通訊 protocol</h5><p>若 Device / Field Gateway 成功 port 上 SDK，則 library 就已經把所需的通訊 protocol 及連線模式都做完了，可直接 call function 使用，但若是 SDK 不相容，Device 端就需自行處理通訊相關的部分，Azure 支援四種 protocol:</p>
+<h4 id="通訊-protocol"><a href="#通訊-protocol" class="headerlink" title="通訊 protocol"></a>通訊 protocol</h4><p>若 Device / Field Gateway 成功 port 上 SDK，則 library 就已經把所需的通訊 protocol 及連線模式都做完了，可直接 call function 使用，但若是 SDK 不相容，Device 端就需自行處理通訊相關的部分，Azure 支援四種 protocol:</p>
 <ul>
 <li>MQTT: 優先建議，lightweight (最小可到 2 byte), reliable, long polling (連線持續建立，而非每次傳送都重建一次連線)</li>
 <li>AMQP: 次之，long polling</li>
@@ -277,12 +276,12 @@
 </ul>
 <hr>
 <img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform02.png" alt="Microsof_Azure_架構圖" title="Microsof_Azure_架構圖">
-<h3 id="Iot-Hub"><a href="#Iot-Hub" class="headerlink" title="Iot Hub"></a>Iot Hub</h3><ul>
-<li>Azure Cloud 中直接對現場端的介面</li>
+<h3 id="IoT-Hub"><a href="#IoT-Hub" class="headerlink" title="IoT Hub"></a>IoT Hub</h3><p>Azure Cloud 中直接對現場端的介面，相當於 Cloud Gateway 的角色。</p>
+<h4 id="主要工作"><a href="#主要工作" class="headerlink" title="主要工作"></a>主要工作</h4><ul>
 <li>對現場端設備雙向通訊，可對設備做讀取及控制，</li>
 <li>資料可暫存1-7天</li>
 </ul>
-<h3 id="Iot-Hub-收費方式"><a href="#Iot-Hub-收費方式" class="headerlink" title="Iot Hub 收費方式"></a>Iot Hub 收費方式</h3><p>三個層級,每隔層級有各自的價錢</p>
+<h4 id="收費方式"><a href="#收費方式" class="headerlink" title="收費方式"></a>收費方式</h4><p>三個層級,每隔層級有各自的價錢</p>
 <ul>
 <li>S1：一個單位(單位可以設1~200): 每天(IDx筆數) = 40萬筆資料 (total$ = S1$+單位數x單位$)</li>
 <li>S2：每天(IDx筆數) = 600萬筆資料</li>
@@ -291,63 +290,64 @@
 <p>傳送之 data 256K 以內算一筆資料，超過257~512K算兩筆，以此類推，需要時可隨時調整單位大小及換層級</p>
 <hr>
 <img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform03.png" alt="Microsof_Azure_架構圖" title="Microsof_Azure_架構圖">
-<p>這階段的主要工作是從Iot hub撈資料，在存進資料庫前先做初步的處理</p>
-<h3 id="Stream-Analytics"><a href="#Stream-Analytics" class="headerlink" title="Stream Analytics"></a>Stream Analytics</h3><ul>
+<h3 id="Real-Time-Processing"><a href="#Real-Time-Processing" class="headerlink" title="Real Time Processing"></a>Real Time Processing</h3><p>這階段的主要工作是從 Iot Hub 撈資料，在存進資料庫前先做初步的處理</p>
+<h4 id="Stream-Analytics"><a href="#Stream-Analytics" class="headerlink" title="Stream Analytics"></a>Stream Analytics</h4><ul>
 <li>可以即時把感興趣的資料抓出來</li>
 <li>可寫SQL Script,SQL可做到的都可以做</li>
 <li>一個filter,篩資料後送到某處</li>
 </ul>
-<h3 id="Event-Processor-Host"><a href="#Event-Processor-Host" class="headerlink" title="Event Processor Host"></a>Event Processor Host</h3><ul>
+<h4 id="Event-Processor-Host"><a href="#Event-Processor-Host" class="headerlink" title="Event Processor Host"></a>Event Processor Host</h4><ul>
 <li>太複雜的判斷可直接寫程式</li>
 <li>是個 SDK,可直接執行的 console 程式</li>
 <li>用 SDK 寫程式已經做完protocol溝通(AMQP)的工作了</li>
 </ul>
 <hr>
 <img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform04.png" alt="Microsof_Azure_架構圖" title="Microsof_Azure_架構圖">
-<p>此階段為 Azure 提供的各種型態的資料庫。<br>一般來說資料性質可分成兩種:</p>
+<h3 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h3><p>此階段為 Azure 提供的各種型態的資料庫。<br>一般來說資料性質可分成兩種:</p>
 <ul>
 <li>熱資料:需即時處理</li>
 <li>冷資料:不需即時處理</li>
 </ul>
 <p>以微軟的經驗，客戶通常不會只用一種儲存體，同一筆資料可以同時存到不同的儲存體，在不同的地方做不同的處理。建議完整的資料先存一份檔案(BLOB)，因為在還沒分析之前可能不知道自己要拿這個資料來做甚麼，但要未來要做大數據分析需要收及足夠大量的資料。</p>
-<h3 id="BLOB"><a href="#BLOB" class="headerlink" title="BLOB"></a>BLOB</h3><ul>
+<h4 id="BLOB"><a href="#BLOB" class="headerlink" title="BLOB"></a>BLOB</h4><ul>
 <li>資料量很大時適用</li>
 <li>500T</li>
 <li>以「檔案」形式儲存</li>
 <li>便宜，容量大</li>
 </ul>
-<h3 id="SQL-Server"><a href="#SQL-Server" class="headerlink" title="SQL Server"></a>SQL Server</h3><ul>
+<h4 id="SQL-Server"><a href="#SQL-Server" class="headerlink" title="SQL Server"></a>SQL Server</h4><ul>
 <li>一般常用的資料庫</li>
 <li>適合用來做報表</li>
 </ul>
-<h3 id="QUEUE"><a href="#QUEUE" class="headerlink" title="QUEUE"></a>QUEUE</h3><ul>
+<h4 id="QUEUE"><a href="#QUEUE" class="headerlink" title="QUEUE"></a>QUEUE</h4><ul>
 <li>需要與異質系統溝通</li>
 <li>類似一個信箱</li>
 </ul>
-<h3 id="Document-DB"><a href="#Document-DB" class="headerlink" title="Document DB"></a>Document DB</h3><ul>
+<h4 id="Document-DB"><a href="#Document-DB" class="headerlink" title="Document DB"></a>Document DB</h4><ul>
 <li>大量,頻繁,單獨物件查詢</li>
 <li>若要用 join 這種交叉查詢請用 SQL server</li>
 </ul>
-<h3 id="Event-Hub"><a href="#Event-Hub" class="headerlink" title="Event Hub"></a>Event Hub</h3><ul>
+<h4 id="Event-Hub"><a href="#Event-Hub" class="headerlink" title="Event Hub"></a>Event Hub</h4><ul>
 <li>和 QUEUE 角色很像</li>
 <li>需要與異質系統溝通</li>
 <li>類似一個信箱</li>
 <li>throuthput 比 QUEUE 高，百萬等級</li>
 </ul>
-<h3 id="Data-Factory"><a href="#Data-Factory" class="headerlink" title="Data Factory"></a>Data Factory</h3><ul>
+<h4 id="Data-Factory"><a href="#Data-Factory" class="headerlink" title="Data Factory"></a>Data Factory</h4><ul>
 <li>雲端版SSIS</li>
 <li>和SSIS不同，可以有些資料在雲端有些資料在地端, SSIS 則一定要全部在雲端或是全在地端</li>
 <li>適合需要排程的資料搬移情境,最小單位是 15min, so不適合即時處理</li>
 </ul>
 <hr>
 <img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform05.png" alt="Microsof_Azure_架構圖" title="Microsof_Azure_架構圖">
-<h3 id="Power-BI"><a href="#Power-BI" class="headerlink" title="Power BI"></a>Power BI</h3><ul>
+<h3 id="Analytics-amp-Presentation"><a href="#Analytics-amp-Presentation" class="headerlink" title="Analytics &amp; Presentation"></a>Analytics &amp; Presentation</h3><p>這個階段是將收集到的大量資料做後續處理，大數據分析，或是以使用者感興趣的方式呈現。</p>
+<h4 id="Power-BI"><a href="#Power-BI" class="headerlink" title="Power BI"></a>Power BI</h4><ul>
 <li>微軟雲端報表工具</li>
 <li>用拖拉的方式建報表</li>
 <li>付費版本，資料有即時push，可當作 dashboard 使用</li>
 <li>免費版本 20~30 才 refresh 一次</li>
 </ul>
-<h3 id="Azure-ML"><a href="#Azure-ML" class="headerlink" title="Azure ML"></a>Azure ML</h3><ul>
+<h4 id="Azure-ML"><a href="#Azure-ML" class="headerlink" title="Azure ML"></a>Azure ML</h4><ul>
 <li>機器學習</li>
 <li>可以”預測”一些事情</li>
 <li>需有足夠的資料量才能”學習”</li>
@@ -357,25 +357,22 @@
 </ul>
 <hr>
 <img src="/ayablog/2017/02/24/Azure%20IoT%20Wokeshop筆記/MicrosoftAzureIoTPlatform06.png" alt="Microsof_Azure_架構圖" title="Microsof_Azure_架構圖">
-<p>流程自動化階段，</p>
-<ul>
-<li>設 threadhold 超過就做通知(人or控制機器關機)</li>
-<li>提供API通知推播平台，只做通知,推播還是該平台做</li>
-</ul>
-<h3 id="Logic-APP"><a href="#Logic-APP" class="headerlink" title="Logic APP"></a>Logic APP</h3><ul>
+<h3 id="Process-Automation"><a href="#Process-Automation" class="headerlink" title="Process Automation"></a>Process Automation</h3><p>流程自動化階段，概括來說就是，根據得到的資料判斷後，做後續「處理動作」的階段，也包含以 Web 以及 APP 介接的處理。</p>
+<h4 id="Logic-APP"><a href="#Logic-APP" class="headerlink" title="Logic APP"></a>Logic APP</h4><ul>
 <li>視覺化工具</li>
 <li>用拖拉元件的方式寫介面</li>
 </ul>
-<h3 id="Web-Apps"><a href="#Web-Apps" class="headerlink" title="Web Apps"></a>Web Apps</h3><ul>
+<h4 id="Web-Apps"><a href="#Web-Apps" class="headerlink" title="Web Apps"></a>Web Apps</h4><ul>
 <li>Web hosting</li>
 <li>可直接從 Iot hub 讀資料(跳過中間步驟) show 在網站上</li>
 </ul>
-<h3 id="Mobile-Apps"><a href="#Mobile-Apps" class="headerlink" title="Mobile Apps"></a>Mobile Apps</h3><ul>
-<li>APP後台</li>
+<h4 id="Mobile-Apps"><a href="#Mobile-Apps" class="headerlink" title="Mobile Apps"></a>Mobile Apps</h4><ul>
+<li>APP 後台</li>
 <li>用一些方式幫你把 API &amp; 資料庫建好</li>
 </ul>
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>做Iot第一個會遇到的挑戰是設備連線的問題，而硬體設備連線大部分是SSL問題。另外資料上雲端一定會稍微延遲，需允許2~3秒的延遲，如果需要做到「真正」的即時，通常是直接在 field GW 上處理。</p>
-<h2 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>做 IoT 第一個會遇到的挑戰是設備連線的問題，而硬體設備連線大部分是SSL問題。另外資料上雲端一定會稍微延遲，需允許2~3秒的延遲，如果需要做到「真正」的即時，通常是直接在 field gateway 上處理。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/iot-suite/iot-security-architecture" target="_blank" rel="external">Internet of Things security architecture</a></li>
 <li><a href="https://channel9.msdn.com/Azure" target="_blank" rel="external">Azure@Channel 9</a></li>
 <li><a href="https://azure.microsoft.com/zh-tw/updates/" target="_blank" rel="external">Service Update</a></li>
 <li>Azure IOT Blogs<ul>
@@ -418,7 +415,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#General-IOT-Architecture"><span class="nav-number">1.</span> <span class="nav-text">General IOT Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#資料蒐集與傳送"><span class="nav-number">1.1.</span> <span class="nav-text">資料蒐集與傳送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#雲端運算及管理"><span class="nav-number">1.2.</span> <span class="nav-text">雲端運算及管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#數據呈現"><span class="nav-number">1.3.</span> <span class="nav-text">數據呈現</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設備控制"><span class="nav-number">1.4.</span> <span class="nav-text">設備控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">1.5.</span> <span class="nav-text">Reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Microsof-Azure-服務架構圖"><span class="nav-number">2.</span> <span class="nav-text">Microsof Azure 服務架構圖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Device-Field-Gateway"><span class="nav-number">2.1.</span> <span class="nav-text">Device / Field Gateway</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Field-Gateway-種類"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">Field Gateway 種類</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Microsoft支援"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">Microsoft支援</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通訊-protocol"><span class="nav-number">2.1.0.3.</span> <span class="nav-text">通訊 protocol</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iot-Hub"><span class="nav-number">2.2.</span> <span class="nav-text">Iot Hub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iot-Hub-收費方式"><span class="nav-number">2.3.</span> <span class="nav-text">Iot Hub 收費方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-Analytics"><span class="nav-number">2.4.</span> <span class="nav-text">Stream Analytics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Processor-Host"><span class="nav-number">2.5.</span> <span class="nav-text">Event Processor Host</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BLOB"><span class="nav-number">2.6.</span> <span class="nav-text">BLOB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Server"><span class="nav-number">2.7.</span> <span class="nav-text">SQL Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QUEUE"><span class="nav-number">2.8.</span> <span class="nav-text">QUEUE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Document-DB"><span class="nav-number">2.9.</span> <span class="nav-text">Document DB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Hub"><span class="nav-number">2.10.</span> <span class="nav-text">Event Hub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Factory"><span class="nav-number">2.11.</span> <span class="nav-text">Data Factory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Power-BI"><span class="nav-number">2.12.</span> <span class="nav-text">Power BI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Azure-ML"><span class="nav-number">2.13.</span> <span class="nav-text">Azure ML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logic-APP"><span class="nav-number">2.14.</span> <span class="nav-text">Logic APP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-Apps"><span class="nav-number">2.15.</span> <span class="nav-text">Web Apps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mobile-Apps"><span class="nav-number">2.16.</span> <span class="nav-text">Mobile Apps</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結語"><span class="nav-number">3.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference-1"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#General-IOT-Architecture"><span class="nav-number">1.</span> <span class="nav-text">General IOT Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#資料蒐集與傳送"><span class="nav-number">1.1.</span> <span class="nav-text">資料蒐集與傳送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#雲端運算及管理"><span class="nav-number">1.2.</span> <span class="nav-text">雲端運算及管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#數據呈現"><span class="nav-number">1.3.</span> <span class="nav-text">數據呈現</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設備控制"><span class="nav-number">1.4.</span> <span class="nav-text">設備控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Microsof-Azure-服務架構圖"><span class="nav-number">2.</span> <span class="nav-text">Microsof Azure 服務架構圖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#On-Prem-Device"><span class="nav-number">2.1.</span> <span class="nav-text">On-Prem Device</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Field-Gateway-種類"><span class="nav-number">2.1.1.</span> <span class="nav-text">Field Gateway 種類</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Microsoft支援"><span class="nav-number">2.1.2.</span> <span class="nav-text">Microsoft支援</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通訊-protocol"><span class="nav-number">2.1.3.</span> <span class="nav-text">通訊 protocol</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IoT-Hub"><span class="nav-number">2.2.</span> <span class="nav-text">IoT Hub</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要工作"><span class="nav-number">2.2.1.</span> <span class="nav-text">主要工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#收費方式"><span class="nav-number">2.2.2.</span> <span class="nav-text">收費方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Real-Time-Processing"><span class="nav-number">2.3.</span> <span class="nav-text">Real Time Processing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Stream-Analytics"><span class="nav-number">2.3.1.</span> <span class="nav-text">Stream Analytics</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Event-Processor-Host"><span class="nav-number">2.3.2.</span> <span class="nav-text">Event Processor Host</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Storage"><span class="nav-number">2.4.</span> <span class="nav-text">Storage</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BLOB"><span class="nav-number">2.4.1.</span> <span class="nav-text">BLOB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-Server"><span class="nav-number">2.4.2.</span> <span class="nav-text">SQL Server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#QUEUE"><span class="nav-number">2.4.3.</span> <span class="nav-text">QUEUE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Document-DB"><span class="nav-number">2.4.4.</span> <span class="nav-text">Document DB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Event-Hub"><span class="nav-number">2.4.5.</span> <span class="nav-text">Event Hub</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-Factory"><span class="nav-number">2.4.6.</span> <span class="nav-text">Data Factory</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analytics-amp-Presentation"><span class="nav-number">2.5.</span> <span class="nav-text">Analytics & Presentation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Power-BI"><span class="nav-number">2.5.1.</span> <span class="nav-text">Power BI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Azure-ML"><span class="nav-number">2.5.2.</span> <span class="nav-text">Azure ML</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Process-Automation"><span class="nav-number">2.6.</span> <span class="nav-text">Process Automation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Logic-APP"><span class="nav-number">2.6.1.</span> <span class="nav-text">Logic APP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web-Apps"><span class="nav-number">2.6.2.</span> <span class="nav-text">Web Apps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mobile-Apps"><span class="nav-number">2.6.3.</span> <span class="nav-text">Mobile Apps</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結語"><span class="nav-number">3.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol>
     
     </div>
   </aside>

@@ -398,23 +398,23 @@
 </code></pre><p>打開 tree.txt 可得到如下樹狀圖：</p>
 <img src="/ayablog/2017/02/13/製作個人風格的%20Hexo%20Themes/tree.png" alt="tree" title="tree">
 <p>從以上樹狀架構圖中可以發現，除了圖片資源(.png .jpg .ico)、字型檔(\source\css\fonts)和翻譯對照檔(\languages)之外，source code 的部分包含四種類型檔案：.js .ejs .css .styl，所以要先知道這四種類型檔案在幹嘛</p>
-<h3 id="css"><a href="#css" class="headerlink" title=".css"></a>.css</h3><p>這應該不用解釋，就是 CSS 語言寫成的檔案。</p>
-<h3 id="styl"><a href="#styl" class="headerlink" title=".styl"></a>.styl</h3><p>Stylus 是一個 Node.js 架構下的 CSS 前處理器，是一種程式語言，它簡化了 CSS 語法再加入函數與運算的功能，讓使用上更加彈性。<br>以 Stylus 程式語言撰寫的檔案，附檔名為 .styl。</p>
+<h4 id="css"><a href="#css" class="headerlink" title=".css"></a>.css</h4><p>這應該不用解釋，就是 CSS 語言寫成的檔案。</p>
+<h4 id="styl"><a href="#styl" class="headerlink" title=".styl"></a>.styl</h4><p>Stylus 是一個 Node.js 架構下的 CSS 前處理器，是一種程式語言，它簡化了 CSS 語法再加入函數與運算的功能，讓使用上更加彈性。<br>以 Stylus 程式語言撰寫的檔案，附檔名為 .styl。</p>
 <p>與 CSS 的對照語法請參考：</p>
 <ul>
 <li><a href="http://blogger.gtwang.org/2014/02/stylus-css-preprocessor-based-on-nodejs.html" target="_blank" rel="external">Stylus：Node.js 架構下的 CSS 前處理器</a></li>
 <li><a href="http://stylus-lang.com/" target="_blank" rel="external">Stylus 官網</a></li>
 </ul>
 <p>所以 Stylus 可以直接翻譯成 CSS，也就是說這兩種類型的檔案主要功用是相同的，就是做靜態網頁的圖文格式設定及排版。</p>
-<h3 id="js"><a href="#js" class="headerlink" title=".js"></a>.js</h3><p>就是javascript的附檔名。</p>
-<h3 id="ejs"><a href="#ejs" class="headerlink" title=".ejs"></a>.ejs</h3><p>EJS 為 Effective JavaScript 的縮寫，是一種可以內嵌在 HTML 程式的 JavaScript 函式庫，因為程式主架構還是 HTML，所以比起用 JavaScript 來產生 HTML 程式碼，在讀程式碼時，網頁架構比較明確易讀，也比較好維護。</p>
+<h4 id="js"><a href="#js" class="headerlink" title=".js"></a>.js</h4><p>就是javascript的附檔名。</p>
+<h4 id="ejs"><a href="#ejs" class="headerlink" title=".ejs"></a>.ejs</h4><p>EJS 為 Effective JavaScript 的縮寫，是一種可以內嵌在 HTML 程式的 JavaScript 函式庫，因為程式主架構還是 HTML，所以比起用 JavaScript 來產生 HTML 程式碼，在讀程式碼時，網頁架構比較明確易讀，也比較好維護。</p>
 <p>EJS 使用 <strong>&lt;% %&gt;</strong> 或 <strong>[% %]</strong> 作為內崁 JavaScript 的關鍵符號，也就是說放在這中間的部分就會被視為 JavaScript 來執行，另外如果放在 <strong>&lt;%= %&gt;</strong> 裡面的 JavaScript 變數，則會以 toString() 的方式將其轉換為字串，並加入至網頁中。</p>
 <p>其他內容請參考：</p>
 <ul>
 <li><a href="https://blog.gtwang.org/programming/ejs-embedded-javascript/" target="_blank" rel="external">EJS：Client 端嵌入式（Embedded）JavaScript</a></li>
 <li><a href="http://ejs.co/" target="_blank" rel="external">EJS 官網</a></li>
 </ul>
-<h3 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h3><p>Bootstrap 是我在看網路文章時看到的軟體工具，覺得這個字很眼熟，才發現 hipaper theme 就是用 Bootstrap 架構寫的。</p>
+<h4 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h4><p>Bootstrap 是我在看網路文章時看到的軟體工具，覺得這個字很眼熟，才發現 hipaper theme 就是用 Bootstrap 架構寫的。</p>
 <blockquote>
 <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.</p>
 </blockquote>

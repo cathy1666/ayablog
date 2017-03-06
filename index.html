@@ -298,7 +298,7 @@
 <li>throuthput 比 QUEUE 高，百萬等級</li>
 </ul>
 <h4 id="Data-Factory"><a href="#Data-Factory" class="headerlink" title="Data Factory"></a>Data Factory</h4><ul>
-<li>雲端版SSIS</li>
+<li>雲端版SSIS(<a href="https://en.wikipedia.org/wiki/SQL_Server_Integration_Services" target="_blank" rel="external">SQL Server Integration Services</a>)</li>
 <li>和SSIS不同，可以有些資料在雲端有些資料在地端, SSIS 則一定要全部在雲端或是全在地端</li>
 <li>適合需要排程的資料搬移情境,最小單位是 15min, so不適合即時處理</li>
 </ul>
@@ -354,6 +354,86 @@
       
   <span class="ico-tags"></span>
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/Azure/">Azure</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/IoT/">IoT</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-製作個人風格的 Hexo Themes"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/ayablog/2017/02/13/製作個人風格的 Hexo Themes/">製作個人風格的 Hexo Theme</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/ayablog/2017/02/13/製作個人風格的 Hexo Themes/" class="article-date">
+	  <time datetime="2017-02-13T04:16:06.850Z" itemprop="datePublished">February 13, 2017</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="第一階段目標"><a href="#第一階段目標" class="headerlink" title="第一階段目標"></a>第一階段目標</h3><p>套用現成別人寫好的版面，試著看看別人版面的寫法，再找出可以修改字型顏色大小、版面長寬的地方，為自己的版面做微調。</p>
+<h3 id="套用現成的-Theme"><a href="#套用現成的-Theme" class="headerlink" title="套用現成的 Theme"></a>套用現成的 Theme</h3><p>學習一個新的東西，最快的方式就是模仿。所以我是先套用一個別人寫好現成的 theme，再慢慢修改成自己的風格。試了很多 theme，我最後選擇 <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank" rel="external">hipaper</a>，簡單大方排版符合我的需求， code 又不會太複雜的 theme 做為基礎來修改。</p>
+<p>檢查一下 hipaper 的 <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper/blob/master/LICENSE" target="_blank" rel="external">License</a>，是 <a href="https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89" target="_blank" rel="external">MIT授權</a> 所以可以任意修改使用，只要附上此許可聲明即可。</p>
+<p>Hexo Theme 的套用方式照著 hipaper 的 README 做就行了。</p>
+<h3 id="解析-hipaper-Themes-Source-Code"><a href="#解析-hipaper-Themes-Source-Code" class="headerlink" title="解析 hipaper Themes Source Code"></a>解析 hipaper Themes Source Code</h3><p>首先，先來了解一下這個專案的整體架構：<br>在 cmd 打入下列指令，可以得到資料夾內容樹狀圖</p>
+<pre><code>tree /F hipaper資料夾路徑 &gt; .\tree.txt
+</code></pre><p>打開 tree.txt 可得到如下樹狀圖：</p>
+<img src="/ayablog/2017/02/13/製作個人風格的%20Hexo%20Themes/tree.png" alt="tree" title="tree">
+<p>從以上樹狀架構圖中可以發現，除了圖片資源(.png .jpg .ico)、字型檔(\source\css\fonts)和翻譯對照檔(\languages)之外，source code 的部分包含四種類型檔案：.js .ejs .css .styl，所以要先知道這四種類型檔案在幹嘛</p>
+<h3 id="css"><a href="#css" class="headerlink" title=".css"></a>.css</h3><p>這應該不用解釋，就是 CSS 語言寫成的檔案。</p>
+<h3 id="styl"><a href="#styl" class="headerlink" title=".styl"></a>.styl</h3><p>Stylus 是一個 Node.js 架構下的 CSS 前處理器，是一種程式語言，它簡化了 CSS 語法再加入函數與運算的功能，讓使用上更加彈性。<br>以 Stylus 程式語言撰寫的檔案，附檔名為 .styl。</p>
+<p>與 CSS 的對照語法請參考：</p>
+<ul>
+<li><a href="http://blogger.gtwang.org/2014/02/stylus-css-preprocessor-based-on-nodejs.html" target="_blank" rel="external">Stylus：Node.js 架構下的 CSS 前處理器</a></li>
+<li><a href="http://stylus-lang.com/" target="_blank" rel="external">Stylus 官網</a></li>
+</ul>
+<p>所以 Stylus 可以直接翻譯成 CSS，也就是說這兩種類型的檔案主要功用是相同的，就是做靜態網頁的圖文格式設定及排版。</p>
+<h3 id="js"><a href="#js" class="headerlink" title=".js"></a>.js</h3><p>就是javascript的附檔名。</p>
+<h3 id="ejs"><a href="#ejs" class="headerlink" title=".ejs"></a>.ejs</h3><p>EJS 為 Effective JavaScript 的縮寫，是一種可以內嵌在 HTML 程式的 JavaScript 函式庫，因為程式主架構還是 HTML，所以比起用 JavaScript 來產生 HTML 程式碼，在讀程式碼時，網頁架構比較明確易讀，也比較好維護。</p>
+<p>EJS 使用 <strong>&lt;% %&gt;</strong> 或 <strong>[% %]</strong> 作為內崁 JavaScript 的關鍵符號，也就是說放在這中間的部分就會被視為 JavaScript 來執行，另外如果放在 <strong>&lt;%= %&gt;</strong> 裡面的 JavaScript 變數，則會以 toString() 的方式將其轉換為字串，並加入至網頁中。</p>
+<p>其他內容請參考：</p>
+<ul>
+<li><a href="https://blog.gtwang.org/programming/ejs-embedded-javascript/" target="_blank" rel="external">EJS：Client 端嵌入式（Embedded）JavaScript</a></li>
+<li><a href="http://ejs.co/" target="_blank" rel="external">EJS 官網</a></li>
+</ul>
+<h3 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h3><p>Bootstrap 是我在看網路文章時看到的軟體工具，覺得這個字很眼熟，才發現 hipaper theme 就是用 Bootstrap 架構寫的。</p>
+<blockquote>
+<p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.</p>
+</blockquote>
+<p>這句話是 <a href="http://getbootstrap.com/" target="_blank" rel="external">Bootstrap 官網</a>對 Bootstrap 的介紹。</p>
+<p>Bootstrap是一個免費開源的開發網站工具，一個 CSS Framework，由知名的社群平台Twitter所開發，無論在結構還是互動性上都相當的完整，可幫助開發者快速開發一個擁有自適應性(responsive web design, RWD)特性的網站。</p>
+<ul>
+<li><a href="http://phoebelin0606.pixnet.net/blog/post/360332817-%E2%99%8C%E7%A8%8B%E5%BC%8F-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8bootstrap" target="_blank" rel="external">程式-如何使用Bootstrap</a></li>
+<li><a href="https://www.minwt.com/webdesign-dev/html/9966.html" target="_blank" rel="external">Bootstrap教學《Bootstrap網設必備》打造Responsive Web Design自適應版型入門|梅問題．教學網</a></li>
+<li><a href="http://cythilya.blogspot.tw/2015/02/bootstrap-rwd-template.html" target="_blank" rel="external">使用Bootstrap建立一個RWD Template (Twitter Bootstrap in Responsive Web Design)</a></li>
+<li><a href="https://kkbruce.tw/bs3" target="_blank" rel="external">Bootstrap</a></li>
+</ul>
+<h2 id="待續…"><a href="#待續…" class="headerlink" title="待續…"></a>待續…</h2>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/EJS/">EJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/Stylus/">Stylus</a></li></ul>
 
       
     </footer>
@@ -766,6 +846,18 @@ print_data END
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/ayablog/2017/02/13/製作個人風格的 Hexo Themes/">製作個人風格的 Hexo Theme</a></h6>
+              <span>February 13, 2017</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/ayablog/2017/02/06/TOEIC準備心得/">TOEIC準備心得</a></h6>
               <span>February 6, 2017</span>
             </div>
@@ -804,18 +896,6 @@ print_data END
 
               <h6 style="margin: 0;"><a href="/ayablog/2017/01/05/如何外部終止特定執行緒/">如何外部終止特定執行緒</a></h6>
               <span>January 5, 2017</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/ayablog/2016/12/23/如何讓VM開機自動執行/">讓Virtualbox 的虛擬機器在 Windows 開機後自動啟動</a></h6>
-              <span>December 23, 2016</span>
             </div>
 
           </li>

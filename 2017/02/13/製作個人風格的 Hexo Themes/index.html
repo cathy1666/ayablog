@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>製作個人風格的 hexo theme | Aya Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="HexoCSSStylusJavaScriptEJS" />
+  
+  
+  
+  
+  <meta name="description" content="第一階段目標套用現成別人寫好的版面，試著看看別人版面的寫法，再找出可以修改字型顏色大小、版面長寬的地方，為自己的版面做微調。
+套用現成的 Theme學習一個新的東西，最快的方式就是模仿。所以我是先套用一個別人寫好現成的 theme，再慢慢修改成自己的風格。試了很多 theme，我最後選擇 hipaper，簡單大方排版符合我的需求， code 又不會太複雜的 theme 做為基礎來修改。
+檢查一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="製作個人風格的 Hexo Theme">
+<meta property="og:url" content="http://cathy1666.github.io/ayablog/2017/02/13/製作個人風格的 Hexo Themes/index.html">
+<meta property="og:site_name" content="Aya Blog">
+<meta property="og:description" content="第一階段目標套用現成別人寫好的版面，試著看看別人版面的寫法，再找出可以修改字型顏色大小、版面長寬的地方，為自己的版面做微調。
+套用現成的 Theme學習一個新的東西，最快的方式就是模仿。所以我是先套用一個別人寫好現成的 theme，再慢慢修改成自己的風格。試了很多 theme，我最後選擇 hipaper，簡單大方排版符合我的需求， code 又不會太複雜的 theme 做為基礎來修改。
+檢查一下">
+<meta property="og:image" content="http://cathy1666.github.io/ayablog/ayablog/2017/02/13/製作個人風格的%20Hexo%20Themes/tree.png">
+<meta property="og:updated_time" content="2017-03-06T06:55:52.796Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="製作個人風格的 Hexo Theme">
+<meta name="twitter:description" content="第一階段目標套用現成別人寫好的版面，試著看看別人版面的寫法，再找出可以修改字型顏色大小、版面長寬的地方，為自己的版面做微調。
+套用現成的 Theme學習一個新的東西，最快的方式就是模仿。所以我是先套用一個別人寫好現成的 theme，再慢慢修改成自己的風格。試了很多 theme，我最後選擇 hipaper，簡單大方排版符合我的需求， code 又不會太複雜的 theme 做為基礎來修改。
+檢查一下">
+<meta name="twitter:image" content="http://cathy1666.github.io/ayablog/ayablog/2017/02/13/製作個人風格的%20Hexo%20Themes/tree.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Aya Blog" type="application/atom+xml">
+  
+  <link rel="icon" href="/ayablog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/ayablog/css/style.css">
+
+  <script src="/ayablog/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/ayablog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/ayablog/css/fashion.css" >
+  <link rel="stylesheet" href="/ayablog/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/ayablog/" title="Aya Blog" rel="home"> Aya Blog </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/ayablog/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/ayablog/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/ayablog/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/ayablog/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-製作個人風格的 Hexo Themes" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      製作個人風格的 Hexo Theme
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/ayablog/2017/02/13/製作個人風格的 Hexo Themes/" class="article-date">
+	  <time datetime="2017-02-13T04:16:06.850Z" itemprop="datePublished">February 13, 2017</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="第一階段目標"><a href="#第一階段目標" class="headerlink" title="第一階段目標"></a>第一階段目標</h3><p>套用現成別人寫好的版面，試著看看別人版面的寫法，再找出可以修改字型顏色大小、版面長寬的地方，為自己的版面做微調。</p>
+<h3 id="套用現成的-Theme"><a href="#套用現成的-Theme" class="headerlink" title="套用現成的 Theme"></a>套用現成的 Theme</h3><p>學習一個新的東西，最快的方式就是模仿。所以我是先套用一個別人寫好現成的 theme，再慢慢修改成自己的風格。試了很多 theme，我最後選擇 <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank" rel="external">hipaper</a>，簡單大方排版符合我的需求， code 又不會太複雜的 theme 做為基礎來修改。</p>
+<p>檢查一下 hipaper 的 <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper/blob/master/LICENSE" target="_blank" rel="external">License</a>，是 <a href="https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89" target="_blank" rel="external">MIT授權</a> 所以可以任意修改使用，只要附上此許可聲明即可。</p>
+<p>Hexo Theme 的套用方式照著 hipaper 的 README 做就行了。</p>
+<h3 id="解析-hipaper-Themes-Source-Code"><a href="#解析-hipaper-Themes-Source-Code" class="headerlink" title="解析 hipaper Themes Source Code"></a>解析 hipaper Themes Source Code</h3><p>首先，先來了解一下這個專案的整體架構：<br>在 cmd 打入下列指令，可以得到資料夾內容樹狀圖</p>
+<pre><code>tree /F hipaper資料夾路徑 &gt; .\tree.txt
+</code></pre><p>打開 tree.txt 可得到如下樹狀圖：</p>
+<img src="/ayablog/2017/02/13/製作個人風格的%20Hexo%20Themes/tree.png" alt="tree" title="tree">
+<p>從以上樹狀架構圖中可以發現，除了圖片資源(.png .jpg .ico)、字型檔(\source\css\fonts)和翻譯對照檔(\languages)之外，source code 的部分包含四種類型檔案：.js .ejs .css .styl，所以要先知道這四種類型檔案在幹嘛</p>
+<h3 id="css"><a href="#css" class="headerlink" title=".css"></a>.css</h3><p>這應該不用解釋，就是 CSS 語言寫成的檔案。</p>
+<h3 id="styl"><a href="#styl" class="headerlink" title=".styl"></a>.styl</h3><p>Stylus 是一個 Node.js 架構下的 CSS 前處理器，是一種程式語言，它簡化了 CSS 語法再加入函數與運算的功能，讓使用上更加彈性。<br>以 Stylus 程式語言撰寫的檔案，附檔名為 .styl。</p>
+<p>與 CSS 的對照語法請參考：</p>
+<ul>
+<li><a href="http://blogger.gtwang.org/2014/02/stylus-css-preprocessor-based-on-nodejs.html" target="_blank" rel="external">Stylus：Node.js 架構下的 CSS 前處理器</a></li>
+<li><a href="http://stylus-lang.com/" target="_blank" rel="external">Stylus 官網</a></li>
+</ul>
+<p>所以 Stylus 可以直接翻譯成 CSS，也就是說這兩種類型的檔案主要功用是相同的，就是做靜態網頁的圖文格式設定及排版。</p>
+<h3 id="js"><a href="#js" class="headerlink" title=".js"></a>.js</h3><p>就是javascript的附檔名。</p>
+<h3 id="ejs"><a href="#ejs" class="headerlink" title=".ejs"></a>.ejs</h3><p>EJS 為 Effective JavaScript 的縮寫，是一種可以內嵌在 HTML 程式的 JavaScript 函式庫，因為程式主架構還是 HTML，所以比起用 JavaScript 來產生 HTML 程式碼，在讀程式碼時，網頁架構比較明確易讀，也比較好維護。</p>
+<p>EJS 使用 <strong>&lt;% %&gt;</strong> 或 <strong>[% %]</strong> 作為內崁 JavaScript 的關鍵符號，也就是說放在這中間的部分就會被視為 JavaScript 來執行，另外如果放在 <strong>&lt;%= %&gt;</strong> 裡面的 JavaScript 變數，則會以 toString() 的方式將其轉換為字串，並加入至網頁中。</p>
+<p>其他內容請參考：</p>
+<ul>
+<li><a href="https://blog.gtwang.org/programming/ejs-embedded-javascript/" target="_blank" rel="external">EJS：Client 端嵌入式（Embedded）JavaScript</a></li>
+<li><a href="http://ejs.co/" target="_blank" rel="external">EJS 官網</a></li>
+</ul>
+<h3 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h3><p>Bootstrap 是我在看網路文章時看到的軟體工具，覺得這個字很眼熟，才發現 hipaper theme 就是用 Bootstrap 架構寫的。</p>
+<blockquote>
+<p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.</p>
+</blockquote>
+<p>這句話是 <a href="http://getbootstrap.com/" target="_blank" rel="external">Bootstrap 官網</a>對 Bootstrap 的介紹。</p>
+<p>Bootstrap是一個免費開源的開發網站工具，一個 CSS Framework，由知名的社群平台Twitter所開發，無論在結構還是互動性上都相當的完整，可幫助開發者快速開發一個擁有自適應性(responsive web design, RWD)特性的網站。</p>
+<ul>
+<li><a href="http://phoebelin0606.pixnet.net/blog/post/360332817-%E2%99%8C%E7%A8%8B%E5%BC%8F-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8bootstrap" target="_blank" rel="external">程式-如何使用Bootstrap</a></li>
+<li><a href="https://www.minwt.com/webdesign-dev/html/9966.html" target="_blank" rel="external">Bootstrap教學《Bootstrap網設必備》打造Responsive Web Design自適應版型入門|梅問題．教學網</a></li>
+<li><a href="http://cythilya.blogspot.tw/2015/02/bootstrap-rwd-template.html" target="_blank" rel="external">使用Bootstrap建立一個RWD Template (Twitter Bootstrap in Responsive Web Design)</a></li>
+<li><a href="https://kkbruce.tw/bs3" target="_blank" rel="external">Bootstrap</a></li>
+</ul>
+<h2 id="待續…"><a href="#待續…" class="headerlink" title="待續…"></a>待續…</h2>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/EJS/">EJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/ayablog/tags/Stylus/">Stylus</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/ayablog/2017/02/24/Azure IoT Wokeshop筆記/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Azure IoT Wokeshop筆記
+        
+      </div>
+    </a>
+  
+  
+    <a href="/ayablog/2017/02/06/TOEIC準備心得/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">TOEIC準備心得</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一階段目標"><span class="nav-number">1.</span> <span class="nav-text">第一階段目標</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#套用現成的-Theme"><span class="nav-number">2.</span> <span class="nav-text">套用現成的 Theme</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析-hipaper-Themes-Source-Code"><span class="nav-number">3.</span> <span class="nav-text">解析 hipaper Themes Source Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css"><span class="nav-number">4.</span> <span class="nav-text">.css</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#styl"><span class="nav-number">5.</span> <span class="nav-text">.styl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js"><span class="nav-number">6.</span> <span class="nav-text">.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ejs"><span class="nav-number">7.</span> <span class="nav-text">.ejs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bootstrap"><span class="nav-number">8.</span> <span class="nav-text">Bootstrap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#待續…"><span class="nav-number"></span> <span class="nav-text">待續…</span></a>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/ayablog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/ayablog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/ayablog/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/ayablog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 Aya Blog All Rights Reserved.
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/ayablog/fancybox/jquery.fancybox.css">
+  <script src="/ayablog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/ayablog/js/script.js"></script>
+<script src="/ayablog/js/bootstrap.js"></script>
+<script src="/ayablog/js/main.js"></script>
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+</body>
+</html>

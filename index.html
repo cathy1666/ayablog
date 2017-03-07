@@ -835,41 +835,8 @@ print_data END
     <div class="article-entry" itemprop="articleBody">
       
         <p>這篇整理記錄我自己接觸 Linux 以來所用到的 Command，會一直不斷更新。</p>
-<h2 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h2><h4 id="ls-al"><a href="#ls-al" class="headerlink" title="ls -al"></a>ls -al</h4><p>可list所有檔案的權限狀態</p>
-<h4 id="cd-路徑"><a href="#cd-路徑" class="headerlink" title="cd 路徑"></a>cd <strong>路徑</strong></h4><p>更換目前工作目錄</p>
-<h4 id="cd"><a href="#cd" class="headerlink" title="cd .."></a>cd ..</h4><p>回上一層目錄</p>
-<h4 id="grep-keyword-filename"><a href="#grep-keyword-filename" class="headerlink" title="grep keyword filename"></a>grep <strong>keyword</strong> <strong>filename</strong></h4><p>印出檔案中含有keyword的整行文字內容</p>
-<h4 id="filename"><a href="#filename" class="headerlink" title="./filename"></a>./<strong>filename</strong></h4><p>執行(注意不用空格)(./代表現在位置)</p>
-<h4 id="filename-amp"><a href="#filename-amp" class="headerlink" title="./filename &amp;"></a>./<strong>filename</strong> &amp;</h4><p>在背景執行(可以繼續下指令)</p>
-<blockquote>
-<p>./start.sh 會另開shell執行start.sh，執行完結束另開的shell回到原shell<br>. start.sh 會在目前的shell執行start.sh</p>
-</blockquote>
-<h4 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h4><p>顯示目前路徑位置</p>
-<h4 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h4><p>顯示目前正在執行的程式</p>
-<h4 id="ps-elf"><a href="#ps-elf" class="headerlink" title="ps -elf"></a>ps -elf</h4><p>顯示目前正在執行的程式</p>
-<h4 id="ps-aux"><a href="#ps-aux" class="headerlink" title="ps aux"></a>ps aux</h4><p>顯示目前正在執行的程式</p>
-<h4 id="ps-T"><a href="#ps-T" class="headerlink" title="ps -T"></a>ps -T</h4><p>顯示目前正在執行的thread</p>
-<h4 id="kill-PID"><a href="#kill-PID" class="headerlink" title="kill PID"></a>kill <strong>PID</strong></h4><p>終止背景執行的程式(程式的PID可用pa aux查看)</p>
-<h4 id="Ctrl-C"><a href="#Ctrl-C" class="headerlink" title="Ctrl + C"></a>Ctrl + C</h4><p>終止目前執行中的程式</p>
-<h4 id="init-0"><a href="#init-0" class="headerlink" title="init 0"></a>init 0</h4><p>關機</p>
-<h4 id="reboot"><a href="#reboot" class="headerlink" title="reboot"></a>reboot</h4><p>重開機</p>
-<h2 id="時間設定"><a href="#時間設定" class="headerlink" title="時間設定"></a>時間設定</h2><h4 id="date"><a href="#date" class="headerlink" title="date"></a>date</h4><p>查詢系統日期與時間</p>
-<h4 id="date-MMDDhhmmYYYY"><a href="#date-MMDDhhmmYYYY" class="headerlink" title="date MMDDhhmmYYYY"></a>date <strong>MMDDhhmmYYYY</strong></h4><p>手動設定日期時間</p>
-<h4 id="hwclock-r"><a href="#hwclock-r" class="headerlink" title="hwclock -r"></a>hwclock -r</h4><p>讀出目前 BIOS 內的時間參數</p>
-<blockquote>
-<p>Linux 作業系統當中其實有兩個時間：</p>
-<ul>
-<li>軟體：Linux的系統時間，由1970/01/01開始記錄的時間參數</li>
-<li>硬體：電腦系統在 BIOS 記錄的實際時間，這也是硬體所記錄的</li>
-</ul>
-</blockquote>
-<h4 id="hwclock-w"><a href="#hwclock-w" class="headerlink" title="hwclock -w"></a>hwclock -w</h4><p>將目前的 Linux 系統時間寫入 BIOS 當中</p>
-<h4 id="hwclock-w-hwclock-r-date"><a href="#hwclock-w-hwclock-r-date" class="headerlink" title="hwclock -w; hwclock -r; date"></a>hwclock -w; hwclock -r; date</h4><p>將軟體時鐘時間寫進硬體時鐘</p>
-<h4 id="更改為台灣時區"><a href="#更改為台灣時區" class="headerlink" title="更改為台灣時區"></a>更改為台灣時區</h4><blockquote>
-<p>date<br>cp /etc/localtime /etc/localtime-old #備份原設定<br>cp /usr/share/zoneinfo/ROC /etc/localtime<br>date</p>
-</blockquote>
-<h4 id="台灣時區"><a href="#台灣時區" class="headerlink" title="台灣時區"></a>台灣時區</h4><p>/usr/share/zoneinfo/ROC 和<br>/usr/share/zoneinfo/Asia/Taipei 相同</p>
-
+<p>因為我一開始是整理成表格，這樣簡短的指令比較能清楚呈現，但 Markdown 的表格語法實在太難用啦!!!目前還沒想到好的表達方式，所以就先放個連結分享吧。</p>
+<h3 id="Linux-Command"><a href="#Linux-Command" class="headerlink" title="Linux Command"></a><a href="https://drive.google.com/file/d/0B3tpptLFunv1dlFtT1NoZ1ZFc1U/view?usp=sharing" target="_blank" rel="external">Linux Command</a></h3>
       
     </div>
     <footer class="entry-meta entry-footer">

@@ -15,11 +15,11 @@
 問題使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何外部終止特定執行緒">
-<meta property="og:url" content="http://cathy1666.github.io/ayablog/2017/01/05/如何外部終止特定執行緒/index.html">
+<meta property="og:url" content="http://cathy1666.github.io/ayablog/2017/01/04/如何外部終止特定執行緒/index.html">
 <meta property="og:site_name" content="Aya Blog">
 <meta property="og:description" content="需求主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。
 問題使用pthread_cancel()來外部終止執行緒是以pthread_id來識別，但pthread_id是類似file descriptor的識別碼，只要空了就可以重複使用，所以有可能上一輪的A已經結">
-<meta property="og:updated_time" content="2017-02-14T09:20:34.038Z">
+<meta property="og:updated_time" content="2017-02-14T09:20:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何外部終止特定執行緒">
 <meta name="twitter:description" content="需求主程式會不定時創建 5 個執行緒執行工作A~E, 當主程式需執行A工作時，需先判斷上一輪的A是否結束，若還沒結束就需先強制終止掉正在進行A的執行緒後，再創建一個新的執行緒執行這次的工作A。
@@ -118,8 +118,8 @@
     
     <div class="article-meta">
       
-	<a href="/ayablog/2017/01/05/如何外部終止特定執行緒/" class="article-date">
-	  <time datetime="2017-01-05T01:46:25.748Z" itemprop="datePublished">January 5, 2017</time>
+	<a href="/ayablog/2017/01/04/如何外部終止特定執行緒/" class="article-date">
+	  <time datetime="2017-01-04T14:46:35.706Z" itemprop="datePublished">January 4, 2017</time>
 	</a>
 
       
@@ -148,19 +148,19 @@
     
 <nav id="article-nav">
   
-    <a href="/ayablog/2017/01/10/如何使用 pthread_create 傳遞多個引數/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/ayablog/2017/01/12/不定長度引數function寫法/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          如何使用 pthread_create 傳遞多個引數
+          不定長度引數函數的寫法
         
       </div>
     </a>
   
   
-    <a href="/ayablog/2016/12/25/Linux Command/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/ayablog/2016/12/25/Design Pattern/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Linux Command</div>
+      <div class="article-nav-title">Design Pattern</div>
     </a>
   
 </nav>
